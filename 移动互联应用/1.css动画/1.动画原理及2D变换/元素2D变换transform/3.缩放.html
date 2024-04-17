@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: #f00;
+            position: relative;
+            top: 200px;
+            left: 200px;
+
+            /* scale 缩放
+                参数：比率 1 为原本大小
+            */
+            transform: scale(1);
+            transform: scaleX(0.5);
+            transform: scaleY(2);
+            transform: scale(2, 0.5);
+        }
+
+        img {
+            /* scale 写负数代表反向 */
+            transform: scale(-1);
+            transform: scaleX(-1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <img src="./img/icon.png" alt="" srcset="">
+</body>
+
+</html>

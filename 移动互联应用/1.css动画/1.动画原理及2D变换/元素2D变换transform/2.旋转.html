@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: #f00;
+            position: relative;
+            top: 200px;
+            left: 200px;
+
+            /* rotate 旋转 */
+            /* 参数：可以是角度值 (deg) 也可以是弧度值 (rad) 弧度制的PI = 180° */
+            /* 沿轴进行顺时针旋转为正方向，0°代表竖直向上 */
+            transform: rotate(30deg);
+            /* 负数的含义其实就是 360 - 对应度数 */
+            /* 默认旋转函数rotate 是沿着z轴进行旋转 */
+            transform: rotate(-30deg);
+
+            /* transform: rotateX(0deg); */
+            transform: rotateY(0deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+</body>
+</html>
