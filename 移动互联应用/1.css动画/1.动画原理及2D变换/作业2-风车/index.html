@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 400px;
+            height: 400px;
+            border: 1px solid #000;
+
+            position: relative;
+        }
+
+        .leaf {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 100px 50px;
+            border-color: transparent transparent #f00 #f00;
+
+            position: absolute;
+            left: 200px;
+            top: 0;
+
+            transform-origin: left bottom;
+            transform: rotate(0deg);
+        }
+
+        .leaf:nth-child(2n) {
+            border-color: transparent transparent #00f #00f;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="leaf"></div>
+        <div class="leaf" style="transform: rotate(90deg);"></div>
+        <div class="leaf" style="transform: rotate(180deg);"></div>
+        <div class="leaf" style="transform: rotate(270deg);"></div>
+    </div>
+</body>
+
+</html>

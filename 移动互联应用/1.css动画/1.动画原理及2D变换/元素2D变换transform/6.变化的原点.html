@@ -19,13 +19,35 @@
 
             /* 设置transform的原点 */
             /* 原点的位置会影响旋转的圆心，缩放的位置 */
-            
+
+            /* 待选值: top bottom left right center 还可以填入像素值 */
+            transform-origin: center;
+            /* 第一个参数代表水平偏移量 第二个参数代表竖直偏移量 */
+            /* transform-origin: right center; */
+            /* transform-origin: center bottom; */
+            /* 当值为像素值的时候，像素值的参考位置是元素的左上角 */
+            /* transform-origin: 20px 70px; */
+
+            transform: rotate(0deg);
+            transform: scale(0.1);
+
+        }
+
+        .point {
+            width: 20px;
+            height: 20px;
+            background-color: #000;
+            border-radius: 50%;
+            position: absolute;
+            top: 270px;
+            left: 220px;
         }
     </style>
 </head>
 
 <body>
     <div class="box"></div>
+    <div class="point"></div>
 </body>
 
 </html>
