@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: #f00;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+</body>
+<script>
+    let box = document.querySelector('.box')
+    // 使盒子每秒移动20px
+
+    // 该函数的回调函数将在下一帧被调用
+    // 帧率又浏览器控制
+    // 默认情况都是 60 fps
+    // 所以经过一帧以后浏览器回去调用参数 render
+    requestAnimationFrame(render)
+
+
+    let offsetX = 0
+    // 规定速度为 20 px/s
+    let v = 50
+
+    // 上一帧的时间
+    let lastTime = 0
+    // 上一帧到下一帧的时间间隔 单位: 秒
+    let deltaTime = 0
+
+    // 渲染函数
+    // time: 从动画播放开始一共经过了多长时间，单位是毫秒
+    function render(time) {
+        deltaTime = (time - lastTime) * 0.001
+        lastTime = time
+
+        console.log(deltaTime);
+
+        // 每一帧的逻辑写在 render 函数中
+        offsetX += v * deltaTime
+
+        box.style.transform = `translateX(${offsetX}px)`
+
+
+        // 渲染函数的末尾 请求下一帧
+        requestAnimationFrame(render)
+    }
+</script>
+
+</html>

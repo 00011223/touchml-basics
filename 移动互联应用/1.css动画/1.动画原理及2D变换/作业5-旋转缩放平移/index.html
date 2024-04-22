@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: #f00;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+</body>
+
+<script>
+    const box1 = document.querySelector('.box:first-child')
+    const box2 = document.querySelector('.box:nth-child(2)')
+    const box3 = document.querySelector('.box:nth-child(3)')
+
+    // 平移用到的变量
+    let offsetX = 0;
+    let d1 = 1
+
+    // 旋转用到的变量
+    let deg = 0
+    let d2 = 1
+
+    // 缩放用到的变量
+    let rate = 1
+    let d3 = 1
+
+    setInterval(() => {
+        offsetX += 2 * d1
+        deg += 5 * d2
+        rate += 0.01 * d3
+
+        // 变相条件
+        if (offsetX >= 300) {
+            d1 = -1
+        } else if (offsetX <= 0) {
+            d1 = 1
+        }
+
+        if (deg >= 360 * 3) {
+            d2 = -1
+        } else if (deg <= 0) {
+            d2 = 1
+        }
+
+        if (rate >= 2) {
+            d3 = -1
+        } else if (rate <= 0.5) {
+            d3 = 1
+        }
+
+        // 渲染图形
+        box1.style.transform = `translateX(${offsetX}px)`
+        box2.style.transform = `rotate(${deg}deg)`
+        box3.style.transform = `scale(${rate})`
+    }, 1000 / 30)
+
+</script>
+
+</html>
