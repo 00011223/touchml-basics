@@ -30,7 +30,7 @@
 
 
     let offsetX = 0
-    // 规定速度为 20 px/s
+    // 规定速度为 50 px/s
     let v = 50
 
     // 上一帧的时间
@@ -50,7 +50,6 @@
         offsetX += v * deltaTime
 
         box.style.transform = `translateX(${offsetX}px)`
-
 
         // 渲染函数的末尾 请求下一帧
         requestAnimationFrame(render)
