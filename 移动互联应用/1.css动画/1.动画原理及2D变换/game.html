@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tank {
+            width: 100px;
+            height: 100px;
+            background-color: #f00;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .weapon {
+            width: 20px;
+            height: 100px;
+            background-color: #f00;
+            position: absolute;
+            left: calc(50% - 10px);
+            top: -50px;
+        }
+
+        .bullet {
+            width: 20px;
+            height: 20px;
+            background-color: #f00;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="tank">
+        <div class="weapon"></div>
+    </div> -->
+</body>
+
+<script>
+    class Tank {
+        el
+        // 位置
+        x = 100
+        y = 100
+        face = 'up'
+        // 速度
+        v = 200
+        // 方向
+        dx = 0
+        dy = 0
+
+        constructor() {
+            let tank = document.createElement('div')
+            tank.className = 'tank'
+            tank.innerHTML = '<div class="weapon"></div>'
+            this.el = tank
+
+            document.body.appendChild(this.el)
+
+            document.body.addEventListener('keypress', ev => {
+                console.log(ev.key);
+
+                if (ev.key === 'w') {
+                    this.face = 'up'
+                    this.dy = -1
+                } else if (ev.key === 's') {
+                    this.face = 'down'
+                    this.dy = 1
+                } else if (ev.key === 'a') {
+                    this.face = 'left'
+                    this.dx = -1
+                } else if (ev.key === 'd') {
+                    this.face = 'right'
+                    this.dx = 1
+                }
+            })
+
+            document.addEventListener('keyup', ev => {
+                if (ev.key === ' ') {
+                    bullets.push(new Bullet(this.x + 40, this.y + 40, this.face))
+                }
+            })
+        }
+
+        render(deltaTime) {
+            this.x += this.dx * this.v * deltaTime
+            this.y += this.dy * this.v * deltaTime
+
+            this.dx = this.dy = 0
+
+            let rotate = ''
+
+            if (this.face === 'up') {
+                rotate = 'rotate(0deg)'
+            } else if (this.face === 'down') {
+                rotate = 'rotate(180deg)'
+            } else if (this.face === 'left') {
+                rotate = 'rotate(270deg)'
+            } else if (this.face === 'right') {
+                rotate = 'rotate(90deg)'
+            }
+
+            let translate = ` translate(${this.x}px, ${this.y}px)`
+
+            this.el.style.transform = translate + rotate
+        }
+    }
+
+    class Bullet {
+        el
+        x
+        y
+        face
+        v = 500
+        constructor(x, y, face) {
+            this.x = x
+            this.y = y
+            this.face = face
+
+            let bullet = document.createElement('div')
+            bullet.className = 'bullet'
+            this.el = bullet
+
+            document.body.appendChild(this.el)
+        }
+
+        render(deltaTime) {
+            if (this.face === 'up') {
+                this.y -= this.v * deltaTime
+            } else if (this.face === 'down') {
+                this.y += this.v * deltaTime
+            } else if (this.face === 'left') {
+                this.x -= this.v * deltaTime
+            } else if (this.face === 'right') {
+                this.x += this.v * deltaTime
+            }
+
+            this.el.style.transform = `translate(${this.x}px, ${this.y}px)`
+        }
+    }
+
+    let bullets = []
+
+    let tank = new Tank()
+
+    let lastTime = 0, deltaTime = 0
+
+    requestAnimationFrame(function (time) {
+        deltaTime = (time - lastTime) * 0.001
+        lastTime = time
+
+        tank.render(deltaTime)
+
+        bullets.forEach(b => {
+            b.render(deltaTime)
+        })
+
+        requestAnimationFrame(arguments.callee)
+    })
+</script>
+
+</html>
