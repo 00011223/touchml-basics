@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .clock {
+            width: 400px;
+            height: 400px;
+            background-color: #000;
+            border: 30px solid #808080;
+            border-radius: 50%;
+
+            position: relative;
+        }
+
+        .point {
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+
+            position: absolute;
+            /* calc 计算函数 可以计算尺寸单位的大小 运算符的两端需要添加空格 */
+            left: calc(50% - 5px);
+            top: 10px;
+
+            border-radius: 5px;
+
+            transform-origin: center 190px;
+
+            transform: rotate(0deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="clock">
+        <!-- html 模板 -->
+        <!-- <div class="point"></div> -->
+    </div>
+</body>
+
+<script>
+
+    const clock = document.querySelector('.clock')
+
+    // clock.innerHTML= '<div class="point"></div>'
+
+    // 页面内容的中间变量
+    let html = ''
+
+    for (let i = 0; i < 60; i++) {
+        // 计算高度
+        let height = i % 5 === 0? 'height: 20px': ''
+
+        html += `<div class="point" style="transform: rotate(${i * 6}deg); ${height}"></div>`
+    }
+
+    clock.innerHTML = html
+
+
+    // 总结
+    // 1. 创建刻度的html模板
+    // 2. 寻找旋转中心并进行验证
+    // 3. 通过 js 代码循环渲染刻度
+</script>
+
+</html>
