@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 参考：https://developer.mozilla.org/zh-CN/docs/Web/CSS/transition */
+        /* 什么是transition？ */
+        /* transition是过渡的意思，将会使元素从一个状态用动画形式过渡到另一个状态 */
+        
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: #f00;
+
+            /* 定义初始状态 */
+            transform: translateX(0px);
+
+            /* transition: all 1s ease-in; */
+
+            /* 播放过度动画至少包含 transition-property transition-duration */
+
+            /* 指定css属性能够产生过度动画 */
+            transition-property: left, transform;
+
+            /* transition-property 还有两个待选项
+                none: 无
+                all: 所有属性都能播放过渡动画
+            */
+            transition-property: all;
+
+            /* 动画播放的时长 */
+            transition-duration: 2s;
+
+            /* 动画播放的速度曲线 */
+            /* 待选项
+                linear: 匀速直线运动
+                ease-in: 慢进
+                ease-out: 慢出
+                ease-in-out: 慢进慢出
+                cubic-bezier: 曲线函数
+            */
+            transition-timing-function: linear;
+
+            /* 动画播放延迟 */
+            transition-delay: 3s;
+
+            /* 合成属性 
+                语法:
+                transition: property duration timing-function delay;
+            */
+            transition: all 3s linear 3s;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+</body>
+</html>
