@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: #f00;
+
+            transition: all 3s linear;
+
+            /* 初始状态 */
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        /* 通常来说使用 active 类名来代表播放动画的状态 */
+        /* .box.active 的意思是: 选择既包含.box又包含.active的元素 */
+        .box.active {
+            /* 激活状态 */
+            transform: translateX(300px);
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <button>播放</button>
+</body>
+
+<script>
+    let box = document.querySelector('.box')
+    let btn = document.querySelector('button')
+
+    btn.addEventListener('click', () => {
+        // box.style.transform = `translateX(300px)`
+        // box.style.opacity = '0'
+
+        // 添加 active 类名 用来控制动画的播放
+        // box.className = 'box active'
+        // box.classList.add('active')
+
+
+        // classList.contains 判断是否包含某个类名 返回一个 bool 值； true 为包含
+        if (box.classList.contains('active')) {
+            box.classList.remove('active')
+            btn.innerHTML = '播放'
+        } else {
+            box.classList.add('active')
+            btn.innerHTML = '反向播放'
+        }
+    })
+</script>
+
+</html>

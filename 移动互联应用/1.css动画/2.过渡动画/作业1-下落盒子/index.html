@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+
+            display: flex;
+        }
+
+        .box {
+            width: 50px;
+            height: 50px;
+            background-color: pink;
+
+            transition: all 2s linear;
+
+            /* 初始状态 */
+            transform: translateY(0px);
+
+            margin-right: 8px;
+
+            /* 设置flex的子元素不要进行压缩 */
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- html 模板 -->
+    <!-- <div class="box"></div> -->
+</body>
+
+<script>
+    // let box = document.querySelector('.box')
+
+    let html = ''
+
+    for (let i = 0; i < 100; i++) {
+        html += `<div class="box" style="transition-delay: ${i * 0.5}s"></div>`
+    }
+
+    document.body.innerHTML = html
+
+    // 查询元素
+    let boxs = document.querySelectorAll('.box')
+
+    document.body.addEventListener('click', () => {
+        // 赋值第二个状态
+        // box.style.transform = 'translateY(100px)'
+        for (let i = 0; i < boxs.length; i++) {
+            const box = boxs[i];
+            box.style.transform = `translateY(100px)`
+        }
+    })
+</script>
+
+</html>
