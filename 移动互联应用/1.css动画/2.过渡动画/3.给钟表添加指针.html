@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .clock {
+            width: 400px;
+            height: 400px;
+            background-color: #000;
+            border: 30px solid #808080;
+            border-radius: 50%;
+
+            position: relative;
+        }
+
+        .point {
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+
+            position: absolute;
+            /* calc 计算函数 可以计算尺寸单位的大小 运算符的两端需要添加空格 */
+            left: calc(50% - 5px);
+            top: 10px;
+
+            border-radius: 5px;
+
+            transform-origin: center 190px;
+
+            transform: rotate(0deg);
+        }
+
+        .point-container {
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .hour {
+            width: 30px;
+            height: 100px;
+            background-color: #575757;
+
+            position: absolute;
+            left: calc(50% - 15px);
+            top: 100px;
+
+            transform-origin: center bottom;
+            transform: rotate(0deg);
+
+            transition: all 0.5s linear;
+        }
+
+        .hour::before {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 15px;
+            border-color: transparent transparent #575757 transparent;
+
+            position: absolute;
+            top: -30px;
+        }
+
+        .minute {
+            width: 20px;
+            height: 150px;
+            background-color: #fff;
+
+            position: absolute;
+            left: calc(50% - 10px);
+            top: 50px;
+
+            transform-origin: center bottom;
+            transform: rotate(0deg);
+
+            transition: all 0.5s linear;
+        }
+
+        .minute::before {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px;
+            border-color: transparent transparent #fff transparent;
+
+            position: absolute;
+            top: -20px;
+        }
+
+        .second {
+            width: 10px;
+            height: 180px;
+            background-color: #f00;
+
+            position: absolute;
+            left: calc(50% - 5px);
+            top: 20px;
+
+            transform-origin: center bottom;
+            transform: rotate(0deg);
+
+            transition: all 0.5s linear;
+        }
+
+        .second::before {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 5px;
+            border-color: transparent transparent #f00 transparent;
+
+            position: absolute;
+            top: -10px;
+        }
+
+        .cover {
+            width: 50px;
+            height: 50px;
+            background-color: #f00;
+            border-radius: 50%;
+
+            position: absolute;
+            left: calc(50% - 25px);
+            top: calc(50% - 25px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="clock">
+        <!-- html 模板 -->
+        <!-- <div class="point"></div> -->
+        <div class="point-container"></div>
+
+        <div class="hour"></div>
+        <div class="minute"></div>
+        <div class="second"></div>
+        <div class="cover"></div>
+    </div>
+</body>
+
+<script>
+    const pointContainer = document.querySelector('.point-container')
+    const hourEl = document.querySelector('.hour')
+    const minuteEl = document.querySelector('.minute')
+    const secondEl = document.querySelector('.second')
+
+
+    // 渲染时钟的表盘
+    function renderClock() {
+        // 页面内容的中间变量
+        let html = ''
+
+        // 渲染刻度
+        for (let i = 0; i < 60; i++) {
+            // 计算高度
+            let height = i % 5 === 0 ? 'height: 20px' : ''
+
+            html += `<div class="point" style="transform: rotate(${i * 6}deg); ${height}"></div>`
+        }
+
+        pointContainer.innerHTML = html
+    }
+
+    // 渲染指针
+    function renderPointer() {
+        // 设置指针的旋转角度
+        hourEl.style.transform = `rotate(${hRound * 360 + hour * 30}deg)`
+        minuteEl.style.transform = `rotate(${mRound * 360 + minute * 6}deg)`
+        secondEl.style.transform = `rotate(${sRound * 360 + second * 6}deg)`
+    }
+
+    renderClock();
+
+
+    // 声明时钟的变量
+    let hour = 11
+    let minute = 59
+    let second = 45
+
+    let hDeg = 0
+    let mDeg = 0
+    let sDeg = 0
+
+    // 指针旋转的圈数
+    let hRound = 0
+    let mRound = 0
+    let sRound = 0
+
+    // 初始化指针
+    renderPointer()
+
+    // 渲染循环
+    setInterval(() => {
+        // 先执行指针旋转逻辑
+
+        second++
+        // 进行进位判断
+        if (second >= 60) {
+            minute++
+            sRound++
+            second = 0
+            if (minute >= 60) {
+                hour++
+                mRound++
+                minute = 0
+                if (hour >= 12) {
+                    hour = 0
+                    hRound++
+                }
+            }
+        }
+
+        // 设置指针的旋转角度
+        renderPointer()
+    }, 1000)
+
+
+    // 总结
+    // 1. 创建刻度的html模板
+    // 2. 寻找旋转中心并进行验证
+    // 3. 通过 js 代码循环渲染刻度
+</script>
+
+</html>
