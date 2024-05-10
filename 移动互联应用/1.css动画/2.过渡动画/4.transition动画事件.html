@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: #f00;
+
+            transition: all 3s linear 3s;
+
+            /* 初始状态 */
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        /* 通常来说使用 active 类名来代表播放动画的状态 */
+        /* .box.active 的意思是: 选择既包含.box又包含.active的元素 */
+        .box.active {
+            /* 激活状态 */
+            transform: translateX(300px);
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <button>播放</button>
+</body>
+
+<script>
+    // transition 动画事件
+
+    // 场景: 假设有一个按钮控制动画的来回播放，当点击按钮播放动画的过程中需要禁用按钮，只有动画播放完了才能解除按钮的禁用，此时可以捕获事件来完成需求
+
+
+    // 参考：
+    // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/transitionrun_event
+    // https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement/transitionstart_event
+    // https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement/transitionend_event
+
+
+    let box = document.querySelector('.box')
+    let btn = document.querySelector('button')
+
+    btn.addEventListener('click', () => {
+        if (box.classList.contains('active')) {
+            box.classList.remove('active')
+            btn.innerHTML = '播放'
+        } else {
+            box.classList.add('active')
+            btn.innerHTML = '反向播放'
+        }
+
+        // 禁用按钮
+        btn.disabled = true
+    })
+
+    // 添加事件
+    box.addEventListener('transitionend', () => {
+        console.log('过渡动画播放完成');
+        // 解除禁用
+        btn.disabled = false
+    })
+
+    box.addEventListener('transitionrun', () => {
+        console.log('过渡动画开始运行');
+    })
+
+    box.addEventListener('transitionstart', () => {
+        console.log('过渡动画开始播放');
+    })
+</script>
+
+</html>
