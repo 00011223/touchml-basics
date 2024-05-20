@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: #ff0;
+
+            transition: all 2s cubic-bezier(0.33, 1.34, 0.63, -0.61);
+
+            transform: translateX(0px);
+        }
+
+        .box-container {
+            transition: all 2s linear;
+            transform: translateY(0px);
+        }
+
+        .box.active {
+            transform: translateX(300px);
+        }
+
+        .box-container.active {
+            transform: translateY(300px);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 将元素的运动划分成水平运动和竖直运动 -->
+
+    <!-- box-container 负责竖直运动 -->
+    <div class="box-container">
+        <!-- box 负责水平运动 -->
+        <div class="box"></div>
+    </div>
+    <button>播放</button>
+</body>
+
+<script>
+    let btn = document.querySelector('button')
+    let box = document.querySelector('.box')
+    let boxContainer = document.querySelector('.box-container')
+
+    btn.addEventListener('click', () => {
+        if (box.classList.contains('active')) {
+            box.classList.remove('active')
+            boxContainer.classList.remove('active')
+        } else {
+            box.classList.add('active')
+            boxContainer.classList.add('active')
+        }
+    })
+</script>
+
+</html>
