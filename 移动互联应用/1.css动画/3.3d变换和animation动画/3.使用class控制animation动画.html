@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: #f00;
+        }
+
+        /* 使用 active 单独添加动画属性 */
+        .box.active {
+            animation: move 3s linear forwards;
+        }
+
+        @keyframes move {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(300px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <button>播放动画</button>
+</body>
+
+<script>
+
+    const btn = document.querySelector('button')
+    const box = document.querySelector('.box')
+
+    btn.addEventListener('click', () => {
+        // 通过js代码 动态添加类名 active 用来播放动画
+        box.classList.add('active')
+    })
+
+</script>
+
+</html>
