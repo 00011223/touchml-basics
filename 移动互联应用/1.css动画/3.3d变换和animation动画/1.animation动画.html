@@ -35,7 +35,7 @@
             /* animation-delay: 3s; */
 
 
-            
+
             /* 以下属性为 animation 独有的属性 */
 
             /* 动画的迭代次数
@@ -58,6 +58,17 @@
                 both: 保留初始和结束时的状态
             */
             animation-fill-mode: both;
+
+
+            /* 可以定义复合属性，取代上面的所有属性 */
+            /* 赋值顺序，可以参考如下顺序 */
+            /* duration | timing-function | delay | iteration-count | direction | fill-mode | play-state | name */
+            /* duration | timing-function | delay | name */
+            /* duration | name */
+            /* animation: 2s move;
+            animation: 2s linear 3s move; */
+
+            animation: move 3s linear 2s forwards;
         }
 
         /* 动画帧序列 */

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: #f00;
+        }
+
+        @keyframes move {
+            from {
+                transform: translateX(0px);
+            }
+
+            to {
+                transform: translateX(300px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <button class="btn1">播放</button>
+    <button class="btn2">暂停/继续</button>
+</body>
+<script>
+    let btn = document.querySelector('.btn1')
+    let btn2 = document.querySelector('.btn2')
+    let box = document.querySelector('.box')
+    btn.addEventListener('click', () => {
+        box.style.animation = 'move 1s linear forwards infinite alternate running'
+    })
+    btn2.addEventListener('click', () => {
+        // animationPlayState 动画播放状态
+        // paused 暂停
+        // running 播放
+
+        if (box.style.animationPlayState === 'paused') {
+            box.style.animationPlayState = 'running'
+        } else {
+            box.style.animationPlayState = 'paused'
+        }
+    })
+</script>
+
+</html>
