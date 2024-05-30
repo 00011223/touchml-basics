@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #1b1b1b;
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            overflow: hidden;
+        }
+
+        .ball {
+            width: 140px;
+            height: 140px;
+            background-color: #ffd100;
+            border-radius: 50%;
+
+            animation: scale 2s ease-in forwards;
+        }
+
+        @keyframes scale {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(20);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <img class="face" src="./img/loading-Home.gif" alt="">
+    <!-- <div class="ball"></div> -->
+</body>
+
+<script>
+
+    const face = document.querySelector('.face')
+
+    // 点击笑脸事件
+    face.addEventListener('click', () => {
+        // 动态创建黄色小球
+        // 然后删除笑脸
+        document.body.innerHTML = `<div class="ball"></div>`
+
+        // 动画播放完成后
+        let ball = document.querySelector('.ball')
+
+        // 给小球添加动画完成事件
+        ball.addEventListener('animationend', () => {
+            console.log('end');
+            // 删除 ball
+            ball.remove()
+            // 设置body的背景色为黄色
+            document.body.style.backgroundColor = `#ffd100`
+        })
+
+
+    })
+
+</script>
+
+</html>
