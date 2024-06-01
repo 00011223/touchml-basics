@@ -9,7 +9,7 @@
     <style>
         body {
             margin: 0;
-            background-color: #1b1b1b;
+            /* background-color: #1b1b1b; */
             height: 100vh;
 
             display: flex;
@@ -37,17 +37,69 @@
                 transform: scale(20);
             }
         }
+
+        .plane {
+            transition: all 2s linear;
+
+            animation: fly 2s linear 2s infinite;
+        }
+
+        @keyframes fly {
+            0% {
+                transform: translate(0);
+            }
+
+            25% {
+                transform: translate(-50px, -200px);
+            }
+
+            50% {
+                transform: translate(0);
+            }
+
+            75% {
+                transform: translate(50px, 200px);
+            }
+
+            100% {
+                transform: translate(0);
+            }
+        }
+
+        .plane>img:nth-child(2) {
+            position: absolute;
+            top: 205px;
+            left: 107px;
+
+            animation: rotate 0.5s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 
 <body>
     <img class="face" src="./img/loading-Home.gif" alt="">
     <!-- <div class="ball"></div> -->
+
+    <!-- <div class="plane">
+        <img src="./img/plane.svg" alt="">
+        <img src="./img/propeller.svg" alt="">
+    </div> -->
 </body>
 
 <script>
 
     const face = document.querySelector('.face')
+
 
     // 点击笑脸事件
     face.addEventListener('click', () => {
@@ -65,6 +117,29 @@
             ball.remove()
             // 设置body的背景色为黄色
             document.body.style.backgroundColor = `#ffd100`
+
+
+            // 播放飞入动画
+
+            // 创建飞机
+            document.body.innerHTML = `
+                <div class="plane">
+                    <img src="./img/plane.svg" alt="">
+                    <img src="./img/propeller.svg" alt="">
+                </div>
+            `
+
+            // 查询飞机
+            const plane = document.querySelector('.plane')
+
+            // (window.innerWidth - 800) * 0.5 + 800
+            // 初始化飞机的位置
+            plane.style.transform = `translateX(${(window.innerWidth - 800) * 0.5 + 800}px)`
+
+            setTimeout(() => {
+                plane.style.transform = `translateX(0)`
+            })
+
         })
 
 
