@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+        }
+
+        .scene {
+            height: 100vh;
+
+            /* 变换样式
+                perserve-3d 代表将元素变成一个3D空间
+            */
+            transform-style: preserve-3d;
+
+            /* 灭点到屏幕的距离 */
+            /* 若三维场景中不添加 perspective 则三维场景是一个正交视图 */
+            perspective: 300px;
+
+            /* 透视原点（灭点所在的坐标）
+                原点为 0 值时，所在位置是scene的左上角
+            */
+            /* perspective-origin: center center; */
+            perspective-origin: 0 0;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: #f00;
+            position: absolute;
+            top: 100px;
+            left: 300px;
+
+            transform: rotateY(65deg);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 创建一个场景，用来显示三维图形 -->
+    <div class="scene">
+
+        <!-- 给三维空间中添加三维元素 -->
+        <div class="box"></div>
+    </div>
+</body>
+<script>
+    /* 参考：https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform-style */
+
+    // 3d变换 是让我们的元素看上去在三维空间中发生变换（平移 旋转 缩放 倾斜）
+
+    // 总结：
+    // 要使用3d变换需要依序执行以下步骤：
+    // 1. 搭建3d场景，在父元素上设置：transform-style: preserve-3d;
+    // 2. 在父元素上设置透视距离：perspective: 100px;
+    // 3. 给场景添加演员，给场景元素添加子元素
+    // 4. 在子元素上使用3d变换
+</script>
+
+</html>
