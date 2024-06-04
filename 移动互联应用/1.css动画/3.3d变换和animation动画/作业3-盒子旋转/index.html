@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .scene {
+            width: 200px;
+            height: 200px;
+
+            transform-style: preserve-3d;
+            perspective: 50000px;
+            perspective-origin: center center;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            position: relative;
+
+            transition: all 1s ease-in-out;
+
+            transform: rotateX(0deg);
+        }
+
+        .scene:hover {
+            transform: rotateX(-90deg);
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            color: #fff;
+
+            font-size: 64px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            position: absolute;
+        }
+
+        .front {
+            background-color: pink;
+
+            transform: translateZ(100px);
+        }
+
+        .top {
+            background-color: #0f0;
+
+            /* transform-origin: center top; */
+
+            transform: rotateX(-90deg) translateZ(-100px) scaleY(-1);
+            /* transform: scaleY(-1); */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="scene">
+        <div class="box front">牛</div>
+        <div class="box top">逼</div>
+    </div>
+</body>
+
+</html>
