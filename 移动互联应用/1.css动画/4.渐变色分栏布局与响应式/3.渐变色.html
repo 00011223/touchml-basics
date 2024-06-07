@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            height: 300px;
+
+            /* 参考：https://developer.mozilla.org/zh-CN/docs/Web/CSS/gradient */
+
+            /* 背景的渐变色实际上是设置的 background-image 而不是 background-color */
+
+            /* 线性渐变 */
+            /* 语法: linear-gradient(direction, color1, color2, color3 ... ) 
+                direction: 渐变色的朝向 以 to 开头, 或者可以添加角度值; 默认值为 to top
+                color1 color2 ...: 渐变的颜色序列
+            */
+            background-image: linear-gradient(30deg, #f00, #0f0, #00f);
+
+            /* 颜色值后可以添加像素距离，该像素值代表着该颜色所处的位置，该位置颜色将到下一个位置的颜色之间进行渐变 */
+            background-image: linear-gradient(to right, #f00, #f00 50px, #0f0 50px, #0f0 100px, #00f 200px);
+
+            /* 重复线性渐变 */
+            background-image: repeating-linear-gradient(to right, #f00, #f00 50px, #00f 50px, #00f 100px);
+
+            /* 径向渐变 */
+            background-image: radial-gradient(#f00, orange, #0f0, #ff0, #f0f);
+            background-image: radial-gradient(#f00, #f00 50px, #00f 50px, #00f 100px, #0f0 100px, #0f0 200px);
+
+            /* 重复径向渐变 */
+            background-image: repeating-radial-gradient(#f00, #f00 50px, #ff0 50px, #ff0 100px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+</body>
+
+</html>
