@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 300px;
+            height: 300px;
+
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .pie {
+            width: 100px;
+            height: 100px;
+            background-color: #000;
+
+            background-image: radial-gradient(#f00, #ff0, #00f, #0f0);
+        }
+
+        .stript {
+            height: 100px;
+
+            background-image: repeating-linear-gradient(to right, #000, #000 5%, #fff 5%, #fff 10%);
+
+            animation: loop 5s linear infinite;
+
+            /* background-position-x: 0px; */
+        }
+
+        @keyframes loop {
+            from {
+                background-position-x: 0;
+            }
+
+            to {
+                background-position-x: calc(100vw - 16px);
+            }
+        }
+
+        .black-line {
+            height: 200px;
+            background-color: #000;
+
+            background-image: linear-gradient(to right, #000, #f00 200px, #000 400px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="pie"></div>
+        <div class="pie"></div>
+        <div class="pie"></div>
+        <div class="pie"></div>
+        <div class="pie"></div>
+        <div class="pie"></div>
+        <div class="pie"></div>
+        <div class="pie"></div>
+        <div class="pie"></div>
+    </div>
+
+    <div class="stript"></div>
+
+    <div class="black-line"></div>
+</body>
+
+<script>
+    let bl = document.querySelector('.black-line')
+
+    // 鼠标移动事件
+    bl.addEventListener('mousemove', ev => {
+        // console.log(ev);
+
+        // 获取鼠标在 bl 元素上的相对坐标
+        // 坐标原点就是元素 bl 的左上角
+        let x = ev.offsetX
+
+        x = x < 200 ?
+            200 :
+            x > (window.innerWidth - 200 - 16) ?
+                (window.innerWidth - 200 - 16) : x
+
+        bl.style.backgroundImage = `linear-gradient(to right, #000 ${x - 200}px, #f00 ${x}px, #000 ${x + 200}px)`
+    })
+</script>
+
+</html>
