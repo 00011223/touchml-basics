@@ -40,21 +40,79 @@
         /* min-width: 屏幕最小宽度 */
         /* max-width: 屏幕最大宽度 */
 
-        @media print and (min-width: 600px) and (max-width: 900px) {
+        @media screen and (min-width: 600px) and (max-width: 900px) {
             .box {
                 background-color: orange !important;
             }
+        }
+
+        @media screen and (min-width: 900px) {
+            .sidebar {
+                display: block !important;
+            }
+        }
+
+        @media screen and (max-width: 900px) {
+            .sidebar-mini {
+                display: block !important;
+            }
+        }
+
+        body {
+            margin: 0;
         }
 
         .box {
             height: 100px;
             background-color: #f00;
         }
+
+        .sidebar {
+            width: 4em;
+            height: 100vh;
+            border-right: 5px solid #000;
+            font-size: 32px;
+
+            display: none;
+        }
+
+        .sidebar>div {
+            border-bottom: 5px solid #000;
+            line-height: 6ex;
+            text-align: center;
+        }
+
+        .sidebar-mini {
+            width: 2em;
+            height: 100vh;
+            border-right: 5px solid #000;
+            font-size: 32px;
+
+            display: none;
+        }
+
+        .sidebar-mini>div {
+            border-bottom: 5px solid #000;
+            line-height: 6ex;
+            text-align: center;
+        }
     </style>
 </head>
 
 <body>
-    <div class="box"></div>
+    <!-- <div class="box"></div> -->
+
+    <div class="sidebar">
+        <div>首页</div>
+        <div>视频</div>
+        <div>音乐</div>
+    </div>
+
+    <div class="sidebar-mini">
+        <div>首</div>
+        <div>视</div>
+        <div>音</div>
+    </div>
 </body>
 
 </html>
