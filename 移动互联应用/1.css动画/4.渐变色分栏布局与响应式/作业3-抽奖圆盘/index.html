@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pan {
+            width: 400px;
+            height: 400px;
+            background-color: #404443;
+            border: 10px solid #b39558;
+            border-radius: 50%;
+        }
+
+        .line {
+            width: 4px;
+            height: 200px;
+            background-color: #b39558;
+
+            position: absolute;
+            left: calc(50% - 2px);
+
+            transform-origin: center bottom;
+
+            transform: rotate(0deg);
+        }
+
+        .rewards {
+            width: 50px;
+            height: 200px;
+            /* background-color: #f00; */
+
+            position: absolute;
+            left: calc(50% - 25px);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            flex-direction: column;
+
+            font-weight: bolder;
+            color: #b39558;
+
+            transform-origin: center bottom;
+            transform: rotate(0deg);
+        }
+
+        .count {
+            font-size: 24px;
+        }
+
+        .word,
+        img {
+            position: relative;
+            top: -40px;
+        }
+
+        .btn {
+            width: 100px;
+            height: 100px;
+            background-color: #b39558;
+            border: 10px solid #000;
+            border-radius: 50%;
+
+            position: absolute;
+
+
+            color: #fff;
+            font-size: 20px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .pointer {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 30px 15px;
+            border-color: transparent transparent #000 transparent;
+
+            position: absolute;
+            left: calc(50% - 15px);
+            top: -61px;
+        }
+
+        .pointer::before {
+            content: '';
+            display: block;
+
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 20px 10px;
+            border-color: transparent transparent #b39558 transparent;
+
+            position: absolute;
+            left: calc(50% - 10px);
+            top: -5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="pan">
+        <!-- <div class="line"></div> -->
+        <div class="rewards">
+            <!-- <img src="./img/cry.png" alt=""> -->
+            <div class="count">100</div>
+            <div>元话费 </div>
+        </div>
+    </div>
+
+    <!-- 抽奖按钮 -->
+    <div class="btn">
+        <div class="pointer"></div>
+        <div>开始抽奖</div>
+        <div>START</div>
+    </div>
+</body>
+
+<script>
+
+    const pan = document.querySelector('.pan')
+
+    // 面向对象
+    // 奖品对象数组
+    let rewards = [
+        {
+            price: 0, // 金额
+        },
+        {
+            price: 100,
+        },
+        {
+            price: 3,
+        },
+        {
+            price: 0,
+        },
+        {
+            price: 8,
+        },
+        {
+            price: 2,
+        },
+        {
+            price: 0,
+        },
+        {
+            price: 1,
+        },
+        {
+            price: 2,
+        },
+        {
+            price: 0,
+        },
+        {
+            price: 10,
+        },
+        {
+            price: 5,
+        },
+    ]
+
+    let html = ''
+
+    // 循环显示 12 条线
+    for (let i = 0; i < 12; i++) {
+        html += `<div class="line" style="transform: rotate(${i * 30}deg)"></div>`
+    }
+
+    // 循环显示 12 个奖品
+    for (let i = 0; i < 12; i++) {
+        // 读取奖品信息
+        let reward = rewards[i]
+
+        // 奖品的内容
+        let content = reward.price === 0 ?
+            `<img src="./img/cry.png" alt="">` :
+            `
+            <div class="count word">${reward.price}</div>
+            <div class="word">元话费 </div>
+            `
+
+        html += `
+            <div class="rewards" style="transform: rotate(${i * 30 + 15}deg)">${content}</div>
+        `
+    }
+
+    pan.innerHTML = html
+
+</script>
+
+</html>
