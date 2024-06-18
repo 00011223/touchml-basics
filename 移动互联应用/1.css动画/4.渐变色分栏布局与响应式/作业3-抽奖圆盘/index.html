@@ -21,6 +21,9 @@
             background-color: #404443;
             border: 10px solid #b39558;
             border-radius: 50%;
+
+            transition: all 1s;
+            transform: rotate(0deg);
         }
 
         .line {
@@ -136,47 +139,99 @@
 <script>
 
     const pan = document.querySelector('.pan')
+    const btn = document.querySelector('.btn')
 
     // 面向对象
     // 奖品对象数组
     let rewards = [
         {
             price: 0, // 金额
+            weight: 1, // 权重值
         },
         {
             price: 100,
+            weight: 100,
         },
         {
             price: 3,
+            weight: 1,
         },
         {
             price: 0,
+            weight: 1,
         },
         {
             price: 8,
+            weight: 1,
         },
         {
             price: 2,
+            weight: 1,
         },
         {
             price: 0,
+            weight: 1,
         },
         {
             price: 1,
+            weight: 1,
         },
         {
             price: 2,
+            weight: 1,
         },
         {
             price: 0,
+            weight: 1,
         },
         {
             price: 10,
+            weight: 1,
         },
         {
             price: 5,
+            weight: 1,
         },
     ]
+
+    // 用于计算权重区间的中间变量
+    let current = 0
+
+    // 权重的和
+    let total = 0
+
+    // 抽奖圆盘旋转角度，需要一直累加
+    let deg = 0
+
+    // 计算奖品的角度区间的中间变量
+    let _temp = 360
+
+    // 当前抽中的奖品
+    let currentReward = null
+
+    // 计算奖品的权重区间
+    // 计算奖品的角度区间
+    rewards.forEach(reward => {
+        total += reward.weight
+
+        // 赋值下限
+        reward.start = current
+        // 添加权重区间
+        current += reward.weight
+        // 赋值上限
+        reward.end = current
+
+
+        // 角度上限
+        reward.endDeg = _temp
+        _temp -= 30
+        // 角度下限
+        reward.startDeg = _temp
+    })
+
+
+    console.log(rewards);
+    console.log(total);
 
     let html = ''
 
@@ -205,6 +260,55 @@
 
     pan.innerHTML = html
 
+
+    // 通过权重获取一个奖品
+    function getRewards() {
+        // 随机值
+        let rand = Math.random() * 12
+
+        let r
+
+        // 循环遍历奖品 找到对应的奖品
+        rewards.every(reward => {
+            if (rand >= reward.start && rand < reward.end) {
+                // 随机值 击中了奖品
+                r = reward
+                // 跳出循环
+                return false
+            }
+            return true
+        })
+
+        return r
+    }
+
+    // 给抽奖按钮绑定点击事件
+    btn.addEventListener('click', ev => {
+        // 获取奖品
+        let r = getRewards()
+
+        // 随机一个对应该奖品的角度
+        let randDeg = r.startDeg + Math.random() * (r.endDeg - r.startDeg)
+
+        // 叠加一个补角补充成360的整数倍
+
+        // 计算补角
+        let b = 360 - deg % 360
+        // 叠加补角 叠加后 deg 的值就是 360 的整数倍
+        deg += b
+
+        deg += randDeg
+
+
+        pan.style.transform = `rotate(${deg}deg)`
+
+        currentReward = r
+    })
+
+    // 添加过渡播放完成事件
+    pan.addEventListener('transitionend', () => {
+        alert(currentReward.price)
+    })
 </script>
 
 </html>
