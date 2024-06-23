@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+</body>
+<script src="./js/jquery.min.js"></script>
+<script>
+    let $lis = $('ul>li')
+
+    // eq 读取对应索引位置的jquery对象
+    let $li = $lis.eq(1)
+    // 因为 $li 是jquery对象 所以可以直接使用jquery操作它
+    $li.css('color', '#0f0')
+
+    // get 读取对应索引位置的dom对象
+    // let li = $lis.get(2)
+    // li.style.color = '#f00'
+
+    // 使用 [] 方括号的方式去获取索引对应的 dom 对象
+    // 其结果等价于 get 函数获取的结果
+    let li = $lis[2]
+    li.style.color = '#f00'
+</script>
+
+</html>

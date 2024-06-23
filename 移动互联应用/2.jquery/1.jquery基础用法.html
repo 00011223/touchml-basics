@@ -7,22 +7,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- jquery 的 cdn -->
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-        crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script> -->
 </head>
 
 <body>
     <div class="box"></div>
 </body>
 
+<script src="./js/jquery.min.js"></script>
 <script>
     // jquery 使用的方法：
 
     // 1. 查询并存储元素
     // 2. 操作元素，包括修改元素样式，绑定事件等
 
+    console.log($);
+
+    // 使用 $() 函数获取一个 jQuery 对象
+    // jquery 对象的变量名 一般以 $ 美元符开头
+    let $box = $('.box')
+
+    // jquery 对象看上去像一个数组 其中数组成员就是 dom 对象
+    console.log($box);
+
+    // 给元素添加样式
+    // $box.css('height', '100px')
+    // $box.css('background-color', '#f00')
+
+
     // jquery对象的函数总返回自己
     // 所以可以进行链式调用
+    $box.css('height', '100px')
+        .css('background-color', '#f00')
+        .css('color', '#fff')
+        .text('hello world')
 
 </script>
 

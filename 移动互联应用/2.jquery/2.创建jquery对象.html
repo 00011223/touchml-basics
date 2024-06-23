@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="box"></div>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+</body>
+<script src="./js/jquery.min.js"></script>
+<script>
+
+    // 什么是jquery 对象
+    // 使用jquery $() 函数查询出来的返回值 就是一个jquery 对象
+
+    // $box 就是一个jquery 对象
+    // let $box = $('.box')
+
+
+    // 获取jquery对象的方法有两种
+    // 1. 使用 css 选择器
+    let $li = $('ul>li')
+
+    // 2. 使用 dom 对象
+    // 先查询一个dom对象
+    let box = document.querySelector('.box')
+    // 使用dom对象获取一个jquery对象
+    let $box = $(box)
+</script>
+
+</html>
