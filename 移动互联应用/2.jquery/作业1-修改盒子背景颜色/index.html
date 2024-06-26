@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #000;
+            margin-right: 8px;
+        }
+
+        .box-container {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <button color="#f00">红</button>
+        <button color="#ff0">黄</button>
+        <button color="#00f">蓝</button>
+        <button color="#0f0">绿</button>
+    </div>
+    <div class="box-container">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+</body>
+<script src="./js/jquery.min.js"></script>
+<script>
+    // 当前选择的颜色
+    let color
+
+    $('button').on('click', function (ev) {
+        // 使用 function 声明的事件处理程序
+        // 其中 this 代表接收事件的元素
+        console.log(this);
+        // currentTarget 是当前监听事件的元素
+        console.log(ev.currentTarget);
+
+        // 获取标签上的颜色信息
+        // color = this.getAttribute('color')
+        // console.log(color);
+
+        // 使用jquery获取属性值
+        color = $(this).attr('color')
+        console.log(color);
+    })
+
+    $('.box').on('click', ev => {
+        // 赋值盒子的背景色为当前选中的颜色
+        $(ev.currentTarget).css('background-color', color)
+    })
+</script>
+
+</html>

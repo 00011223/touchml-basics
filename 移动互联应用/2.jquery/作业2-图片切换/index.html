@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .phone-shell {
+            width: 200px;
+        }
+
+        .pie-container {
+            display: flex;
+        }
+
+        .pie {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #808080;
+        }
+
+        .pie.active {
+            background-color: #ffa600;
+        }
+    </style>
+</head>
+
+<body>
+    <img class="phone-shell" src="./img/1-1.png" alt="">
+    <div class="pie-container">
+        <div src="./img/1-1.png" class="pie active"></div>
+        <div src="./img/2-2.png" class="pie"></div>
+        <div src="./img/3-3.png" class="pie"></div>
+        <div src="./img/4-4.png" class="pie"></div>
+        <div src="./img/5-5.png" class="pie"></div>
+        <div src="./img/6-6.png" class="pie"></div>
+        <div src="./img/7-7.png" class="pie"></div>
+    </div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script>
+    // 当前索引
+    let currentIndex = 0
+
+    $('.phone-shell').on('click', ev => {
+        // 清空小圆点的激活状态
+        $('.pie').eq(currentIndex).removeClass('active')
+
+        // 递增索引
+        currentIndex++
+
+        // 判断索引是否越界，若越界就重置索引
+        currentIndex = currentIndex >= 7 ? 0 : currentIndex
+
+        // 赋值当前索引对应的图片src
+        let src = $('.pie').eq(currentIndex).attr('src')
+        $('.phone-shell').attr('src', src)
+
+        // 将当前索引对应的按钮激活
+        $('.pie').eq(currentIndex).addClass('active')
+    })
+
+    $('.pie').on('click', ev => {
+        // 清空小圆点的激活状态
+        $('.pie').eq(currentIndex).removeClass('active')
+
+        // 赋值当前索引对应的图片src
+        let src = $(ev.currentTarget).attr('src')
+        $('.phone-shell').attr('src', src)
+
+        // 将当前索引对应的按钮激活
+        $(ev.currentTarget).addClass('active')
+
+
+        // 查询当前点击的 pie 在所有小圆点中的索引值
+        let i = $('.pie').index($(ev.currentTarget))
+        console.log(i);
+
+        // 赋值 currentIndex
+        currentIndex = i
+    })
+</script>
+
+</html>
