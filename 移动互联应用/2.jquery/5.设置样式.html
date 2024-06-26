@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            font-size: 64px;
+        }
+
+        .box1 {
+            color: #ff0;
+            background-color: #f00;
+        }
+
+        .box2 {
+            color: #0f0;
+            background-color: #00f;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box box1">1</div>
+    <div class="box box2">2</div>
+</body>
+
+<script src="./js/jquery.min.js"></script>
+<script>
+
+    let $box = $('.box')
+
+    // 读取样式
+    let width = $box.css('width')
+    console.log(width);
+
+    // 读取多个样式
+    let r = $box.css(['width', 'color', 'font-size'])
+    console.log(r);
+
+    // 赋值样式
+    // $box.css('background-color', '#f00')
+
+    // 通过函数来赋值样式
+    $box.css('background-color', (index, value) => {
+        // index 遍历的数组成员的索引
+        // value 对应索引元素的样式值
+        console.log(index, value);
+
+        // 返回一个参数就可以赋值css属性
+        if (index === 0) {
+            return 'pink'
+        } else {
+            return 'gold'
+        }
+    })
+</script>
+
+</html>

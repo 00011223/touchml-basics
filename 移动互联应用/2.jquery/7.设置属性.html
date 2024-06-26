@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="box"></div>
+</body>
+
+<script src="./js/jquery.min.js"></script>
+<script>
+    let $box = $('.box')
+
+    // 读取属性
+    let clazz = $box.attr('class')
+    console.log(clazz);
+
+    // 赋值属性
+    $box.attr('my-data', 'hello world')
+
+    // 删除属性
+    $box.removeAttr('class')
+</script>
+
+</html>

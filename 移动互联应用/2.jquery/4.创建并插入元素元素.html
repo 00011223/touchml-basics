@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin-bottom: 15px;
+
+            font-size: 32px;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">1</div>
+    <div class="box">2</div>
+    <div class="box">3</div>
+</body>
+<script src="./js/jquery.min.js"></script>
+<script>
+
+    // 创建一个节点，该节点就是一个jquery对象
+    let $box = $(`<div class="box">new</div>`)
+
+    // 某个元素追加一个子节点
+    // $(document.body).append($box)
+
+    // 追加一个子节点到另一个元素中
+    // $box.appendTo($(document.body))
+
+    // 某个元素追加一个节点到头部
+    // $(document.body).prepend($box)
+
+    // 追加一个子节点到另一个元素的头部
+    // $box.prependTo($(document.body))
+
+    let $box2 = $('.box').eq(1)
+
+    // 某个元素的前面追加一个元素
+    // $box2.before($box)
+
+    // 某个元素被添加到另一个元素的前面
+    // $box.insertBefore($box2)
+
+    // 某个元素的后面添加一个元素
+    // $box2.after($box)
+
+    // 某个元素被添加到另一个元素的后面
+    $box.insertAfter($box2)
+
+</script>
+
+</html>

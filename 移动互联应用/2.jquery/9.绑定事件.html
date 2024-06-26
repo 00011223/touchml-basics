@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>click me</button>
+</body>
+<script src="./js/jquery.min.js"></script>
+<script>
+    let $btn = $('button')
+
+    // 和dom对象绑定事件进行类比
+    // dom 对象有两种绑定事件的方法
+    // 1. 使用 事件属性 例如: onclick onmousemove
+
+    // 对应 jquery 的写法如下
+    $btn.click(ev => {
+        console.log('click');
+        // ev 是jquery封装的事件对象
+        console.log(ev);
+    })
+
+    // 再例如
+    $btn.mousemove(ev => {
+        console.log('mousemove');
+    })
+
+    // 可以直接使用事件对应的函数去触发事件，例如:
+    $btn.click()
+    $btn.mousemove()
+
+    // 2. 使用事件监听器
+    // $btn[0].addEventListener('click', ev=>{})
+
+    // 对应的jquery写法：
+
+    const handler = ev => {
+        console.log(ev);
+        console.log(1);
+    }
+
+    // 绑定事件
+    $btn.on('click', handler)
+
+    $btn.on('click', ev => {
+        console.log(ev);
+        console.log(2);
+    })
+
+    // 绑定一次性事件
+    $btn.one('click', ev => {
+        console.log(ev);
+        console.log('one');
+    })
+
+    // 解绑指定事件处理程序
+    // $btn.off('click', handler)
+
+    // 解绑所有事件处理程序
+    $btn.off('click')
+
+</script>
+
+</html>
