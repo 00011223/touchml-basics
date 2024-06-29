@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form onsubmit="return false">
+        <div>
+            <label>姓名: <input name="name" type="text"></label>
+        </div>
+        <div>
+            性别:
+            <label><input type="radio" name="sex" value="male">男</label>
+            <label><input type="radio" name="sex" value="female">女</label>
+            <label><input type="radio" name="sex" value="other">其他</label>
+        </div>
+        <div>
+            爱好:
+            <label><input type="checkbox" name="hobbies" value="dlq">打篮球</label>
+            <label><input type="checkbox" name="hobbies" value="tzq">踢足球</label>
+            <label><input type="checkbox" name="hobbies" value="ymq">羽毛球</label>
+        </div>
+        <div>
+            <label>班级: <select name="clazz">
+                    <option value="" disabled selected>-- 请选择 --</option>
+                    <option value="1">一班</option>
+                    <option value="2">二班</option>
+                    <option value="3">三班</option>
+                </select></label>
+        </div>
+        <div>
+            <label>简介: <textarea name="desc" rows="4"></textarea></label>
+        </div>
+        <div>
+            <button>提交</button>
+        </div>
+    </form>
+</body>
+
+<script src="./js/jquery.min.js"></script>
+<script>
+    // 查询表单元素
+    let $name = $('input[name=name]')
+    let $sex = $('input[name=sex]')
+    let $hobbies = $('input[name=hobbies]')
+    let $clazz = $('select[name=clazz]')
+    let $desc = $('textarea[name=desc]')
+    let $btn = $('form button')
+
+    // sex 变量用于保存性别值
+    let sex
+
+    // hobbies 变量用于保存爱好的多选结果
+    // 一般是一个数组
+    let hobbies = []
+
+    $btn.click(ev => {
+        // 使用jquery读取表单数据
+
+        // 读取输入框
+        let name = $name.val()
+        console.log(name);
+
+        // 读取单选/多选
+        // 通过元素的 checked 属性读取
+        $sex.each((i, el) => {
+            // 使用 dom api
+            // console.log(el.value)
+            // console.log(el.checked)
+            // 使用jquery读取值
+            if (el.checked) {
+                // 使用 jquery 的 val 函数 读取单选按钮的 value 值
+                sex = $(el).val()
+            }
+        })
+
+        console.log(sex);
+
+
+        // 清空数组
+        hobbies.splice(0, hobbies.length)
+        $hobbies.each((i, el) => {
+            if (el.checked) {
+                // 若当前选项被勾选了
+                // 则将选项值插入到数组中
+                hobbies.push($(el).val())
+            }
+        })
+
+        console.log(hobbies);
+
+        // 读取下拉框
+        console.log($clazz.val());
+
+        // 读取文本域
+        console.log($desc.val());
+    })
+
+
+    // 伪造一个服务器返回的假数据
+    let stu = {
+        name: '法外狂徒张三',
+        sex: 'female',
+        hobbies: ['dlq', 'tzq'],
+        clazz: '1',
+        desc: '从出生到入土\n张三的传奇一生'
+    }
+
+    // 回显数据到表单上
+    function review() {
+        // jquery赋值value
+        $name.val(stu.name)
+
+        // 回显性别
+        $sex.each((i, el) => {
+            // 判断选项的value是否等于数据的sex值
+            if ($(el).val() === stu.sex) {
+                // 勾选
+                el.checked = true
+            }
+        })
+
+        // 回显爱好
+        $hobbies.each((i, el) => {
+            // 使用数组的 includes 来判断 $(el).val() 是否被数组 hobbies 包含
+            // indexOf 
+            if (stu.hobbies.includes($(el).val())) {
+                // 勾选
+                el.checked = true
+            }
+        })
+
+        // 回显班级
+        $clazz.val(stu.clazz)
+
+        // 回显简介
+        $desc.val(stu.desc)
+    }
+
+    review()
+</script>
+
+</html>
