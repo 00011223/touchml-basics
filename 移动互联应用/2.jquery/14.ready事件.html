@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <img src="作业2-图片切换/img/1-1.png" width="100" />
+</body>
+<script src="js/jquery.min.js"></script>
+<script>
+
+    // 页面加载完成后触发一段自己的程序
+    $().ready(() => {
+        console.log('页面准备完成');
+    })
+
+    // $().ready() 的缩写
+    $(function () {
+        console.log('页面准备完成2');
+    })
+
+    // js api 的页面加载完成事件
+    window.addEventListener('load', () => {
+        console.log('window 页面加载完成');
+    })
+
+    // 文档准备状态发生变化事件
+    document.addEventListener('readystatechange', ev => {
+        // document.readyState 文档的准备状态
+        // 当该状态变为 complete 时 代表文档加载完成
+        if (document.readyState === 'complete') {
+            console.log('文档加载完成');
+        }
+    })
+
+</script>
+
+</html>

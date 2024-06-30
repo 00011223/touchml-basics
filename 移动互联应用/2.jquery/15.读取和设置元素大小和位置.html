@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .container {
+            width: 500px;
+            height: 500px;
+            background-color: aqua;
+            position: absolute;
+            top: 50px;
+            left: 150px;
+        }
+
+        .box {
+            width: 100px;
+            height: 150px;
+            padding: 50px;
+            background-color: red;
+
+            border: 50px solid black;
+
+            position: absolute;
+            top: 50px;
+            left: 250px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box"></div>
+    </div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script>
+
+    const $box = $('.box')
+
+    // 读取元素位置
+    // position 查询元素相对于父元素的位置 不能赋值只能读值
+    console.log($box.position());
+
+    // offset 查询元素全局坐标
+    console.log($box.offset());
+
+    // offset 可以赋值
+    $box.offset({ top: 200, left: 100 })
+
+    // 所有查询元素大小的函数均可赋值
+    // 查询元素的内容宽高
+    console.log($box.width(300));
+    console.log($box.height());
+
+    // innerWidth 代表 width + padding
+    console.log($box.innerWidth());
+    // outerWidth 代表 width + padding + border
+    console.log($box.outerWidth());
+</script>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .fs {
+            font-size: 32px;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+</body>
+
+<script src="./js/jquery.min.js"></script>
+<script>
+    // wrap wrapAll 函数作用是将指定元素用一段html内容包裹起来
+    
+    // 每一个元素都使用 div 来进行包裹
+    // $('li').wrap('<div class="fs"></div>')
+
+    // 所有的 li 元素用一个 div 进行包裹
+    $('li').wrapAll('<div class="fs"></div>')
+
+</script>
+
+</html>
