@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .content {
+            height: 3000px;
+            width: 3000px;
+        }
+
+        .btn {
+            position: fixed;
+            top: 32px;
+            left: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">content</div>
+    <button class="btn">读取滚动条</button>
+</body>
+
+<script src="./js/jquery.min.js"></script>
+<script>
+    // 使用jquery设置滚动条位置
+    // 前提是要找到哪个元素出现了滚动条
+    let $html = $('html')
+
+    $('.btn').click(() => {
+        // 水平滚动条位置
+        console.log($html.scrollLeft());
+        // 竖直滚动条位置
+        console.log($html.scrollTop());
+    })
+
+    // 赋值滚动条位置只需要在函数参数处填入距离参数就可以了
+    $html.scrollLeft(500)
+    $html.scrollTop(300)
+</script>
+
+</html>

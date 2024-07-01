@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>请求bilibili</button>
+</body>
+<script src="./js/jquery.min.js"></script>
+<script>
+    // 什么是 ajax?
+    // async javascript and xml 缩写为 ajax
+    // ajax 朴素的理解就是：异步的网络请求
+
+    $('button').click(() => {
+        // 发起 ajax 请求
+        $.ajax({
+            // 请求地址
+            url: 'https://www.bilibili.com',
+            // 请求方法
+            method: 'get',
+            // 请求参数
+            data: { x: 1, y: 2 },
+            // 请求成功的回调函数
+            success: (data) => {
+                console.log(data);
+            },
+            // 请求异常的回调函数
+            error: (err) => {
+                console.error(err);
+            },
+            complete: () => {
+                console.log('无论请求成功还是失败，都会触发 complete');
+            }
+        })
+    })
+</script>
+
+</html>
