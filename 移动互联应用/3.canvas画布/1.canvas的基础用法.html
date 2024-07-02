@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 3px solid #000;
+            /* 样式的宽高也可以设置canvas标签的大小，但不是真实的像素值而是拉伸后的大小 */
+            width: 800px;
+            height: 600px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- width height 属性可以设置画布的像素大小
+        例如: width="800" 就意味着画布水平有800个真实像素
+    -->
+    <canvas width="400" height="300"></canvas>
+</body>
+
+<script>
+    const canvas = document.querySelector('canvas')
+    // 获取canvas标签的画布对象
+    // 可以通过操作画布对象来进行绘画
+    const ctx = canvas.getContext('2d')
+
+    // 绘制一个实心矩形
+    ctx.fillRect(100, 50, 100, 100)
+
+    // 总结:
+    // 使用canvas的步骤
+    // 1. 创建canvas标签
+    // 2. 给canvas标签设置 width height 属性
+    // 3. 通过js 获取canvas标签
+    // 4. 通过canvas标签获取context画布上下文（画布对象）
+    // 5. 通过context绘制画布
+</script>
+
+</html>
