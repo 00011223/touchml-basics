@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 3px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="800" height="600"></canvas>
+</body>
+
+<script>
+    const canvas = document.querySelector('canvas')
+    const ctx = canvas.getContext('2d')
+
+    // 修改字体大小和字体库
+    ctx.font = '32px 华文琥珀'
+
+    ctx.fillStyle = '#f00'
+
+    // 绘制实心文字
+    // 语法：ctx.fillText(text, x, y, max-width)
+    // text: 要渲染的文本
+    // x,y: 文本渲染的坐标位置
+    // max-width: 文本最大宽度，当大于该宽度，文本字体将自动缩小以自适应宽度
+    // ctx.fillText('祖国万岁!!', 200, 100, 100)
+    ctx.fillText('祖国万岁!!', 200, 100)
+
+
+    ctx.strokeStyle = '#0f0'
+
+    // 镂空文字
+    // 参数和实心文本相同
+    ctx.strokeText('祖国万岁!!', 200, 300)
+
+</script>
+
+</html>
