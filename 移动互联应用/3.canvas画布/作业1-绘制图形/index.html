@@ -6,46 +6,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        canvas {
-            border: 3px solid #000;
-        }
-    </style>
 </head>
 
 <body>
     <canvas width="800" height="600"></canvas>
-    <input type="color">
 </body>
 
 <script>
-    document.querySelector('input').onchange = function (ev) {
-        console.log(this.value);
-    }
 
     const canvas = document.querySelector('canvas')
-    const ctx = canvas.getContext('2d')
-
-    ctx.fillStyle = '#6b6b6b'
-    ctx.fillRect(100, 100, 150, 100)
+    const ctx = canvas.getContext("2d")
+    // 先调色后绘制矩形
     ctx.fillStyle = '#bfbfbf'
-    ctx.fillRect(100, 100, 300, 20)
-    ctx.fillRect(100, 200, 40, 50)
+    ctx.fillRect(50, 50, 300, 20)
+    ctx.fillStyle = '#6b6b6b'
+    ctx.fillRect(50, 70, 150, 80)
+    ctx.fillStyle = '#bfbfbf'
+    ctx.fillRect(50, 150, 40, 60)
     ctx.fillStyle = '#f9891f'
-    ctx.fillRect(120, 200, 20, 40)
+    ctx.fillRect(70, 150, 20, 50)
 
-    ctx.fillStyle = '#000'
-    ctx.fillRect(500, 100, 200, 450)
-    ctx.fillStyle = '#ff0'
-    ctx.fillRect(525, 150, 50, 50)
-    ctx.fillRect(625, 150, 50, 50)
-    ctx.fillRect(525, 250, 50, 50)
-    ctx.fillRect(625, 250, 50, 50)
-    ctx.fillRect(525, 350, 50, 50)
-    ctx.fillRect(625, 350, 50, 50)
-    ctx.fillRect(525, 450, 50, 50)
-    ctx.fillRect(625, 450, 50, 50)
 
+    ctx.fillStyle = '#000000'
+    ctx.fillRect(400, 50, 200, 450)
+    ctx.fillStyle = '#ffff00'
+    ctx.fillRect(425, 100, 50, 50)
+    ctx.fillRect(525, 100, 50, 50)
+    ctx.fillRect(425, 200, 50, 50)
+    ctx.fillRect(525, 200, 50, 50)
+    ctx.fillRect(425, 300, 50, 50)
+    ctx.fillRect(525, 300, 50, 50)
+    ctx.fillRect(425, 400, 50, 50)
+    ctx.fillRect(525, 400, 50, 50)
 
 </script>
 

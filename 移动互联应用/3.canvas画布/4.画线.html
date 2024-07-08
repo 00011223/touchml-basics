@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 3px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="800" height="600"></canvas>
+</body>
+
+<script>
+    const canvas = document.querySelector('canvas')
+    const ctx = canvas.getContext('2d')
+
+
+    // 设置颜色和线宽
+    ctx.strokeStyle = '#ff0'
+    ctx.lineWidth = 15
+
+    // 画线分两个步骤:
+    // 1. 描点（设置路径）
+    // 2. 画线（将所描的点连接起来）
+
+    // 步骤一
+    // 使用 beginPath 开启路径
+    ctx.beginPath()
+    // 移动笔头但不会记录路径上的线条
+    ctx.moveTo(400, 100)
+    // 用线绘制到下一个点
+    ctx.lineTo(200, 200)
+    ctx.lineTo(600, 200)
+    ctx.lineTo(400, 100)
+
+    // 将路径封闭
+    ctx.closePath()
+
+    // 注意：beginPath在画新的路径的时候必须调用，closePath选择性调用
+
+
+    // 步骤二
+    // 为了显示图形需要调用以下函数
+    // 将路径所包围的图形用纯色来填充
+    // ctx.fill()
+    // 将路径用镂空线条进行绘制
+    ctx.stroke()
+
+
+    ctx.strokeStyle = '#f00'
+
+    ctx.beginPath()
+
+    ctx.moveTo(400, 400)
+    ctx.lineTo(500, 400)
+
+    // 角度转弧度的公式: rad = (PI / 180) * deg
+    // 弧线
+    // ctx.arc(x, y, r, start, end)
+    // x: 圆心横坐标
+    // y: 圆心纵坐标
+    // r: 圆半径
+    // start: 起始弧度 0度时的方向为水平向右 顺时针为正方向
+    // end: 结束弧度
+    ctx.arc(400, 400, 100, 0, Math.PI / 180 * 30)
+    ctx.closePath()
+
+    ctx.fill()
+    // ctx.stroke()
+</script>
+
+</html>
