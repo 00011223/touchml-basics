@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid royalblue;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="500" height="500"></canvas>
+</body>
+<script>
+    const canvas = document.querySelector('canvas')
+    const ctx = canvas.getContext('2d')
+
+    ctx.lineWidth = 10
+
+    // 画屋顶
+    ctx.beginPath()
+    ctx.moveTo(250, 100)
+    ctx.lineTo(150, 200)
+    ctx.lineTo(350, 200)
+    ctx.lineTo(250, 100)
+    ctx.closePath()
+
+    ctx.stroke()
+
+    // 画房屋体
+    ctx.beginPath()
+    ctx.moveTo(170, 200)
+    ctx.lineTo(170, 350)
+    ctx.lineTo(330, 350)
+    ctx.lineTo(330, 200)
+
+    ctx.stroke()
+
+    // 画门
+    ctx.fillRect(220, 250, 60, 100)
+</script>
+
+</html>
