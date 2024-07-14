@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        canvas {
+            border: 3px solid #00f;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="500" height="500"></canvas>
+</body>
+
+<script>
+    const canvas = document.querySelector('canvas')
+    const ctx = canvas.getContext('2d')
+
+    ctx.beginPath()
+    ctx.arc(250, 250, 200, 0, 2 * Math.PI)
+    ctx.closePath()
+    ctx.stroke()
+
+    // 获取刻度的起始和结束坐标
+    let s = getPoint(250, 250, 200, -90)
+    let e = getPoint(250, 250, 150, -90)
+
+    ctx.beginPath()
+    ctx.moveTo(s.x, s.y)
+    ctx.lineTo(e.x, e.y)
+    ctx.stroke()
+
+
+    s = getPoint(250, 250, 200, -60)
+    e = getPoint(250, 250, 150, -60)
+
+    ctx.beginPath()
+    ctx.moveTo(s.x, s.y)
+    ctx.lineTo(e.x, e.y)
+    ctx.stroke()
+
+
+
+    // 获取点坐标
+    // x, y 圆心坐标
+    // r 圆半径
+    // a 圆心角 水平向右为 0 度
+    function getPoint(x, y, r, a) {
+        let result = { x: 0, y: 0 }
+
+        result.x = Math.cos(Math.PI / 180 * a) * r + x
+        result.y = Math.sin(Math.PI / 180 * a) * r + y
+
+        return result
+    }
+</script>
+
+</html>
