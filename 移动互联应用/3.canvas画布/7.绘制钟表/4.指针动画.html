@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        canvas {
+            border: 3px solid #00f;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="500" height="500"></canvas>
+</body>
+
+<script>
+    const canvas = document.querySelector('canvas')
+    const ctx = canvas.getContext('2d')
+
+
+    // 画表盘背景
+    function drawBg() {
+
+        // 设置线宽和颜色
+        ctx.lineWidth = 1
+        ctx.strokeStyle = '#000'
+
+        // 画圆
+        ctx.beginPath()
+        ctx.arc(250, 250, 200, 0, 2 * Math.PI)
+        ctx.closePath()
+        ctx.stroke()
+
+        // 画刻度
+        for (let i = 0; i < 60; i++) {
+            // 求每个刻度的起点和结束点
+            let s = getPoint(250, 250, 200, i * 6)
+            // 结束点的圆半径
+            let endRadius = i % 5 === 0 ? 150 : 175
+            let e = getPoint(250, 250, endRadius, i * 6)
+
+            // 画线
+            ctx.beginPath()
+            ctx.moveTo(s.x, s.y)
+            ctx.lineTo(e.x, e.y)
+            ctx.stroke()
+        }
+    }
+
+
+    // 获取点坐标
+    // x, y 圆心坐标
+    // r 圆半径
+    // a 圆心角 水平向右为 0 度
+    function getPoint(x, y, r, a) {
+        let result = { x: 0, y: 0 }
+
+        result.x = Math.cos(Math.PI / 180 * a) * r + x
+        result.y = Math.sin(Math.PI / 180 * a) * r + y
+
+        return result
+    }
+
+    // 绘制指针
+    // len 针的长度
+    // w 针的宽度
+    // color 针的颜色
+    // a 针的角度
+    function drawPointer(len, w, color, a) {
+        // 获取画线的起始和结束坐标
+        let s = { x: 250, y: 250 }
+        let e = getPoint(250, 250, len, a)
+
+        // 修改线宽和颜色
+        ctx.lineWidth = w
+        ctx.strokeStyle = color
+
+        // 画针
+        ctx.beginPath()
+        ctx.moveTo(250, 250)
+        ctx.lineTo(e.x, e.y)
+        ctx.stroke()
+    }
+
+    // 画红色指针盖子
+    function drawCover() {
+        ctx.fillStyle = '#f00'
+
+        ctx.beginPath()
+        ctx.arc(250, 250, 20, 0, 2 * Math.PI)
+        ctx.closePath()
+        ctx.fill()
+    }
+
+    // 绘制钟表
+    function drawClock() {
+        drawBg()
+        drawPointer(100, 15, '#00f', h * 30 - 90)
+        drawPointer(130, 13, '#0f0', m * 6 - 90)
+        drawPointer(150, 10, '#f00', s * 6 - 90)
+        drawCover()
+    }
+
+
+    // drawBg()
+    // drawPointer(100, 15, '#00f', 210)
+    // drawPointer(130, 13, '#0f0', 180)
+    // drawPointer(150, 10, '#f00', 90)
+    // drawCover()
+
+    // 定义时间
+    let h = 11
+    let m = 59
+    let s = 50
+
+    // 渲染第一帧
+    drawClock()
+
+    // 渲染循环
+    setInterval(() => {
+        // 计算时间
+        s++
+        // 判断进位
+        if (s >= 60) {
+            m++
+            s = 0
+            if (m >= 60) {
+                h++
+                m = 0
+                if (h >= 12) {
+                    h = 0
+                }
+            }
+        }
+
+        // 绘制钟表
+
+        // 清空画布
+        ctx.clearRect(0, 0, 500, 500)
+        // 画表
+        drawClock()
+    }, 1000)
+</script>
+
+</html>
