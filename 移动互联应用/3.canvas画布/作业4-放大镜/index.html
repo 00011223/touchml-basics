@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        img {
+            width: 288px;
+            height: 180px;
+        }
+
+        canvas {
+            width: 300px;
+            height: 300px;
+            border: 5px solid violet;
+        }
+
+        .img-container {
+            width: 288px;
+            height: 180px;
+            position: relative;
+
+        }
+
+        .cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            width: 50px;
+            height: 50px;
+
+            background-color: rgb(36, 72, 255);
+
+            opacity: 0.2;
+        }
+
+        .pan {
+            width: 288px;
+            height: 180px;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="img-container">
+        <div class="cover"></div>
+        <div class="pan"></div>
+        <img src="../img/img.jpg" />
+    </div>
+    <canvas width="300" height="300"></canvas>
+</body>
+<script>
+    const pan = document.querySelector('.pan')
+    const img = document.querySelector('img')
+    const cover = document.querySelector('.cover')
+    const canvas = document.querySelector('canvas')
+    const ctx = canvas.getContext('2d')
+
+    pan.addEventListener('mousemove', ev => {
+        // 获取鼠标坐标
+        let x = ev.offsetX
+        let y = ev.offsetY
+        console.log(x, y);
+
+        // 限制鼠标位置的极限值
+        x = clamp(x, 25, 288 - 25)
+        y = clamp(y, 25, 180 - 25)
+
+        // 设置 cover 位置并作出向左上角的偏移
+        cover.style.left = x - 25 + 'px'
+        cover.style.top = y - 25 + 'px'
+
+        // cover 左上角坐标
+        x = x - 25
+        y = y - 25
+
+        // 放大10倍,求真实图片大小上的坐标
+        x *= 10
+        y *= 10
+
+        // drawImage
+        ctx.drawImage(img, x, y, 500, 500, 0, 0, 300, 300)
+    })
+
+    // 定界函数
+    // 将value值限制在min和max之间
+    // 3 0 2
+    function clamp(value, min, max) {
+        let temp = Math.max(min, value)
+        temp = Math.min(temp, max)
+        return temp
+    }
+</script>
+
+</html>
