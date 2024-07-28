@@ -59,10 +59,28 @@
         <button class="muted">静音</button>
     </div>
 
+    <input type="range" min="0" max="100" step="20" value="0"><span class="range-value">0</span>
+
     <!-- picture -->
+    <picture>
+        <!-- source 标签中有多个待选项时，使用srcset规定资源路径 -->
+        <!-- media 设置媒体查询 -->
+        <!-- 媒体查询的顺序由大到小 -->
+        <source srcset="./img/1.png" media="(min-width: 800px)">
+        <source srcset="./img/2.png" media="(min-width: 600px)">
+        <img width="500" src="./img/desktop.png">
+    </picture>
 </body>
 
 <script>
+
+    let inputRange = document.querySelector('input[type=range]')
+    let rangeValue = document.querySelector('.range-value')
+
+    inputRange.addEventListener('input', () => {
+        rangeValue.textContent = inputRange.value
+    })
+
     // 可以使用 Audio 类名来创建 audio 标签
     // let audio = new Audio()
     // audio.src = './audio/a4.mp3'
@@ -78,6 +96,7 @@
     let vUpBtn = document.querySelector('.v-up')
     let vDownBtn = document.querySelector('.v-down')
     let mutedBtn = document.querySelector('.muted')
+
 
     let timer
 
