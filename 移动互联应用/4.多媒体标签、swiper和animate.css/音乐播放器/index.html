@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .player {
+            width: 1000px;
+        }
+
+        .music-item {
+            width: 100%;
+            height: 60px;
+            color: #fff;
+            font-weight: bolder;
+            background-color: #333333;
+
+            display: flex;
+            align-items: center;
+        }
+
+        .music-item>div:nth-child(1) {
+            width: 300px;
+            padding-left: 30px;
+        }
+
+        .music-item>div:nth-child(2) {
+            width: 200px;
+            color: #656565;
+        }
+
+        .music-item:nth-child(2n) {
+            background-color: #2d2d2d;
+        }
+
+        .player-controls {
+            height: 100px;
+            background-color: #222222;
+            display: flex;
+            align-items: center;
+        }
+
+        .btns {
+            width: 150px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        .btns>img {
+            height: 24px;
+        }
+
+        .btns>img:nth-child(2) {
+            height: 30px;
+        }
+
+        .cover>.img {
+            width: 80px;
+            height: 80px;
+            background-image: url('./img/cover/山根ミチル - Beginning(アイテムBGM1・悪魔城伝説より) [VAMPIRE KILLER (MD) ].jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .name-row {
+
+            height: 40px;
+            padding-left: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .left {
+            display: flex;
+        }
+
+        .left>div {
+            width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .progress-bar {
+            height: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="player">
+        <!-- 播放列表 -->
+        <div class="music-list">
+            <!-- 列表项 -->
+            <div class="music-item">
+                <div>知足</div>
+                <div>五月天</div>
+                <div>热门华语85</div>
+            </div>
+            <div class="music-item">
+                <div>知足</div>
+                <div>五月天</div>
+                <div>热门华语85</div>
+            </div>
+            <div class="music-item">
+                <div>知足</div>
+                <div>五月天</div>
+                <div>热门华语85</div>
+            </div>
+            <div class="music-item">
+                <div>知足</div>
+                <div>五月天</div>
+                <div>热门华语85</div>
+            </div>
+            <div class="music-item">
+                <div>知足</div>
+                <div>五月天</div>
+                <div>热门华语85</div>
+            </div>
+        </div>
+        <!-- 播放器 -->
+        <div class="player-controls">
+            <!-- 播放按钮组合 -->
+            <div class="btns">
+                <img src="./img/bg-backward.svg" />
+                <img src="./img/pause.svg" />
+                <img src="./img/bg-forward.svg" />
+            </div>
+            <!-- 专辑封面图 -->
+            <div class="cover">
+                <div class="img"></div>
+            </div>
+            <div style="flex-grow: 1">
+                <!-- 歌名行 -->
+                <div class="name-row">
+                    <!-- 左侧 -->
+                    <div class="left">
+                        <div style="color: #fff">山根ミチル - Beginning(アイテムBGM1・悪魔城伝説より) [VAMPIRE KILLER (MD) ]</div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <span style="color: #6b6b6c">山根ミチル</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <img style="width: 24px;" src="./img/link.svg" alt="">
+                    </div>
+                    <!-- 右侧工具栏 -->
+                    <div class="tool-bar"></div>
+                </div>
+                <!-- 进度条行 -->
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
