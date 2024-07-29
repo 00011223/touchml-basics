@@ -7,12 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        @import url(slider.css);
+
         body {
             margin: 0;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            background-color: #333333;
         }
 
         .player {
@@ -76,9 +79,7 @@
         }
 
         .name-row {
-
             height: 40px;
-            padding-left: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -95,8 +96,49 @@
             white-space: nowrap;
         }
 
+        .tool-bar {
+            width: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .tool-bar>img {
+            width: 20px;
+        }
+
         .progress-bar {
             height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .progress {
+            width: 495px;
+        }
+
+        .volumn {
+            width: 100px;
+        }
+
+        .p-container {
+            position: relative;
+        }
+
+        input[type=range] {
+            position: relative;
+        }
+
+        .pro-bg {
+            width: 100%;
+            height: calc(100% - 8px);
+            position: absolute;
+            top: 5px;
+            left: 0;
+            background-color: #6b6b6c;
+            border-radius: 5px;
+            background-image: linear-gradient(to right, #6b6b6c, #6b6b6c 50%, #131313 50%)
         }
     </style>
 </head>
@@ -144,7 +186,7 @@
             <div class="cover">
                 <div class="img"></div>
             </div>
-            <div style="flex-grow: 1">
+            <div style="flex-grow: 1; padding-left: 20px; padding-right: 15px;">
                 <!-- 歌名行 -->
                 <div class="name-row">
                     <!-- 左侧 -->
@@ -156,10 +198,31 @@
                         <img style="width: 24px;" src="./img/link.svg" alt="">
                     </div>
                     <!-- 右侧工具栏 -->
-                    <div class="tool-bar"></div>
+                    <div class="tool-bar">
+                        <img src="./img/open.svg" />
+                        <img style="width: 30px" src="./img/random.svg" />
+                        <img src="./img/list.svg" />
+                    </div>
                 </div>
                 <!-- 进度条行 -->
-                <div class="progress-bar"></div>
+                <div class="progress-bar">
+                    <!-- 进度条 -->
+                    <div class="p-container progress">
+                        <div class="pro-bg"></div>
+                        <input type="range">
+                    </div>
+                    <!-- 进度值 -->
+                    <div>
+                        <span style="color: #6b6b6c;" class="current-time">00:00</span><span
+                            style="color: #5b5b5b;">/<span class="total-time">00:00</span></span>
+                    </div>
+                    <img style="width: 20px;" src="img/volumn.svg" />
+                    <!-- 音量进度条 -->
+                    <div class="p-container volumn">
+                        <div class="pro-bg"></div>
+                        <input type="range">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
