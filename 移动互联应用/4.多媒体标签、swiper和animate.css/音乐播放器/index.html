@@ -39,6 +39,7 @@
         }
 
         .music-item>div:nth-child(2) {
+            padding-left: 8px;
             width: 200px;
             color: #656565;
         }
@@ -138,7 +139,7 @@
             left: 0;
             background-color: #6b6b6c;
             border-radius: 5px;
-            background-image: linear-gradient(to right, #6b6b6c, #6b6b6c 50%, #131313 50%)
+            background-image: linear-gradient(to right, #6b6b6c, #6b6b6c 50%, #131313 50%);
         }
     </style>
 </head>
@@ -209,7 +210,7 @@
                     <!-- 进度条 -->
                     <div class="p-container progress">
                         <div class="pro-bg"></div>
-                        <input type="range">
+                        <input type="range" min="0" max="1" step="any">
                     </div>
                     <!-- 进度值 -->
                     <div>
@@ -220,12 +221,118 @@
                     <!-- 音量进度条 -->
                     <div class="p-container volumn">
                         <div class="pro-bg"></div>
-                        <input type="range">
+                        <input type="range" min="0" max="1" step="any">
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
+<script>
+    const proInp = document.querySelector('.progress input')
+    const volInp = document.querySelector('.volumn input')
+    const proBg = document.querySelector('.progress>.pro-bg')
+    const volBg = document.querySelector('.volumn>.pro-bg')
+    const ML = document.querySelector('.music-list')
+
+    // 音乐播放器
+    let audio = new Audio()
+
+    // 当前正被加载到播放器中的音乐索引
+    let currentIndex = 0
+
+    // 音乐列表数据
+    let musicList = [
+        {
+            name: 'Beginning(アイテムBGM1・悪魔城伝説より) [VAMPIRE KILLER (MD) ]',
+            author: '山根ミチル',
+            group: '悪魔城伝説より',
+            cover: './img/cover/山根ミチル - Beginning(アイテムBGM1・悪魔城伝説より) [VAMPIRE KILLER (MD) ].jpg',
+            src: './audio/山根ミチル - Beginning(アイテムBGM1・悪魔城伝説より) [VAMPIRE KILLER (MD) ].mp3'
+        },
+        {
+            name: 'Bloddy Tears(アイテムBGM2・ドラキュラ2より) [VAMPIRE KILLER (MD) ]',
+            author: '山根ミチル',
+            group: 'ドラキュラ2より',
+            cover: './img/cover/山根ミチル - Bloddy Tears(アイテムBGM2・ドラキュラ2より) [VAMPIRE KILLER (MD) ].jpg',
+            src: './audio/山根ミチル - Bloddy Tears(アイテムBGM2・ドラキュラ2より) [VAMPIRE KILLER (MD) ].mp3'
+        },
+        {
+            name: 'Amber Ale',
+            author: 'Borislav Slavov',
+            group: 'Divinity: Original Sin 2',
+            cover: './img/cover/divinity-original-sin2.jpg',
+            src: './audio/Borislav Slavov - Amber Ale.mp3'
+        },
+        {
+            name: 'Welcome to Fort Joy',
+            author: 'Borislav Slavov',
+            group: 'Divinity: Original Sin 2',
+            cover: './img/cover/divinity-original-sin2-2.jpg',
+            src: './audio/Borislav Slavov - Welcome to Fort Joy.mp3'
+        },
+    ]
+
+
+    // 给进度条绑定input事件
+    proInp.addEventListener('input', () => {
+        setProBg()
+    })
+
+    volInp.addEventListener('input', () => {
+        setVolBg()
+    })
+
+    // 设置进度条
+    function setProBg() {
+        let value = Number(proInp.value)
+        proBg.style.backgroundImage = `linear-gradient(to right, #6b6b6c, #6b6b6c ${value * 100}%, #131313 ${value * 100}%)`
+    }
+
+    // 设置音量
+    function setVolBg() {
+        let value = Number(volInp.value)
+        volBg.style.backgroundImage = `linear-gradient(to right, #6b6b6c, #6b6b6c ${value * 100}%, #131313 ${value * 100}%)`
+    }
+
+    // 创建音乐列表
+    function buildMusicList() {
+        // 数组的map函数可以将一个数组中每个成员映射到另一个数组中
+        // 映射的内容取决于函数内的返回值
+        // map函数的返回值是一个新的数组
+        let r = musicList.map(music => {
+            return `
+                <div class="music-item">
+                    <div>${music.name}</div>
+                    <div>${music.author}</div>
+                    <div>${music.group}</div>
+                </div>
+            `
+        })
+
+        // 使用数组的join函数将字符串数组成员用一个字符连接起来
+        r = r.join('')
+
+        ML.innerHTML = r
+    }
+
+    // 初始化音乐播放器
+    function initAudio() {
+        audio.src = musicList[currentIndex].src
+    }
+
+
+    // 初始化函数
+    function init() {
+        proInp.value = 0
+        volInp.value = 1
+        setProBg()
+        setVolBg()
+        buildMusicList()
+        initAudio()
+    }
+
+    init()
+</script>
 
 </html>
