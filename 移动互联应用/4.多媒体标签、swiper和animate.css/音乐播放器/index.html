@@ -180,7 +180,7 @@
             <!-- 播放按钮组合 -->
             <div class="btns">
                 <img src="./img/bg-backward.svg" />
-                <img src="./img/pause.svg" />
+                <img src="./img/play.svg" />
                 <img src="./img/bg-forward.svg" />
             </div>
             <!-- 专辑封面图 -->
@@ -192,9 +192,10 @@
                 <div class="name-row">
                     <!-- 左侧 -->
                     <div class="left">
-                        <div style="color: #fff">山根ミチル - Beginning(アイテムBGM1・悪魔城伝説より) [VAMPIRE KILLER (MD) ]</div>
+                        <div class="music-name" style="color: #fff">山根ミチル - Beginning(アイテムBGM1・悪魔城伝説より) [VAMPIRE KILLER
+                            (MD) ]</div>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <span style="color: #6b6b6c">山根ミチル</span>
+                        <span class="music-author" style="color: #6b6b6c">山根ミチル</span>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <img style="width: 24px;" src="./img/link.svg" alt="">
                     </div>
@@ -217,7 +218,7 @@
                         <span style="color: #6b6b6c;" class="current-time">00:00</span><span
                             style="color: #5b5b5b;">/<span class="total-time">00:00</span></span>
                     </div>
-                    <img style="width: 20px;" src="img/volumn.svg" />
+                    <img class="muted" style="width: 20px;" src="img/volumn.svg" />
                     <!-- 音量进度条 -->
                     <div class="p-container volumn">
                         <div class="pro-bg"></div>
@@ -234,12 +235,23 @@
     const proBg = document.querySelector('.progress>.pro-bg')
     const volBg = document.querySelector('.volumn>.pro-bg')
     const ML = document.querySelector('.music-list')
+    const playBtn = document.querySelector('.btns>img:nth-child(2)')
+    const prevBtn = document.querySelector('.btns>img:nth-child(1)')
+    const nextBtn = document.querySelector('.btns>img:nth-child(3)')
+    const coverEl = document.querySelector('.cover>.img')
+    const musicName = document.querySelector('.music-name')
+    const musicAuthor = document.querySelector('.music-author')
+    const currentTime = document.querySelector('.current-time')
+    const totalTime = document.querySelector('.total-time')
+    const mutedBtn = document.querySelector('.muted')
 
     // 音乐播放器
     let audio = new Audio()
 
     // 当前正被加载到播放器中的音乐索引
     let currentIndex = 0
+
+    let timer
 
     // 音乐列表数据
     let musicList = [
@@ -273,15 +285,115 @@
         },
     ]
 
+    // ------------------------------------- 事件 -------------------------------------------
+
+    // audio 相关事件: https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/audio#%E4%BA%8B%E4%BB%B6
+
+    // 总时长发生变化事件
+    audio.addEventListener('durationchange', () => {
+        // 设置总时长
+        totalTime.textContent = getMusicTime(audio.duration)
+    })
+
+    // 音乐播放完成事件
+    audio.addEventListener('ended', () => {
+        audio.pause()
+        playBtn.src = './img/play.svg'
+    })
 
     // 给进度条绑定input事件
     proInp.addEventListener('input', () => {
+        // 设置播放器的当前时间
+        audio.currentTime = audio.duration * Number(proInp.value)
         setProBg()
     })
 
     volInp.addEventListener('input', () => {
+        audio.volume = Number(volInp.value)
+        // 根据音量判断是否静音
+        audio.muted = audio.volume === 0
+        // 修改图标
+        mutedBtn.src = audio.muted ? './img/muted.svg' : './img/volumn.svg'
         setVolBg()
     })
+
+    playBtn.addEventListener('click', () => {
+        // audio.paused 代表音乐是否暂停
+        if (audio.paused) {
+            audio.play()
+            // 开始更新播放进度
+            clearInterval(timer)
+            timer = setInterval(() => {
+                // 计算进度值
+                proInp.value = audio.currentTime / audio.duration
+                setProBg()
+                // 更新当前时间
+                currentTime.textContent = getMusicTime(audio.currentTime)
+            }, 200)
+            playBtn.src = './img/pause.svg'
+        } else {
+            audio.pause()
+            playBtn.src = './img/play.svg'
+        }
+    })
+
+    // 上一首
+    prevBtn.addEventListener('click', () => {
+        let i = currentIndex - 1
+        i = i < 0 ? musicList.length - 1 : i
+        play(i)
+    })
+
+    // 下一首
+    nextBtn.addEventListener('click', () => {
+        let i = currentIndex + 1
+        i = i > musicList.length - 1 ? 0 : i
+        play(i)
+    })
+
+    // 静音按钮点击事件
+    mutedBtn.addEventListener('click', () => {
+        // 静音
+        audio.muted = !audio.muted
+        // 修改图标
+        mutedBtn.src = audio.muted ? './img/muted.svg' : './img/volumn.svg'
+        // 设置进度条
+        volInp.value = audio.muted ? 0 : audio.volume
+        setVolBg()
+    })
+
+    // -------------------------------------- 函数 -----------------------------------------------
+
+    // 获取音乐事件的格式化
+    function getMusicTime(time) {
+        let m = Math.floor(time / 60)
+        let s = Math.round(time % 60)
+        return `${m < 10 ? '0' + m : m}:${s < 10 ? '0' + s : s}`
+    }
+
+    // 播放音乐
+    // index: 音乐的索引
+    function play(index) {
+        // 若要播放的音乐就是当前音乐 则返回
+        if (index === currentIndex) return
+
+        audio.pause()
+        // 切换当前索引
+        currentIndex = index
+        initAudio(currentIndex)
+        // 播放音乐
+        audio.play()
+        // 开始更新播放进度
+        clearInterval(timer)
+        timer = setInterval(() => {
+            // 计算进度值
+            proInp.value = audio.currentTime / audio.duration
+            setProBg()
+            // 更新当前时间
+            currentTime.textContent = getMusicTime(audio.currentTime)
+        }, 200)
+        playBtn.src = './img/pause.svg'
+    }
 
     // 设置进度条
     function setProBg() {
@@ -314,11 +426,25 @@
         r = r.join('')
 
         ML.innerHTML = r
+
+        // 查询元素绑定点击事件
+        let musicItems = document.querySelectorAll('.music-item')
+        for (let i = 0; i < musicItems.length; i++) {
+            const musicItem = musicItems[i];
+            musicItem.addEventListener('dblclick', ev => {
+                play(i)
+            })
+        }
     }
 
     // 初始化音乐播放器
-    function initAudio() {
-        audio.src = musicList[currentIndex].src
+    function initAudio(index) {
+        let music = musicList[index]
+        audio.src = music.src
+        // 初始化封面图等音乐信息
+        coverEl.style.backgroundImage = `url('${music.cover}')`
+        musicName.textContent = music.name
+        musicAuthor.textContent = music.author
     }
 
 
@@ -329,7 +455,7 @@
         setProBg()
         setVolBg()
         buildMusicList()
-        initAudio()
+        initAudio(currentIndex)
     }
 
     init()
