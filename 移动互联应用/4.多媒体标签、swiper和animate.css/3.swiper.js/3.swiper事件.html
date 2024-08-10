@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/swiper-bundle.min.css" />
+
+    <script src="../js/swiper-bundle.min.js"></script>
+    <style>
+        .swiper {
+            width: 800px;
+            height: 600px;
+        }
+
+        .swiper-slide:nth-child(1) {
+            background-color: #f00;
+        }
+
+        .swiper-slide:nth-child(2) {
+            background-color: #0f0;
+        }
+
+        .swiper-slide:nth-child(3) {
+            background-color: #00f;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="swiper">
+        <!-- swiper-wrapper 展示内容的包装器 -->
+        <div class="swiper-wrapper">
+            <!-- swiper-slide 每一个 swiper-slide 就是一个滑动块 -->
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+        </div>
+        <!-- 分页工具节点 -->
+        <div class="swiper-pagination"></div>
+
+        <!-- 导航按钮节点 -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+
+        <!-- 滚动条节点 -->
+        <div class="swiper-scrollbar"></div>
+    </div>
+</body>
+<script>
+    // 事件： https://swiperjs.com/swiper-api#events
+    const swiper = new Swiper('.swiper', {
+        direction: 'horizontal',
+        loop: false,
+        effect: 'coverflow',
+        pagination: {
+            el: '.swiper-pagination',
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        scrollbar: {
+            el: '.swiper-scrollbar',
+        },
+
+        // 添加事件配置
+        on: {
+            // 当前激活索引发生变化事件
+            activeIndexChange(swiper) {
+                console.log('索引发生了变化');
+                // swiper 实例对象
+                console.log(swiper);
+                // activeIndex 当前激活页的索引
+                console.log(swiper.activeIndex);
+            }
+        }
+    });
+
+
+    // on off 绑定和解绑事件
+    // 滑块发生变化且动画播放完成事件
+    swiper.on('slideChangeTransitionEnd', (swiper) => {
+        console.log('滑块变化，动画播放完成');
+        console.log(swiper.activeIndex);
+    })
+
+    // 到达底部事件
+    swiper.on('reachEnd', (swiper) => {
+        console.log('已到达底部');
+        console.log(swiper.activeIndex);
+    })
+
+    // 解绑事件
+    swiper.off('slideChangeTransitionEnd')
+</script>
+
+</html>
