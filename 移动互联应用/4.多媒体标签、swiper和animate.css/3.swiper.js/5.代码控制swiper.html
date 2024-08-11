@@ -6,13 +6,118 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../css/swiper-bundle.min.css" />
+
+    <script src="../js/swiper-bundle.min.js"></script>
+    <style>
+        .my-bullet-active {
+            opacity: 1;
+            background-color: #000;
+        }
+
+        .swiper {
+            width: 800px;
+            height: 600px;
+        }
+
+        .swiper-slide:nth-child(1) {
+            background-color: #f00;
+        }
+
+        .swiper-slide:nth-child(2) {
+            background-color: #0f0;
+        }
+
+        .swiper-slide:nth-child(3) {
+            background-color: #00f;
+        }
+    </style>
 </head>
 
 <body>
+    <div class="swiper">
+        <!-- swiper-wrapper 展示内容的包装器 -->
+        <div class="swiper-wrapper">
+            <!-- swiper-slide 每一个 swiper-slide 就是一个滑动块 -->
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+        </div>
+        <!-- 分页工具节点 -->
+        <div class="swiper-pagination"></div>
 
+        <!-- 导航按钮节点 -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+
+        <!-- 滚动条节点 -->
+        <div class="swiper-scrollbar"></div>
+    </div>
+    <div>
+        <button class="next">下一个</button>
+        <button class="pre">上一个</button>
+        <button class="to">跳转</button>
+    </div>
 </body>
 <script>
     // https://swiperjs.com/swiper-api#methods-and-properties
+
+    const next = document.querySelector('.next')
+    const pre = document.querySelector('.pre')
+    const to = document.querySelector('.to')
+
+    next.addEventListener('click', () => {
+        // swiper.slideNext(speed, runCallbacks)
+        // speed：毫秒为单位的动画播放时长
+        // runCallbacks：一个bool值 用来表示是否触发过渡事件
+        swiper.slideNext(3000, false)
+    })
+
+    pre.addEventListener('click', () => {
+        // swiper.slidePrev(speed, runCallbacks)
+        // speed：毫秒为单位的动画播放时长
+        // runCallbacks：一个bool值 用来表示是否触发过渡事件
+        swiper.slidePrev(3000, false)
+    })
+
+    to.addEventListener('click', () => {
+        // swiper.slideTo(index, speed, runCallbacks)
+        // index: 要滑动到的索引
+        // speed：毫秒为单位的动画播放时长
+        // runCallbacks：一个bool值 用来表示是否触发过渡事件
+        swiper.slideTo(2, 5000, false)
+    })
+
+    const swiper = new Swiper('.swiper', {
+        effect: 'cube',
+
+        // 分页模块
+        pagination: {
+            el: '.swiper-pagination',
+            bulletActiveClass: 'my-bullet-active'
+        },
+
+        // 导航模块
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+
+        // 滚动条模块
+        scrollbar: {
+            el: '.swiper-scrollbar',
+        },
+
+        // 盒子特效
+        cubeEffect: {
+            shadowOffset: 300,
+            shadowScale: 0.5
+        }
+    });
+
+    swiper.on('slideChangeTransitionEnd', (swiper) => {
+        console.log(swiper.activeIndex);
+    })
 </script>
 
 </html>
