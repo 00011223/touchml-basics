@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="../css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="../css/animate.min.css">
+    <style>
+        .swiper {
+            width: 320px;
+            height: 486px;
+            border: 3px solid #f00;
+        }
+
+        .swiper-slide {
+            background-image: url(./img/full_bg.png);
+            background-size: cover;
+            background-position: center center;
+            position: relative;
+        }
+
+        .swiper-slide>* {
+            position: absolute;
+        }
+
+        .big-bg {
+            transform: scale(1.07);
+            width: 320px;
+            height: 486px;
+        }
+
+        .big-bg.active {
+            animation: scale 1s linear forwards;
+        }
+
+        @keyframes scale {
+            from {
+                transform: scale(2);
+            }
+
+            to {
+                transform: scale(1.07);
+            }
+        }
+
+        .bgm-btn {
+            width: 30px;
+            height: 30px;
+            top: 10px;
+            right: 10px;
+            animation: rotate 2s linear infinite;
+        }
+
+        .tyjj {
+            top: 50%;
+            left: 8px;
+        }
+
+        .logo1 {
+            left: calc(50% - 75.5px);
+            top: 56px;
+        }
+
+        .logo2 {
+            left: calc(50% - 121px);
+            top: 62px;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .shadow {
+            bottom: 111px;
+            left: calc(50% - 59px);
+        }
+
+        .human {
+            top: calc(50% - 37px);
+            left: calc(50% - 74.5px);
+        }
+
+        .word-bg-container {
+            /* border: 1px solid #f00; */
+            width: 200px;
+            height: 28px;
+            left: calc(50% - 89px);
+            bottom: 55px;
+        }
+
+        .word-bg-container>div {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .word-bg-container>div:nth-child(1),
+        .word-bg-container>div:nth-child(2) {
+            width: 100%;
+            height: 100%;
+            background-color: #6543a1;
+            border-radius: 14px;
+        }
+
+        .word-bg-container>div:nth-child(3) {
+            color: #fff;
+            font-weight: bolder;
+            top: calc(50% - 11px);
+            left: calc(50% - 4em);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img class="big-bg active" src="./img/big_bg.png" />
+                <img class="bgm-btn" src="./img/bgmBtn.svg" alt="">
+                <img class="tyjj animate__animated animate__flipInX animate__delay-1s" src="./img/word.png" alt="">
+                <img class="logo2 animate__animated animate__zoomIn animate__delay-2s" src="./img/logo2.png" alt="">
+                <img class="logo1 animate__animated animate__flipInX animate__delay-3s" src="./img/logo1.png" alt="">
+                <img class="shadow animate__animated animate__fadeInLeft animate__delay-2s" src="./img/shadow.png" alt="">
+                <img class="human animate__animated animate__fadeInUpBig animate__delay-1s" src="./img/human.png" alt="">
+                <div class="word-bg-container">
+                    <div class="animate__animated animate__fadeInLeft animate__delay-2s"></div>
+                    <div class="animate__animated animate__fadeInRight animate__delay-2s"></div>
+                    <div class="animate__animated animate__zoomIn animate__delay-3s">易企秀友谊冰球赛</div>
+                </div>
+            </div>
+            <div class="swiper-slide">slide2</div>
+            <div class="swiper-slide">slide3</div>
+        </div>
+    </div>
+</body>
+
+<script>
+    const swiper = new Swiper('.swiper', {
+        direction: 'vertical',
+
+    })
+</script>
+
+</html>
