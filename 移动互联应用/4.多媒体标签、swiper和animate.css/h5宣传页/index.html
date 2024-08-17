@@ -14,6 +14,11 @@
             width: 320px;
             height: 486px;
             border: 3px solid #f00;
+            position: relative;
+        }
+
+        .swiper-wrapper {
+            position: relative;
         }
 
         .swiper-slide {
@@ -50,9 +55,11 @@
         .bgm-btn {
             width: 30px;
             height: 30px;
+            position: absolute;
             top: 10px;
             right: 10px;
             animation: rotate 2s linear infinite;
+            z-index: 9999;
         }
 
         .tyjj {
@@ -126,28 +133,126 @@
         <div class="swiper-wrapper">
             <div class="swiper-slide">
                 <img class="big-bg active" src="./img/big_bg.png" />
-                <img class="bgm-btn" src="./img/bgmBtn.svg" alt="">
-                <img class="tyjj animate__animated animate__flipInX animate__delay-1s" src="./img/word.png" alt="">
-                <img class="logo2 animate__animated animate__zoomIn animate__delay-2s" src="./img/logo2.png" alt="">
-                <img class="logo1 animate__animated animate__flipInX animate__delay-3s" src="./img/logo1.png" alt="">
-                <img class="shadow animate__animated animate__fadeInLeft animate__delay-2s" src="./img/shadow.png" alt="">
-                <img class="human animate__animated animate__fadeInUpBig animate__delay-1s" src="./img/human.png" alt="">
+                <img class="tyjj animate__animated animate__flipInX animate__delay-1s" src="./img/word.png" />
+                <img class="logo2 animate__animated animate__zoomIn animate__delay-2s" src="./img/logo2.png" />
+                <img class="logo1 animate__animated animate__flipInX animate__delay-3s" src="./img/logo1.png" />
+                <img class="shadow animate__animated animate__fadeInLeft animate__delay-2s" src="./img/shadow.png" />
+                <img class="human animate__animated animate__fadeInUpBig animate__delay-1s" src="./img/human.png" />
                 <div class="word-bg-container">
-                    <div class="animate__animated animate__fadeInLeft animate__delay-2s"></div>
-                    <div class="animate__animated animate__fadeInRight animate__delay-2s"></div>
-                    <div class="animate__animated animate__zoomIn animate__delay-3s">易企秀友谊冰球赛</div>
+                    <div class="word-bg-l animate__animated animate__fadeInLeft animate__delay-2s"></div>
+                    <div class="word-bg-r animate__animated animate__fadeInRight animate__delay-2s"></div>
+                    <div class="word animate__animated animate__zoomIn animate__delay-3s">易企秀友谊冰球赛</div>
                 </div>
             </div>
-            <div class="swiper-slide">slide2</div>
-            <div class="swiper-slide">slide3</div>
+            <div class="swiper-slide">
+                <img style="opacity: 0" class="big-bg" src="./img/big_bg.png" />
+            </div>
+            <div class="swiper-slide">
+                <img style="opacity: 0" class="big-bg" src="./img/big_bg.png" />
+            </div>
         </div>
+        <img class="bgm-btn" src="./img/bgmBtn.svg" />
     </div>
 </body>
 
 <script>
+    // 查询所有的动画元素
+    const animatedEls = document.querySelectorAll('.animate__animated')
+    // 背景
+    const bgs = document.querySelectorAll('.big-bg')
+    const bg = bgs[0]
+    const bg2 = bgs[1]
+    const bg3 = bgs[2]
+
+    // 声明一个用于存储类名的对象
+    // key: 动画元素的唯一标识名称
+    // value: 动画元素对应的动画类名
+    let classNames = {}
+
+    for (let i = 0; i < animatedEls.length; i++) {
+        const el = animatedEls[i];
+        // tyjj animate__animated animate__flipInX animate__delay-1s
+        // 截取字符串
+        let classArr = el.className.split(' ')
+        // 将第一个成员作为key
+        // value: 利用数组切片去掉第一个数组成员
+        classNames[classArr[0]] = classArr.slice(1)
+
+        // 绑定动画播放结束事件
+        el.addEventListener('animationend', () => {
+            el.className = classArr[0]
+        })
+    }
+
+    // 单独处理bg的动画
+    bg.addEventListener('animationend', () => {
+        bg.classList.remove('active')
+    })
+
+    console.log(classNames);
+
+
     const swiper = new Swiper('.swiper', {
         direction: 'vertical',
+    })
 
+    // 添加索引变化事件
+    swiper.on('slideChangeTransitionEnd', () => {
+        console.log(swiper.activeIndex);
+
+        // 离开第一屏 清空第一屏动画
+        if (swiper.activeIndex !== 0) {// 清空动画
+            for (let i = 0; i < animatedEls.length; i++) {
+                let el = animatedEls[i]
+                el.className = el.className.split(' ')[0]
+                el.style.opacity = 0
+            }
+            bg.className = 'big-bg'
+            bg.style.opacity = 0
+        }
+
+        // 进入第一屏时 播放动画
+        if (swiper.activeIndex === 0) {
+            for (let i = 0; i < animatedEls.length; i++) {
+                let el = animatedEls[i]
+                // 通过类名获取动画的样式列表
+                console.log(el.className);
+                let cssArr = classNames[el.className]
+                console.log(cssArr);
+
+                // 添加动画类名
+                el.className = el.className + ' ' + cssArr.join(' ')
+
+                el.style.opacity = 1
+            }
+
+            bg.classList.add('active')
+            bg.style.opacity = 1
+        }
+
+        // 移出第二屏
+        if (swiper.activeIndex !== 1) {
+            bg2.classList.remove('active')
+            bg2.style.opacity = 0
+        }
+
+        // 移入第二屏
+        if (swiper.activeIndex === 1) {
+            bg2.classList.add('active')
+            bg2.style.opacity = 1
+        }
+
+        // 移出第三屏
+        if (swiper.activeIndex !== 2) {
+            bg3.classList.remove('active')
+            bg3.style.opacity = 0
+        }
+
+        // 移入第三屏
+        if (swiper.activeIndex === 2) {
+            bg3.classList.add('active')
+            bg3.style.opacity = 1
+        }
     })
 </script>
 
