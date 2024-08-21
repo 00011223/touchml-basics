@@ -178,10 +178,17 @@
 
     // 添加索引变化事件
     swiper.on('slideChangeTransitionEnd', () => {
+        // 使用 eval 将字符串作为脚本执行
+
+        // 通过 eval 获取 对应屏的 reset 函数
         let fn = eval(`reset${currentIndex + 1}`)
+        // 调用 reset 函数
         fn()
+        // 修改当前索引
         currentIndex = swiper.activeIndex
+        // 通过 eval 获取 对应屏的 play 函数
         fn = eval(`play${currentIndex + 1}`)
+        // 调用 play 函数 播放下一屏动画
         fn()
     })
 
