@@ -1,0 +1,29 @@
+<!-- 相当于div -->
+<view>world</view>
+
+<!-- 相当于span -->
+<text>hello</text>
+
+<view>
+  <!-- text 在view 中显示的效果类似于 span -->
+  <text>我</text>
+  <text>很牛逼</text>
+</view>
+
+<!-- image 图片标签
+  mode: 图片显示大小的模式
+ -->
+<image style="height: 200px;" src="../../images/icon.png" mode="heightFix"></image>
+
+<!-- block 分组标签
+  将 block 中的元素分为一组，但最终 block 标签不会显示到页面上
+ -->
+<block>
+  <view>张三</view>
+  <view>男</view>
+</block>
+
+<block>
+  <view>老王</view>
+  <view>不详</view>
+</block>

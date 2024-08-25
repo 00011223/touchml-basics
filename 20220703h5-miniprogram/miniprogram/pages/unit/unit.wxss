@@ -1,0 +1,9 @@
+/* pages/unit/unit.wxss */
+
+.box {
+  /* 使用rpx的尺寸会随着屏幕宽度的变化自动进行缩放 */
+  /* 使用 px 的尺寸是一个固定值 在不同设备上显示的大小始终一样 */
+  width: 320rpx;
+  height: 320rpx;
+  background-color: #f00;
+}
