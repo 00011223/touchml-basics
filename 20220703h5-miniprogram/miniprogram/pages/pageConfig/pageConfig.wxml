@@ -1,0 +1,3 @@
+<!--pages/pageConfig/pageConfig.wxml-->
+<text>pages/pageConfig/pageConfig.wxml</text>
+<navigator url="../lang/lang">to lang</navigator>

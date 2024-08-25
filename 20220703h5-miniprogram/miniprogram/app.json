@@ -1,5 +1,8 @@
 {
+  "entryPagePath": "pages/pageModel/pageModel",
   "pages": [
+    "pages/pageConfig/pageConfig",
+    "pages/lang/lang",
     "pages/pageModel/pageModel",
     "pages/unit/unit",
     "pages/basic/index",
@@ -8,7 +11,7 @@
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarBackgroundColor": "#f00",
     "navigationBarTitleText": "云开发 QuickStart",
     "navigationBarTextStyle": "black"
   },

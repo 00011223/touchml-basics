@@ -1,0 +1,30 @@
+<!-- 插值 
+  插值的内容
+  1. 可以是一个js表达式
+  2. 还可以访问data中的属性
+-->
+<view>{{ 'hello' + ' ' + 'world' }}</view>
+<view>{{ title }}</view>
+<view>{{ '>>' + title + '--' }}</view>
+
+<!-- 循环渲染 -->
+<!-- 循环渲染时，首先创建一个元素的模板 -->
+<!-- 循环渲染使用 wx:for
+  循环渲染一定要添加 wx:key 值为唯一标识
+  wx:for-item  修改 item 的变量名
+  wx:for-index  修改 index 的变量名
+ -->
+<view style="background-color: #f00;" wx:for-index="i" wx:for-item="myItem" wx:for="{{users}}" wx:key="name">
+  <!-- item 是循环的每一个数组成员 -->
+  <!-- index 是循环的每一个数组成员的索引 -->
+  <text style="color:#000;">索引: {{i}}; </text>
+  <text style="color:#ff0;">姓名: {{myItem.name}}; </text>
+  <text style="color: #00f">性别: {{myItem.sex}}</text>
+</view>
+
+<view>性别: </view>
+<!-- 条件渲染 -->
+<!-- 条件渲染时可以先罗列所有的情况 -->
+<view wx:if="{{sex === 'male'}}">男</view>
+<view wx:elif="{{sex === 'female'}}">女</view>
+<view wx:else>其他</view>
