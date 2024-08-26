@@ -1,6 +1,6 @@
 {
-  "entryPagePath": "pages/pageModel/pageModel",
   "pages": [
+    "pages/lead/lead",
     "pages/pageConfig/pageConfig",
     "pages/lang/lang",
     "pages/pageModel/pageModel",
