@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/iconfont.css">
+    <script src="./js/iconfont.js"></script>
+    <style>
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 图标库被当作文本使用
+        图标库的使用必须添加 iconfont 类名
+    -->
+    <i class="iconfont icon-zhuanyeyanjiang" style="color: #f00; font-size: 64px;"></i>
+    &nbsp;
+    &copy;
+    &gt;
+
+    <!-- 使用unicode编码 -->
+    <i class="iconfont" style="color: #f00; font-size: 64px;">
+        <!-- unicode编码可以和普通的文字进行混编 -->
+        hello &#xe618; world
+    </i>
+
+    <!-- 彩色图标 -->
+    <svg class="icon" aria-hidden="true" style="font-size: 64px">
+        <!-- xlink:href 可以修改图标的名称 -->
+        <use xlink:href="#icon-binglizhengji"></use>
+    </svg>
+</body>
+
+</html>

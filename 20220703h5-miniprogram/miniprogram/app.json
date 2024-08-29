@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/getAndSet/getAndSet",
     "pages/lead/lead",
     "pages/pageConfig/pageConfig",
     "pages/lang/lang",

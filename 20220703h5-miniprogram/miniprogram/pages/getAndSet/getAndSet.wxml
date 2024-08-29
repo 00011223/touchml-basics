@@ -1,0 +1,8 @@
+<view>
+  {{title}}
+</view>
+
+<!-- bindtap 给元素绑定点击事件
+  值为事件处理程序的名称
+ -->
+<button bindtap="modifyTitle">修改title</button>
