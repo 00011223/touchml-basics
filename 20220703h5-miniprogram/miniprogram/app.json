@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/tabbar/page2/page2",
+    "pages/tabbar/page1/page1",
     "pages/iconfont/iconfont",
     "pages/getAndSet/getAndSet",
     "pages/lead/lead",
@@ -18,5 +20,24 @@
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",
-  "style": "v2"
+  "style": "v2",
+  "tabBar": {
+    "color": "#00f",
+    "selectedColor": "#f00",
+    "backgroundColor": "#ff0",
+    "borderStyle": "white",
+    "list": [{
+        "pagePath": "pages/tabbar/page1/page1",
+        "text": "页面1",
+        "iconPath": "images/icons/add.png",
+        "selectedIconPath": "images/icons/add-fill.png"
+      },
+      {
+        "pagePath": "pages/tabbar/page2/page2",
+        "text": "页面2",
+        "iconPath": "images/icons/cart- full.png",
+        "selectedIconPath": "images/icons/cart- full-fill.png"
+      }
+    ]
+  }
 }
