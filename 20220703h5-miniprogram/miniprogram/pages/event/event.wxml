@@ -1,0 +1,19 @@
+<!-- bind 要冒泡 -->
+<view bind:tap="viewBind">
+  <button bind:tap="btnBind">bind</button>
+</view>
+
+<view bind:tap="viewBind">
+  <!-- catch 不冒泡 -->
+  <button catch:tap="btnCatch">catch</button>
+</view>
+
+<!-- capture-bind 捕获事件并冒泡 -->
+<view capture-bind:tap="viewCapBind">
+  <button bind:tap="btnBind">capture bind</button>
+</view>
+
+<!-- capture-catch 捕获事件并不冒泡 -->
+<view capture-catch:tap="viewCapCatch">
+  <button bind:tap="btnBind">capture catch</button>
+</view>
