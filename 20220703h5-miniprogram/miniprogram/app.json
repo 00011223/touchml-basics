@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/navigate/main/main",
     "pages/event/event",
     "pages/tabbar/page2/page2",
     "pages/tabbar/page1/page1",
@@ -11,7 +12,9 @@
     "pages/pageModel/pageModel",
     "pages/unit/unit",
     "pages/basic/index",
-    "pages/home/home"
+    "pages/home/home",
+    "pages/navigate/page1/page1",
+    "pages/navigate/page2/page2"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -21,5 +24,14 @@
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",
-  "style": "v2"
+  "style": "v2",
+  "tabBar": {
+    "list": [{
+      "pagePath": "pages/navigate/main/main",
+      "text": "首页"
+    },{
+      "pagePath": "pages/navigate/page1/page1",
+      "text": "页面1"
+    }]
+  }
 }

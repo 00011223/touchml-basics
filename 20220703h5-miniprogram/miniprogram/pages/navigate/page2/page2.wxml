@@ -1,0 +1,2 @@
+<view>Page2</view>
+<navigator url="../page1/page1" open-type="reLaunch">reLaunch page1</navigator>

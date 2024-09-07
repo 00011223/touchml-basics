@@ -1,0 +1,4 @@
+<view>Page1</view>
+<navigator url="../page2/page2" open-type="navigate">to page2</navigator>
+<navigator url="../page2/page2" open-type="redirect">redirect page2</navigator>
+<navigator open-type="navigateBack">返回</navigator>

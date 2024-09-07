@@ -1,0 +1,18 @@
+<view>main</view>
+
+<!-- navigator 标签导航 -->
+<!-- 
+  url: 要跳转的页面路径
+  open-type: 导航方式
+    待选项:
+      navigate: 入栈导航
+      redirect: 重定向
+      navigateBack: 返回
+      reLaunch: 重启页面（清空栈中的所有页面）
+      switchTab: 跳转选项卡，只能和 app.json 中的 tabBar 配合使用
+ -->
+<navigator url="../page1/page1" open-type="navigate">to page1</navigator>
+
+<navigator url="../page1/page1" open-type="redirect">redirect page1</navigator>
+
+<navigator url="../page1/page1" open-type="switchTab">switch page1</navigator>
