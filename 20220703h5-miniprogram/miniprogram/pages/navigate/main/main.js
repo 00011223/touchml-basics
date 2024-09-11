@@ -62,5 +62,33 @@ Page({
    */
   onShareAppMessage() {
 
+  },
+
+  toPage2() {
+    // 入栈导航
+    wx.navigateTo({
+      // 导航的路径
+      url: '../page2/page2',
+    })
+  },
+
+  reLaunchPage1() {
+    // 重启页面 清空栈中数据
+    wx.reLaunch({
+      url: '../page1/page1',
+    })
+  },
+
+  switchPage1() {
+    // 切换选项卡
+    wx.switchTab({
+      url: '../page1/page1',
+    })
+  },
+
+  toPage1() {
+    wx.navigateTo({
+      url: '../page1/page1?x=1&y=2&z=3'
+    })
   }
 })

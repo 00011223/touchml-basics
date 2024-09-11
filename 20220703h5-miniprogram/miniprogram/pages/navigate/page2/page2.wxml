@@ -1,2 +1,4 @@
 <view>Page2</view>
 <navigator url="../page1/page1" open-type="reLaunch">reLaunch page1</navigator>
+<button bindtap="redirectPage1">redirect page1</button>
+<button bindtap="back">back</button>

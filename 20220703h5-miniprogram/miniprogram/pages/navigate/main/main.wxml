@@ -16,3 +16,15 @@
 <navigator url="../page1/page1" open-type="redirect">redirect page1</navigator>
 
 <navigator url="../page1/page1" open-type="switchTab">switch page1</navigator>
+
+<button bind:tap="toPage2">to page2</button>
+
+<button bind:tap="reLaunchPage1">reLaunch page1</button>
+
+<button bind:tap="switchPage1">switch page1</button>
+
+<!-- 参数写在url上，用?问好隔离开路径和参数
+  若有多个参数用 & 符号隔开
+ -->
+<navigator url="../page1/page1?a=1&b=2&c=3" open-type="navigate">跳转到 page1 并传递参数</navigator>
+<button bindtap="toPage1">跳转到 page1 并传递参数</button>

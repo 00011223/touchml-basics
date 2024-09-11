@@ -62,5 +62,20 @@ Page({
    */
   onShareAppMessage() {
 
+  },
+
+  redirectPage1() {
+    // 重定向
+    wx.redirectTo({
+      url: '../page1/page1'
+    })
+  },
+
+  back() {
+    // 返回
+    wx.navigateBack({
+      // 指定一次返回多少页
+      delta: 2
+    })
   }
 })

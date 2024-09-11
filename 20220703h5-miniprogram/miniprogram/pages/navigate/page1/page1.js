@@ -12,7 +12,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    // options 页面传参所保存的对象
+    console.log(options);
   },
 
   /**
