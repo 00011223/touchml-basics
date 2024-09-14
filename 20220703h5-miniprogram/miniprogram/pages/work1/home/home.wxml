@@ -1,0 +1,11 @@
+<view style="display: flex; justify-content: space-evenly;">
+  <navigator open-type="reLaunch" url="./home">home<text class="iconfont icon-banquan"></text></navigator> |
+  <navigator url="../page1/page1">page1<text class="iconfont icon-fapiao"></text></navigator> |
+  <navigator url="../page2/page2?num1={{num1}}&num2={{num2}}">page2<text class="iconfont icon-erweima"></text></navigator>
+</view>
+
+<view>num1</view>
+<input value="{{num1}}" bindinput="num1Input" type="text"/>
+<view>num2</view>
+<input value="{{num2}}" bindinput="num2Input" type="text"/>
+<button bindtap="showValue">显示输入框内容</button>

@@ -1,0 +1,2 @@
+<view>{{title}}</view>
+<button bindtap="now">报时</button>
