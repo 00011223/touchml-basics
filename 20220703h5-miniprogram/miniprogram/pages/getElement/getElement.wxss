@@ -1,0 +1,11 @@
+/* pages/getElement/getElement.wxss */
+
+.box {
+  width: 200px;
+  height: 100px;
+  background-color: #0f0;
+  padding: 20px;
+  position: absolute;
+  top: 50px;
+  left: 20px;
+}

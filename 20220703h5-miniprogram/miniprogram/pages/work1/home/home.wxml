@@ -5,7 +5,6 @@
 </view>
 
 <view>num1</view>
-<input value="{{num1}}" bindinput="num1Input" type="text"/>
+<input type="text" value="{{num1}}" bindinput="num1Input"/>
 <view>num2</view>
-<input value="{{num2}}" bindinput="num2Input" type="text"/>
-<button bindtap="showValue">显示输入框内容</button>
+<input type="text" value="{{num2}}" bindinput="num2Input"/>

@@ -1,0 +1,3 @@
+<!-- data-id 是一个自定义属性 属性名为 id -->
+<view class="box" data-id="123" bindtap="tapHandler"></view>
+<image class="img" src="./sdhgksdf"></image>
