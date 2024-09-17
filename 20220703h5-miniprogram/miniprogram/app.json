@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/form/form",
     "pages/getElement/getElement",
     "pages/work1/home/home",
     "pages/navigate/main/main",

@@ -1,0 +1,45 @@
+<label for="name">姓名</label>
+<!-- 输入框
+  value 赋值初始值
+  bindinput 输入事件，用于修改name值
+ -->
+<input id="name" type="text" value="{{name}}" bindinput="onNameInput" />
+
+<!-- 单选按钮
+  bindchange 单选值发生变化事件
+ -->
+<label>性别
+  <radio-group bindchange="onSexChange">
+    <!-- checked 代表是否勾选
+      value 选项值
+     -->
+    <radio value="male" checked="{{sex==='male'}}">男</radio>
+    <radio value="female" checked="{{sex==='female'}}">女</radio>
+  </radio-group>
+</label>
+
+<!-- 多选框 -->
+<label>爱好
+  <checkbox-group bindchange="onHobbiesChange">
+    <checkbox checked="{{item.checked}}" value="{{item.value}}" wx:for="{{hobbiesOptions}}" wx:key="index">
+      {{item.label}}
+    </checkbox>
+  </checkbox-group>
+</label>
+
+<!-- 选择器
+  value: 初始选项的索引
+  range: 选择范围 是一个数组
+ -->
+<label>班级
+  <picker value="{{clazz}}" range="{{clazzRange}}" bindchange="onClazzChange">
+    <!-- 选择器的触发元素 -->
+    <view>结果: {{clazzRange[clazz]}}</view>
+  </picker>
+</label>
+
+<label>简介
+  <textarea auto-height value="{{desc}}" bindinput="onDescInput"></textarea>
+</label>
+
+<button bindtap="submit">提交</button>
