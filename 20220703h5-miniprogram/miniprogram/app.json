@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/customAttr/customAttr",
     "pages/form/form",
     "pages/getElement/getElement",
     "pages/work1/home/home",

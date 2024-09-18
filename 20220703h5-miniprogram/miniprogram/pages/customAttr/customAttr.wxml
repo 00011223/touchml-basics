@@ -1,0 +1,7 @@
+<view wx:for="{{list}}" wx:key="id">
+  <view>姓名: {{item.name}}</view>
+  <view>性别: {{item.sex}}</view>
+  <view>年龄: {{item.age}}</view>
+  <!-- data- 添加自定义属性 属性名为 data- 后面的值 例如此处的 id -->
+  <button data-id="{{item.id}}" data-index="{{index}}" bindtap="remove">删除</button>
+</view>

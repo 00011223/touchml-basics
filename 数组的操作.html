@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+
+    let arr = [{
+        id: 3,
+        name: '张三',
+        sex: 'male',
+        age: 17
+    },
+    {
+        id: 1,
+        name: '李四',
+        sex: 'female',
+        age: 24
+    },
+    {
+        id: 2,
+        name: '老王',
+        sex: 'other',
+        age: 30
+    }]
+
+    // find
+    // 查找指定的数组成员，并返回该成员
+    // 参数: 迭代函数
+    // item: 当前被迭代的数组成员
+    // index: 正被迭代的数组成员索引
+    // _arr: 当前正被迭代的数组 等价于 arr
+    let result = arr.find((item, index, _arr) => {
+        // 返回一个boolean 值
+        // true 代表当前成员正是要找的成员
+        // false 代表不是
+
+        // 查找id为1的数组成员
+        return item.id === 1
+    })
+
+    console.log(result);
+
+
+    // findIndex
+    // 此 api 结构于 find 相同
+    // 只是返回的内容是查找的数组成员的索引
+    result = arr.findIndex((item, index, _arr) => {
+        // 查找id为1的数组成员的索引
+        return item.id === 1
+    })
+
+    console.log(result);
+
+
+    // some
+    // 判断数组中是否存在一个满足条件的成员
+    // 返回一个boolean值 true 代表存在
+    result = arr.some((item, index, _arr) => {
+        // 判断数组成员中是否有大于35岁的人
+        // return item.age > 35
+        // 判断数组成员中是否有小于20岁的人
+        return item.age < 20
+    })
+
+    console.log(result);
+
+
+    // map
+    // 将数组成员全部映射到一个新的数组
+    result = arr.map((item, index, _arr) => {
+        // 返回值是该数组成员在新数组中的映射
+        return item.age
+    })
+
+    console.log(result);
+
+    // reduce
+    // 用于数据统计
+    // reduce 方法 第一次调用回调函数时， prev和next 代表数组的前两个成员
+    // 后面调用回调函数时，prev代表的是上一次调用回调函数的返回值 next是下一个成员
+    result = arr.reduce((prev, next) => {
+        console.log(prev);
+        console.log(next);
+        return {
+            id: null,
+            name: '',
+            sex: '',
+            age: prev.age + next.age
+        }
+    })
+
+    console.log(result);
+
+    // filter
+    // 过滤满足条件的数组成员
+    // 返回一个过滤后的新数组
+    result = arr.filter((item, index, _arr) => {
+        // 过滤年龄大于25岁的人
+        // 返回值为true 代表保留该成员
+        // 否则就会被过滤掉
+        return item.age <= 25
+    })
+
+    console.log(result);
+
+
+    // 基础操作
+    // push pop unshfit shift
+    // splice concat slice indexOf lastIndexOf includes
+</script>
+
+</html>
