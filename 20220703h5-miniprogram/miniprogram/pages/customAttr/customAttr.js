@@ -87,9 +87,23 @@ Page({
     console.log(ev);
     // 获取被删除的数据id
     let id = ev.target.dataset.id
-    // 查找id所对应的数据索引
-    this.data.list.findIndex()
-    // 然后删除对应索引的数据
+    // // 查找id所对应的数据索引
+    // let i = this.data.list.findIndex(item => {
+    //   return item.id === id
+    // })
+    // // 然后删除对应索引的数据
+    // this.data.list.splice(i, 1)
 
+    // 通过过滤来删除元素
+    this.data.list = this.data.list.filter(item => item.id !== id)
+
+    // let fn = () => ({
+    //   a: 1,
+    //   b: 2
+    // })
+
+    this.setData({
+      list: this.data.list
+    })
   }
 })

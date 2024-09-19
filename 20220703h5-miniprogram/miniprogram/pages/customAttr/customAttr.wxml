@@ -1,4 +1,5 @@
 <view wx:for="{{list}}" wx:key="id">
+  <view>id: {{item.id}}</view>
   <view>姓名: {{item.name}}</view>
   <view>性别: {{item.sex}}</view>
   <view>年龄: {{item.age}}</view>

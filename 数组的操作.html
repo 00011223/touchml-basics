@@ -94,11 +94,21 @@
             id: null,
             name: '',
             sex: '',
+            // 统计所有人的年龄和
             age: prev.age + next.age
         }
     })
 
     console.log(result);
+
+    // map reduce 联合使用 统计所有人的年龄和
+    result = arr.map(item => { return item.age }).reduce((p, n) => {
+        return p + n
+    })
+
+    console.log(result);
+
+
 
     // filter
     // 过滤满足条件的数组成员
@@ -115,7 +125,7 @@
 
     // 基础操作
     // push pop unshfit shift
-    // splice concat slice indexOf lastIndexOf includes
+    // splice concat slice indexOf lastIndexOf includes sort reverse
 </script>
 
 </html>
