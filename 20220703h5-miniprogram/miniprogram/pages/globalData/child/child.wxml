@@ -1,0 +1,3 @@
+<view>父页面传入的全局值为:</view>
+<view>{{value}}</view>
+<button bindtap="removeValue">删除value</button>

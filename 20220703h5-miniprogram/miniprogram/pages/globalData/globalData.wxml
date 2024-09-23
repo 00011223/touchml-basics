@@ -1,0 +1,2 @@
+<input type="text" value="{{value}}" bindinput="onInput" />
+<navigator url="child/child">跳转到child</navigator>
