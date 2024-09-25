@@ -1,0 +1,3 @@
+<my-btn class="my-btn" tit="牛逼的标题"></my-btn>
+<my-btn tit="不牛逼的标题"></my-btn>
+<my-btn bind:my-event="onMyEventTrigger"></my-btn>

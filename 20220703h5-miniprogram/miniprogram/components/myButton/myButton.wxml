@@ -1,0 +1,7 @@
+<view class="container">
+  <text>{{tit}}</text>
+  <text class="btn" bindtap="now">按钮</text>
+  <view>
+    value: {{value}}
+  </view>
+</view>

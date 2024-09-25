@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/component/component",
+    "pages/locale/locale",
     "pages/subpackage/subpackage",
     "pages/globalData/globalData",
     "pages/customAttr/customAttr",
