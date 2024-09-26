@@ -1,0 +1,6 @@
+<view>a</view>
+<input type="number" value="{{a}}" bindinput="onAInput"/>
+<view>b</view>
+<input type="number" value="{{b}}" bindinput="onBInput"/>
+<view>结果: {{result}}</view>
+<button bindtap="add">加法运算</button>

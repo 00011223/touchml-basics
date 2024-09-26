@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/cloudFunction/cloudFunction",
     "pages/component/component",
     "pages/locale/locale",
     "pages/subpackage/subpackage",

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+    // 开启严格模式
+    // 严格模式下将纠正部分js的历史问题
+    // 例如：此处的函数内的 this 问题
+    'use strict'
+
+    function fn() {
+        // 函数内的this若不给他赋值 则应该为 undefined
+
+        console.log(this);
+
+        // 可以通过 bind call apply 来赋值this
+
+        fn2 = fn2.bind(123)
+
+        fn2()
+
+        function fn2() {
+            console.log(this);
+        }
+
+        // 箭头函数内没有this关键
+        // 所以此处使用的this 实际上是借用的 声明 fn3 时 环境中的this
+        // 所以 此处的this是fn的this
+        let fn3 = () => {
+            console.log(this);
+        }
+
+        fn3.call(456)
+    }
+
+    fn = fn.bind(789)
+
+    class A {
+        fn() {
+            fn2()
+            function fn2() {
+                console.log(this);
+            }
+        }
+    }
+
+    new A().fn()
+
+    fn()
+</script>
+
+</html>
