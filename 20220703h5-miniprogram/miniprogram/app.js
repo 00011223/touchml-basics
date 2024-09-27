@@ -15,5 +15,11 @@ App({
     }
 
     this.globalData = {};
+
+    // 创建数据库连接
+    const db = wx.cloud.database()
+    // 保存db到全局对象中
+    // 这样的话在任意的页面都可以使用db对象了
+    this.globalData.db = db
   }
 });

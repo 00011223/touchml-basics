@@ -1,0 +1,1 @@
+<button bindtap="add">插入数据</button>
