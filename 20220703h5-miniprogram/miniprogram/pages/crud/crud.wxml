@@ -1,1 +1,4 @@
 <button bindtap="add">插入数据</button>
+<view>关键字:</view>
+<input type="text" value="{{kw}}" bindinput="onKwInput"/>
+<button bindtap="queryPage">分页查询</button>

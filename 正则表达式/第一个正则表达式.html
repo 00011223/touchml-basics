@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 什么是正则表达式?
+    // 用于匹配一段字符串的符号组合
+
+    // 声明正则表达式
+    let regex = /end$/
+    // regex = new RegExp('^star')
+
+    let str = 'star war'
+    // 调用 test 来测试字符串是否符合正则表达式的规则
+
+    console.log(regex.test(str));
+
+
+    // 正则的规则
+    // 匹配字符位置 匹配字符 匹配字符数量
+
+    regex = /abc/
+
+    str = 'aabcccccc'
+
+    console.log(regex.test(str));
+
+</script>
+
+</html>

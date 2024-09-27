@@ -4,6 +4,8 @@ const db = getApp().globalData.db
 // db.collection 参数是集合的名称
 // 返回值是集合对象
 const students = db.collection('students')
+// 获取指令集
+const _ = db.command
 
 // pages/crud/crud.js
 Page({
@@ -12,7 +14,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    // 模糊查询的关键字
+    kw: ''
   },
 
   /**
@@ -76,9 +79,14 @@ Page({
     students.add({
       // 要保存的数据
       data: {
-        name: '张三',
-        sex: 'male',
-        age: 17
+        name: '李四4',
+        sex: 'female',
+        age: 24,
+        // 约定俗成会存入时间字段
+        // 数据的创建时间
+        createdAt: new Date(),
+        // 数据的修改时间
+        updatedAt: new Date()
       },
       // 保存成功的回调
       success: (res) => {
@@ -93,6 +101,49 @@ Page({
         console.log('保存完成');
         console.log(res);
       }
+    })
+  },
+
+  // 分页查询
+  queryPage() {
+    // 分页查询的重点:
+    // 1. 当前页 page
+    // 2. 每页多少条数据 size
+    let page = 1
+    let size = 2
+
+    // skip 跳过多少条数据
+    // limit 查询多少条数据
+    // orderBy 按字段排序 第一个参数: 排序字段  第二个参数: 排序方式 升序 asc 降序 desc
+    // where 约束条件
+    students.orderBy('updatedAt', 'desc')
+      .skip((page - 1) * size)
+      .limit(size)
+      // .where({
+      //   name: '张三',
+      //   age: 18
+      // })
+      .where({
+        // name: _.neq('张三')
+        // age: _.gte(24)
+        // name: _.nin(['张三', '李四'])
+
+        // age: _.gte(10).and(_.lte(20))
+        // age: _.lte(20).or(_.gte(25))
+
+        // 通过正则表达式进行模糊查询
+        name: /^[\s\S]*$/
+      })
+      .get({
+        success: (res) => {
+          console.log(res);
+        }
+      })
+  },
+
+  onKwInput(ev) {
+    this.setData({
+      kw: ev.detail.value
     })
   }
 })

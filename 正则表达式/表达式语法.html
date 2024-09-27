@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head></head>
+
+<body>
+
+</body>
+<script>
+    // 参考：https://baike.baidu.com/item/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/1700215?fr=aladdin
+
+    let regex = /^$/
+
+    // \ 斜杠：转义
+    // 转义的意思就是转变字符原有的含义
+
+    regex = /\$$/
+    console.log(regex.test('agsddgsdf$'))
+
+    // ^ ：匹配字符串的开头
+
+    regex = /^star/
+    console.log(regex.test('star war'))
+
+    // $ ：匹配字符串的结尾
+
+    regex = /end$/
+    console.log(regex.test('legend'))
+
+
+    // ------------------- 匹配字符个数的符号
+    // 这些匹配字符个数的符号，代表的意思是：匹配前一个字符多少次
+
+
+    // * ：匹配任意次
+    regex = /^a*bc/
+    console.log(regex.test('bc')) // => true
+    console.log(regex.test('abc')) // => true
+    console.log(regex.test('aaabc')) // => true
+    console.log(regex.test('1bc')) // => false
+
+
+    // ? : 匹配0次或1次
+    regex = /^go?d$/
+    console.log(regex.test('god')); // => true
+    console.log(regex.test('gd')); // => true
+    console.log(regex.test('good')); // => false
+
+    // + : 匹配至少1次
+    regex = /^go+d/
+    console.log(regex.test('god')); // => true
+    console.log(regex.test('good')); // => true
+    console.log(regex.test('goood')); // => true
+    console.log(regex.test('gd')); // => false
+
+
+    // {n} : 匹配指定次数
+    regex = /^go{3}d/
+    console.log(regex.test('goood')); // => true
+    console.log(regex.test('gooood')); // => false
+    console.log(regex.test('good')); // => false
+
+
+    // {n,} : 匹配至少n次
+    regex = /^go{3,}d/
+    console.log(regex.test('goood')); // => true
+    console.log(regex.test('gooood')); // => true
+    console.log(regex.test('good')); // => false
+
+    // {n,m} : 匹配至少n次，之多m次
+    regex = /^go{2,4}d/
+    console.log(regex.test('good')); // => true
+    console.log(regex.test('goood')); // => true
+    console.log(regex.test('gooood')); // => true
+    console.log(regex.test('god')); // => false
+    console.log(regex.test('goooood')); // => false
+
+    // ------------------- 匹配字符个数的符号 - end
+
+    // [xyz]: 匹配字符集合，匹配一个字符，该字符在方括号内
+    regex = /^[xyz]ok/
+    console.log(regex.test('xok')); // => true
+    console.log(regex.test('yok')); // => true
+    console.log(regex.test('zok')); // => true
+    console.log(regex.test('aok')); // => false
+
+    // x|y : 或
+    regex = /^(good|bad)$/
+    console.log(regex.test('good')); // => true
+    console.log(regex.test('bad')); // => true
+    console.log(regex.test('ok')); // => false
+
+
+    // [^xyz]: 匹配负值集合，匹配一个字符，该字符不在方括号内
+    regex = /^[^xyz]ok/
+    console.log(regex.test('xok')); // => false
+    console.log(regex.test('yok')); // => false
+    console.log(regex.test('zok')); // => false
+    console.log(regex.test('aok')); // => true
+
+
+    // [a-z] [0-9] : 取范围值，匹配一个字符，该字符在指定范围内
+    regex = /^[a-z][A-Z][0-9]/
+    console.log(regex.test('vE6')); // => true
+    console.log(regex.test('eU4')); // => true
+    console.log(regex.test('AU4')); // => false
+
+    // [^5-7]: 取范围负值，匹配一个字符，该字符不在指定范围内
+    regex = /^[^5-7]/
+    console.log(regex.test('1')); // => true
+    console.log(regex.test('2')); // => true
+    console.log(regex.test('6')); // => false
+
+    // ------------------- 分组 (pattern)
+    // (pattern): 将pattern里面的所有字符当作一个字符处理
+    regex = /^(abc)d/
+    console.log(regex.test('abcd')); // => true
+
+    // 站在字符串的角度看，圆括号不仅有分组的作用，同时，它将被取值
+    console.log('abcd'.match(regex))
+
+
+    // (?:pattern): 匹配分组内容，但不获取圆括号中的值
+    regex = /^(?:abc)d/
+    console.log(regex.test('abcd')); // => true
+
+    console.log('abcd'.match(regex))
+
+
+    // -------------------- 预查询
+    // 预查询：正则表达式会去匹配预查询中的内容，但不会进行取值
+    // 预查询分方向：前后方向
+
+    // (?=pattern) ：后置预查询
+    regex = /Windows(?=95|97|2000)/
+    console.log('Windows95'.match(regex))
+
+    // (?!pattern): 负后置预查询
+    regex = /Windows(?!95|97|2000)/
+    console.log('WindowsVista'.match(regex))
+
+    // (?<=pattern) : 前置预查询
+    regex = /(?<=95|97|2000)Windows/
+    console.log('97Windows'.match(regex))
+
+
+    // (?<!pattern) 负前置预查询
+    regex = /(?<!95|97|2000)Windows/
+    console.log('XPWindows'.match(regex))
+
+</script>
+
+</html>
