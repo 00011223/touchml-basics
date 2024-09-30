@@ -2,3 +2,5 @@
 <view>关键字:</view>
 <input type="text" value="{{kw}}" bindinput="onKwInput"/>
 <button bindtap="queryPage">分页查询</button>
+<button bindtap="update">修改数据</button>
+<button bindtap="remove">删除数据</button>

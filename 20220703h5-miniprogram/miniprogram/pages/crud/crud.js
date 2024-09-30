@@ -111,6 +111,9 @@ Page({
     // 2. 每页多少条数据 size
     let page = 1
     let size = 2
+    let regex = new RegExp(`^[\\s\\S]*${this.data.kw}[\\s\\S]*$`)
+    // let regex = eval(`/^[\\s\\S]*${this.data.kw}[\\s\\S]*$/`)
+    console.log(regex);
 
     // skip 跳过多少条数据
     // limit 查询多少条数据
@@ -132,7 +135,8 @@ Page({
         // age: _.lte(20).or(_.gte(25))
 
         // 通过正则表达式进行模糊查询
-        name: /^[\s\S]*$/
+        // name: /^[\s\S]*李四[\s\S]*$/
+        name: regex
       })
       .get({
         success: (res) => {
@@ -144,6 +148,48 @@ Page({
   onKwInput(ev) {
     this.setData({
       kw: ev.detail.value
+    })
+  },
+
+  update() {
+    // 通过_id构造一个文档对象 document
+    let doc = students.doc('058dfefe6318352e1929eff741cdd9aa')
+    // update 更新函数
+    doc.update({
+      // 要跟新的字段
+      data: {
+        name: '李小四',
+        age: 14,
+        // 修改数据的时候一定要更新updatedAt
+        updatedAt: new Date()
+      },
+      success: () => {
+        console.log('数据更新成功');
+      }
+    })
+  },
+
+  // 删除
+  remove() {
+    // 单个删除
+
+    // 通过doc获取文档对象
+    // let doc = students.doc('0ab5303b63183ce21aee44cb2a3487ae')
+    // doc.remove({
+    //   success: () => {
+    //     console.log('删除成功');
+    //   }
+    // })
+
+    // 批量删除
+    students.where({
+      // 添加查询条件
+      // id在数组中的数据将被删除
+      _id: _.in(['b69f67c0631814a414b56de50714aa3b', '6d85a2b9631835121e94803a224ff622'])
+    }).remove({
+      success: () => {
+        console.log('批量删除成功');
+      }
     })
   }
 })
