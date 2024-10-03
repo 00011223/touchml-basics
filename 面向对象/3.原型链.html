@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 无论使用function还是class声明的类
+    // 他们的继承都是使用的原型 prototype
+
+    class A {
+        name = '张三'
+    }
+
+    class B extends A {
+        sex = 'male'
+    }
+
+    class C extends B {
+        age = 17
+
+        // this.__proto__.__proto__.name
+    }
+
+    let c = new C()
+
+    // 原型链是什么？
+    // 原型链是实例对象用于寻找自己父类属性的一个引用路径，路径像一个链条所以称为原型链
+    // 原型链将自下而上的查找用户调用的属性，直到找到为止，否则返回 undefined
+
+    // 例如
+    // C 类中不存在 sex 所以就从父类 B 中查找 sex
+    console.log(c.sex)
+
+    // C 类中不存在 name 就从 B类中查找 B类中不存在 name 再从 A类中查找
+    console.log(c.name);
+
+</script>
+
+</html>

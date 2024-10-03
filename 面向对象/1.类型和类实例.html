@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+
+    // 1. 什么是类
+    // 类是一群具备共同的特性的群体的抽象
+    // 例如: 人类是一个类型，只要具备该类型的特征的东西都属于人类
+
+
+    // 2. 什么是实例
+    // 实例是类型中的一个具体的例子，是个实实在在存在的具体的东西
+    // 除了实例的说法外，实例还可以被称为: 实例对象，类实例
+
+
+    // 3. 类 和 实例 是什么关系
+    // 类是创建实例的模板，实例是类的一个具体的造物
+    // 例如: 汽车类 和 汽车实例
+    // 汽车类代表的是一类事物的抽象，代码中可以通过汽车类来创建一个实例
+    // 可以将类理解成是一个磨具，而实例就是通过磨具生产出来的产品
+
+
+
+
+    // 声明类
+    // 声明类最重要的地方在于：声明属性和行为
+    // 1. 使用function声明类
+
+    // 函数的参数可以提供给类实例
+    function Car(price, name) {
+        // 使用this开头声明属性和行为
+        // 类中的this代表该类的实例对象
+        // 属性
+        // this.price = price
+        this.name = name
+
+        // 使用 let 或 var 定义的此处的变量 是私有属性
+        // 私有属性: 只有类实例可以访问 外部是无法访问的
+        let _price = price
+
+        // 行为
+        this.run = function () {
+            console.log('价值' + _price + '元的汽车在跑');
+        }
+
+        this.shout = function () {
+            console.log('汽车在按喇叭 baba叫');
+        }
+
+        let fix = function () {
+            console.log('维修');
+        }
+    }
+
+
+
+    // 2. 使用 class 关键字声明类
+    class Human {
+        // 属性
+        name = '法外狂徒男枪'
+        age
+
+        // 使用井号定义的属性和行为都是私有属性 只能在类实例内部访问
+        #sex
+
+        // 构造函数
+        // 构造函数就是创建该类实例时调用的函数
+        constructor(name, age, sex) {
+            this.name = name
+            this.age = age
+            this.#sex = sex
+        }
+
+        // 行为
+        eat() {
+            // this是什么
+            // 类方法中的this代表类的实例对象
+            console.log(`性别为${this.#sex}的${this.name}在吃饭`);
+        }
+    }
+
+
+
+    // 创建类的实例对象
+    // 使用 new 关键字创建实例
+    let car = new Car(100000, '五菱神车')
+    console.log(car);
+
+    // 可以通过 . 点运算符调用实例的属性和行为
+    console.log(car.name);
+    car.run()
+
+    let zhangsan = new Human('正义使者张三', 17, '男')
+    console.log(zhangsan.name);
+    zhangsan.eat()
+
+</script>
+
+</html>

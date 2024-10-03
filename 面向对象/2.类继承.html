@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 什么是继承?
+    // 可以让子类活得父类的所有属性和行为
+
+    // 汽车类
+    function Car(name, price) {
+        this.price = price
+        this.name = name
+        this.run = function () {
+            console.log('车在跑');
+        }
+    }
+
+    // 皮卡车类
+    function PickCar(weight, name, price) {
+        // 子类可以有自己的属性和行为
+        // 载重量
+        this.weight = weight
+        this.pickGoods = function () {
+            console.log('装载货物');
+        }
+
+        // 此处 this.__proto__ 代表的是该类实例对象的原型对象
+        this.__proto__.name = name
+        this.__proto__.price = price
+
+
+        // 子类可以定义和父类相同名称的方法
+        // 这种覆盖父类方法的行为叫做方法的重写（override）
+        this.run = function () {
+            // 在子类的实例中调用父类的方法
+            this.__proto__.run()
+            console.log('皮卡在跑');
+        }
+    }
+
+    // prototype 是原型
+    // 通过给原型赋值来提供父类
+    PickCar.prototype = new Car()
+
+    let pc = new PickCar(3, '丰田皮卡', 300000)
+
+    console.log(pc);
+
+
+    // class 声明的类的继承方法
+
+
+    // 飞机类
+    class Airplane {
+        name
+        price
+        constructor(name, price) {
+            this.name = name
+            this.price = price
+        }
+        fly() {
+            console.log('飞机在飞');
+        }
+    }
+
+    // 战斗机类
+    // 使用关键字 extends 进行继承
+    class FightAirplane extends Airplane {
+        // 子类自身的属性和行为
+        face = '长得好看'
+        constructor(face, name, price) {
+            // 子类的构造函数中必须先构造父类
+            // 使用 super 关键字创建父类
+            // 此处的super相当于父类的构造函数
+            super(name, price)
+            // this 关键字在构造函数中必须写在 super 后面
+            this.face = face
+        }
+        fire() {
+            console.log('开火');
+        }
+
+        // 重写父类的fly方法
+        fly() {
+            // 在除了构造函数外的其他方法中 super 代表父类的实例对象
+            super.fly()
+            console.log('战斗机在飞');
+        }
+    }
+
+
+    let fa = new FightAirplane('超级好看的战斗机', '歼20', 500000000)
+    console.log(fa);
+
+</script>
+
+</html>
