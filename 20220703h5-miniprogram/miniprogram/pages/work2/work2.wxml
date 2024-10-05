@@ -1,0 +1,11 @@
+<label>账号</label>
+<input type="text" value="{{account}}" bindinput="onAccountInput" />
+<label>密码</label>
+<input type="password" value="{{pwd}}" bindinput="onPwdInput" />
+<label>新密码</label>
+<input type="password" value="{{newPwd}}" bindinput="onNewPwdInput" />
+
+<button bindtap="signUp">注册</button>
+<button bindtap="signIn">登录</button>
+<button bindtap="modifyPwd">修改密码</button>
+<button bindtap="remove">注销账号</button>

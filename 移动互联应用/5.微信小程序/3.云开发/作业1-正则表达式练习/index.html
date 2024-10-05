@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form onsubmit="return false">
+        <div><label>账号: <input type="text" name="account"></label></div>
+        <div><label>密码: <input type="password" name="pwd"></label></div>
+        <div><label>邮箱: <input type="text" name="email"></label></div>
+        <button>提交</button>
+    </form>
+</body>
+<script>
+    // 1. 创建一个 html 项目
+    // 2. 创建表单添加如下表单项，请使用正则表达式验证以下表单项
+    // 1. 账号: 必须包含至少一个大写字母，至少一个小写字母，至少一个数字，长度在6~10之间
+    // 2. 密码: 必须全部是英文字母，长度在6~10之间
+    // 3. 邮箱: 必须是 `xxx@xxx.xxx` 这个格式，其中 `xxx` 代表任意字符任意多个
+    // 3. 提交表单时显示验证结果
+
+    let btn = document.querySelector('button')
+    let form = document.querySelector('form')
+
+    btn.addEventListener('click', () => {
+        // 获取表单数据
+        let fd = new FormData(form)
+        let account = fd.get('account')
+        let pwd = fd.get('pwd')
+        let email = fd.get('email')
+
+        // 验证参数
+
+        // 账号
+        // if (!/[A-Z]+/.test(account)) {
+        //     alert('账号必须包含一个大写字母')
+        //     return
+        // }
+        // if (!/[a-z]+/.test(account)) {
+        //     alert('账号必须包含一个小写字母')
+        //     return
+        // }
+        // if (!/\d+/.test(account)) {
+        //     alert('账号必须包含一个数字')
+        //     return
+        // }
+        // if (!/[\s\S]{6,10}/.test(account)) {
+        //     alert('账号长度必须在6~10之间')
+        //     return
+        // }
+
+
+        // 密码
+        // if (!/[a-zA-Z]{6,10}/.test(pwd)) {
+        //     alert('密码必须是6~10个的英文字母')
+        //     return
+        // }
+
+        // xxx@xxx.xxx
+        // 邮箱
+        if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+$/.test(email)) {
+            alert('不符合邮箱格式')
+            return
+        }
+
+        console.log('验证通过');
+    })
+</script>
+
+</html>

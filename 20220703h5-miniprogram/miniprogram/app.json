@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/work2/work2",
     "pages/crud/crud",
     "pages/cloudFunction/cloudFunction",
     "pages/component/component",
