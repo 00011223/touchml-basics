@@ -1,0 +1,4 @@
+<button bindtap="uploadImage">上传图片</button>
+
+<!-- 上传的文件使用文件id进行显示 -->
+<image src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/test/uID3RygVbRwS9cff4de5475b048914e0039317fefc75.png"></image>
