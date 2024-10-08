@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/userInfo/userInfo",
     "pages/upload/upload",
     "pages/work2/work2",
     "pages/crud/crud",

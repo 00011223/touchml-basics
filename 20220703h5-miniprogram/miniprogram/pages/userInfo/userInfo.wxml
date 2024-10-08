@@ -1,0 +1,9 @@
+<image src="{{headIcon}}"></image>
+
+<!-- 使用按钮来上传图片充当头像 -->
+<!-- 当 button 的 open-type="chooseAvatar" 时，点击按钮后可以读取微信的用户头像 -->
+<button open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">上传头像</button>
+
+<label>昵称:</label>
+<!-- 当 input 的 type 为 nickname 的时候 用户进行输入时 可以选择微信的昵称 -->
+<input type="nickname" value="{{nickname}}" bindinput="onNickNameInput"/>
