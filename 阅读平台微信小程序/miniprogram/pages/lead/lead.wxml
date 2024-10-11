@@ -1,0 +1,23 @@
+<view class="card" wx:for="{{list}}" wx:key="id">
+  <!-- 头像行 -->
+  <view class="row1">
+    <image class="head-icon" src="{{item.aPhoto}}"></image>
+    <text class="author">{{item.author}}</text>
+  </view>
+  <!-- 图片行 -->
+  <image class="big-img" src="{{item.bigImg}}"></image>
+  <!-- 标题 -->
+  <view class="title-row">
+    <text class="hot">热点</text>
+    <text class="title">{{item.tit}}</text>
+  </view>
+  <!-- 简述行 -->
+  <view class="intro">
+    {{item.intro}}
+  </view>
+  <!-- 点赞行 -->
+  <view class="row-good">
+    <view>{{item.clickNum}}点击 · 4本书</view>
+    <view>{{item.great}}</view>
+  </view>
+</view>

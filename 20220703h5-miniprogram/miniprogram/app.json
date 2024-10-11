@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/lead/lead",
     "pages/userInfo/userInfo",
     "pages/upload/upload",
     "pages/work2/work2",
@@ -19,7 +20,6 @@
     "pages/tabbar/page1/page1",
     "pages/iconfont/iconfont",
     "pages/getAndSet/getAndSet",
-    "pages/lead/lead",
     "pages/pageConfig/pageConfig",
     "pages/lang/lang",
     "pages/pageModel/pageModel",

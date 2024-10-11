@@ -1,0 +1,93 @@
+<block wx:if="{{!isShowSearch}}">
+
+  <!-- 搜索 -->
+  <view class="search-row">
+    <view class="search-bar" bindtap="openSearch">
+      <text class="iconfont icon-search"></text>
+      <text>搜索</text>
+    </view>
+    <view class="scan-container">
+      <text bindtap="scanQRCode" class="iconfont icon-scan"></text>
+    </view>
+  </view>
+  <!-- 排行榜 -->
+  <view class="rank-row">
+    <image src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/lead/book2.jpg"></image>
+    <image src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/category/book5.jpg"></image>
+  </view>
+  <!-- 分割线 -->
+  <view class="split">
+    <view class="dashed"></view>
+    <view style="padding: 0 8px">分类</view>
+    <view class="dashed"></view>
+  </view>
+  <!-- 列表 -->
+  <view class="list">
+    <navigator class="list-item">
+      <image class="list-cover" src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/category/book10.jpg"></image>
+      <text class="list-title">神话</text>
+    </navigator>
+    <navigator class="list-item">
+      <image class="list-cover" src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/category/book10.jpg"></image>
+      <text class="list-title">神话</text>
+    </navigator>
+    <navigator class="list-item">
+      <image class="list-cover" src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/category/book10.jpg"></image>
+      <text class="list-title">神话</text>
+    </navigator>
+
+    <navigator class="list-item">
+      <image class="list-cover" src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/category/book10.jpg"></image>
+      <text class="list-title">神话</text>
+    </navigator>
+    <navigator class="list-item">
+      <image class="list-cover" src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/category/book10.jpg"></image>
+      <text class="list-title">神话</text>
+    </navigator>
+    <navigator class="list-item">
+      <image class="list-cover" src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/category/book10.jpg"></image>
+      <text class="list-title">神话</text>
+    </navigator>
+
+    <navigator class="list-item">
+      <image class="list-cover" src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/category/book10.jpg"></image>
+      <text class="list-title">神话</text>
+    </navigator>
+    <navigator class="list-item">
+      <image class="list-cover" src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/category/book10.jpg"></image>
+      <text class="list-title">神话</text>
+    </navigator>
+    <navigator class="list-item">
+      <image class="list-cover" src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/category/book10.jpg"></image>
+      <text class="list-title">神话</text>
+    </navigator>
+
+    <navigator class="list-item">
+      <image class="list-cover" src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/category/book10.jpg"></image>
+      <text class="list-title">神话</text>
+    </navigator>
+    <navigator class="list-item">
+      <image class="list-cover" src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/category/book10.jpg"></image>
+      <text class="list-title">神话</text>
+    </navigator>
+    <navigator class="list-item">
+      <image class="list-cover" src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/category/book10.jpg"></image>
+      <text class="list-title">神话</text>
+    </navigator>
+  </view>
+
+</block>
+
+<block wx:else>
+  <view class="search-container">
+    <input style="width: 238px;" type="text" />
+    <view bindtap="closeSearch" style="display: flex; align-items: center;font-size: 14px">取消</view>
+  </view>
+  <!-- 搜索完成的列表 -->
+  <view class="result-list">
+    <view class="rli">
+      <view>《西游记》</view>
+      <view style="text-align: right;">—— 吴承恩</view>
+    </view>
+  </view>
+</block>
