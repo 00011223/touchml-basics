@@ -62,9 +62,42 @@ page {
   flex-wrap: wrap;
 }
 
-.list-item {
+/* .list-item {
   width: 199.9921875rpx;
   height: 199.9921875rpx;
+  border-radius: 5px;
+  background-color: #f00;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+} */
+
+.box {
+  width: 100%;
+  position: relative;
+}
+
+.box>view {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.box-1x1::before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+
+.item-container {
+  width: calc((100% - 32px) / 3);
+}
+
+.list-item {
   border-radius: 5px;
   background-color: #f00;
   position: relative;

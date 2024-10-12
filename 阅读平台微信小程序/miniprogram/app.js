@@ -15,5 +15,6 @@ App({
     }
 
     this.globalData = {};
+    this.globalData.db = wx.cloud.database()
   }
 });

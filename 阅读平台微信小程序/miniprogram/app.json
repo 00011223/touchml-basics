@@ -3,7 +3,8 @@
     "pages/category/category",
     "pages/lead/lead",
     "pages/desk/desk",
-    "pages/ucenter/ucenter"
+    "pages/ucenter/ucenter",
+    "pages/category/detail/detail"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -14,26 +15,31 @@
   "sitemapLocation": "sitemap.json",
   "style": "v2",
   "tabBar": {
-    "list": [{
-      "pagePath": "pages/lead/lead",
-      "text": "领读",
-      "iconPath": "images/tab_icon1.png",
-      "selectedIconPath": "images/tab_icon1_active.png"
-    },{
-      "pagePath": "pages/category/category",
-      "text": "分类",
-      "iconPath": "images/tab_icon2.png",
-      "selectedIconPath": "images/tab_icon2_active.png"
-    },{
-      "pagePath": "pages/desk/desk",
-      "text": "书桌",
-      "iconPath": "images/tab_icon3.png",
-      "selectedIconPath": "images/tab_icon3_active.png"
-    },{
-      "pagePath": "pages/ucenter/ucenter",
-      "text": "我的",
-      "iconPath": "images/tab_icon4.png",
-      "selectedIconPath": "images/tab_icon4_active.png"
-    }]
+    "list": [
+      {
+        "pagePath": "pages/lead/lead",
+        "text": "领读",
+        "iconPath": "images/tab_icon1.png",
+        "selectedIconPath": "images/tab_icon1_active.png"
+      },
+      {
+        "pagePath": "pages/category/category",
+        "text": "分类",
+        "iconPath": "images/tab_icon2.png",
+        "selectedIconPath": "images/tab_icon2_active.png"
+      },
+      {
+        "pagePath": "pages/desk/desk",
+        "text": "书桌",
+        "iconPath": "images/tab_icon3.png",
+        "selectedIconPath": "images/tab_icon3_active.png"
+      },
+      {
+        "pagePath": "pages/ucenter/ucenter",
+        "text": "我的",
+        "iconPath": "images/tab_icon4.png",
+        "selectedIconPath": "images/tab_icon4_active.png"
+      }
+    ]
   }
 }

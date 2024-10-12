@@ -1,3 +1,11 @@
+const db = getApp().globalData.db
+// 指令集
+const _ = db.command
+const category = db.collection('category')
+const books = db.collection('books')
+// 计时器 用于防抖
+let timer
+
 // pages/category/category.js
 Page({
 
@@ -6,13 +14,17 @@ Page({
    */
   data: {
     isShowSearch: false,
+    list: [],
+    kw: '',
+    // 查询结果集
+    result: [],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    this.queryCategory()
   },
 
   /**
@@ -74,7 +86,9 @@ Page({
   // 关闭搜索
   closeSearch() {
     this.setData({
-      isShowSearch: false
+      isShowSearch: false,
+      result: [],
+      kw: ''
     })
   },
 
@@ -86,5 +100,49 @@ Page({
         console.log(res);
       }
     })
+  },
+
+  // 查询分类信息
+  queryCategory() {
+    category.get({
+      success: res => {
+        console.log(res);
+        this.setData({
+          list: res.data
+        })
+      }
+    })
+  },
+
+  onKwInput(ev) {
+    this.setData({
+      kw: ev.detail.value
+    })
+
+    clearTimeout(timer)
+
+    if (this.data.kw.trim() === '') return
+
+    // 用户停止输入后 500 毫秒后 在查询数据库
+    timer = setTimeout(() => {
+
+      console.log(this.data.kw);
+
+      // 跨字段的或查询
+      // https://developers.weixin.qq.com/miniprogram/dev/wxcloud/reference-sdk-api/database/command/Command.or.html
+      books.where(_.or([{
+          name: new RegExp(`^[\\s\\S]*${this.data.kw}[\\s\\S]*$`)
+        },
+        {
+          author: new RegExp(`^[\\s\\S]*${this.data.kw}[\\s\\S]*$`)
+        }
+      ])).get({
+        success: res => {
+          this.setData({
+            result: res.data
+          })
+        }
+      })
+    }, 500)
   }
 })

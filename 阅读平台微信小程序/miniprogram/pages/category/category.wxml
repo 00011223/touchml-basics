@@ -23,71 +23,26 @@
   </view>
   <!-- 列表 -->
   <view class="list">
-    <navigator class="list-item">
-      <image class="list-cover" src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/category/book10.jpg"></image>
-      <text class="list-title">神话</text>
-    </navigator>
-    <navigator class="list-item">
-      <image class="list-cover" src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/category/book10.jpg"></image>
-      <text class="list-title">神话</text>
-    </navigator>
-    <navigator class="list-item">
-      <image class="list-cover" src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/category/book10.jpg"></image>
-      <text class="list-title">神话</text>
-    </navigator>
-
-    <navigator class="list-item">
-      <image class="list-cover" src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/category/book10.jpg"></image>
-      <text class="list-title">神话</text>
-    </navigator>
-    <navigator class="list-item">
-      <image class="list-cover" src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/category/book10.jpg"></image>
-      <text class="list-title">神话</text>
-    </navigator>
-    <navigator class="list-item">
-      <image class="list-cover" src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/category/book10.jpg"></image>
-      <text class="list-title">神话</text>
-    </navigator>
-
-    <navigator class="list-item">
-      <image class="list-cover" src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/category/book10.jpg"></image>
-      <text class="list-title">神话</text>
-    </navigator>
-    <navigator class="list-item">
-      <image class="list-cover" src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/category/book10.jpg"></image>
-      <text class="list-title">神话</text>
-    </navigator>
-    <navigator class="list-item">
-      <image class="list-cover" src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/category/book10.jpg"></image>
-      <text class="list-title">神话</text>
-    </navigator>
-
-    <navigator class="list-item">
-      <image class="list-cover" src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/category/book10.jpg"></image>
-      <text class="list-title">神话</text>
-    </navigator>
-    <navigator class="list-item">
-      <image class="list-cover" src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/category/book10.jpg"></image>
-      <text class="list-title">神话</text>
-    </navigator>
-    <navigator class="list-item">
-      <image class="list-cover" src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/category/book10.jpg"></image>
-      <text class="list-title">神话</text>
-    </navigator>
+    <view wx:for="{{list}}" wx:key="_id" class="item-container">
+      <navigator url="detail/detail?id={{item._id}}" class="list-item box box-1x1">
+        <image class="list-cover" src="{{item.cover}}"></image>
+        <text class="list-title">{{item.name}}</text>
+      </navigator>
+    </view>
   </view>
 
 </block>
 
 <block wx:else>
   <view class="search-container">
-    <input style="width: 238px;" type="text" />
+    <input style="width: 238px;" type="text" value="{{kw}}" bindinput="onKwInput"/>
     <view bindtap="closeSearch" style="display: flex; align-items: center;font-size: 14px">取消</view>
   </view>
   <!-- 搜索完成的列表 -->
   <view class="result-list">
-    <view class="rli">
-      <view>《西游记》</view>
-      <view style="text-align: right;">—— 吴承恩</view>
+    <view class="rli" wx:for="{{result}}" wx:key="_id">
+      <view>《{{item.name}}》</view>
+      <view style="text-align: right;">—— {{item.author}}</view>
     </view>
   </view>
 </block>
