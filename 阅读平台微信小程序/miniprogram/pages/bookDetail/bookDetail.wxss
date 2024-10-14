@@ -1,0 +1,99 @@
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 0 0;
+}
+
+.img-container {
+  width: 281.25rpx;
+  margin-bottom: 32px;
+}
+
+.box>image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.name {
+  font-weight: bolder;
+  margin-bottom: 16px;
+}
+
+.author {
+  color: #219d90;
+  font-size: 12px;
+  margin-bottom: 16px;
+}
+
+.on-read {
+  color: #dadada;
+  font-size: 12px;
+}
+
+.tabs {
+  display: flex;
+}
+
+.tab {
+  width: 50%;
+  text-align: center;
+  font-size: 13px;
+  border-bottom: 1px solid #dadada;
+  padding: 16px 0;
+  color: #dadada;
+
+  position: relative;
+}
+
+.tab.active {
+  color: #000;
+  font-weight: bolder;
+}
+
+.tab.active::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 3px;
+  background-color: #000;
+  position: absolute;
+  bottom: 0;
+  left: calc(50% - 20px);
+}
+
+.content {
+  padding: 16px;
+}
+
+.dir>view {
+  padding-bottom: 8px;
+  border-bottom: 1px solid #000;
+  margin-bottom: 8px;
+}
+
+.btns {
+  width: 100%;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+}
+
+.btn {
+  width: 50%;
+  text-align: center;
+  line-height: 51.2px;
+  font-weight: bolder;
+}
+
+.btn:nth-child(1) {
+  background-color: #fff;
+}
+
+.btn:nth-child(2) {
+  background-color: #ccb583;
+  color: #fff;
+}

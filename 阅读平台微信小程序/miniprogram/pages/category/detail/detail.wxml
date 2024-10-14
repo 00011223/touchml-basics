@@ -1,1 +1,20 @@
-分类详情页
+<!-- 名人名言 -->
+<view class="desc">
+  <text class="iconfont icon-quotation"></text>
+  {{desc}}
+</view>
+<!-- 作者信息 -->
+<view class="info">
+  <image class="head-icon" src="{{authorIcon}}"></image>
+  <text class="author">{{author}}</text>
+  <text class="iconfont icon-renzheng"></text>
+</view>
+<!-- 书籍列表 -->
+<view class="list">
+  <navigator url="/pages/bookDetail/bookDetail?id={{item._id}}" class="list-item" wx:for="{{listData}}" wx:key="_id">
+    <view class="box box-3x4">
+      <image src="{{item.fileID}}"></image>
+    </view>
+    <text>{{item.name}}</text>
+  </navigator>
+</view>

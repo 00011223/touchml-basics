@@ -1,2 +1,42 @@
-<!--pages/desk/desk.wxml-->
-<text>pages/desk/desk.wxml</text>
+<view class="container">
+  <view class="img-container">
+    <view class="box box-3x4">
+      <swiper bindchange="onSwiperChange">
+        <swiper-item wx:for="{{booksData}}" wx:key="_id">
+          <image src="{{item.fileID}}"></image>
+        </swiper-item>
+      </swiper>
+    </view>
+  </view>
+
+  <!-- 当前swiper的导航按钮 -->
+  <view class="nav">
+    <view wx:for="{{navBtns}}" wx:key="index" class="{{'nav-btn' + (item? ' active': '')}}"></view>
+  </view>
+
+  <!-- 书名 -->
+  <view>书名: {{booksData[currentIndex].name}}</view>
+  <!-- 作者 -->
+  <view>作者: {{booksData[currentIndex].author}}</view>
+</view>
+
+<text class="iconfont icon-caidan"></text>
+
+<!-- 整理页面的遮罩 -->
+<view class="cover">
+  <!-- 按钮行 -->
+  <view class="btns">
+    <view class="btn">关闭</view>
+    <view wx:if="{{!tidy}}" class="btn" bindtap="onTidy">整理</view>
+    <view wx:else class="btn" bindtap="onCancel">取消</view>
+  </view>
+  <view class="list">
+    <view class="list-item" wx:for="{{deskData}}" wx:key="index" bindtap="onItemClick" data-index="{{index}}">
+      <view class="box box-3x4">
+        <image src="{{item.cover}}"></image>
+      </view>
+      <text>{{item.name}}</text>
+      <text wx:if="{{tidy}}" class="iconfont icon-renzheng" style="{{item.checked? 'color: orange': ''}}"></text>
+    </view>
+  </view>
+</view>

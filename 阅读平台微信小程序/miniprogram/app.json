@@ -1,10 +1,11 @@
 {
   "pages": [
-    "pages/category/category",
-    "pages/lead/lead",
-    "pages/desk/desk",
     "pages/ucenter/ucenter",
-    "pages/category/detail/detail"
+    "pages/desk/desk",
+    "pages/bookDetail/bookDetail",
+    "pages/category/category",
+    "pages/category/detail/detail",
+    "pages/lead/lead"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

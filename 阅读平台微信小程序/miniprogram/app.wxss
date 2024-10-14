@@ -1,1 +1,12 @@
 @import './iconfont.wxss';
+
+.box {
+  width: 100%;
+  position: relative;
+}
+
+.box-3x4::before {
+  content: '';
+  display: block;
+  padding-top: 133.33%;
+}

@@ -1,0 +1,30 @@
+<view class="info">
+  <view class="img-container">
+    <view class="box box-3x4">
+      <image class="cover" src="{{cover}}"></image>
+    </view>
+  </view>
+  <text class="name">{{name}}</text>
+  <text class="author">{{author}}</text>
+  <text class="on-read">1075人在读></text>
+</view>
+
+<view class="tabs">
+  <view data-index="{{index}}" bindtap="switchTab" wx:for="{{tabs}}" wx:key="label" class="{{'tab' + (item.active? ' active': '')}}">{{item.label}}</view>
+</view>
+
+<!-- 详情和目录 -->
+<view class="content">
+  <view wx:if="{{tabs[0].active}}" class="desc">{{desc}}</view>
+  <view wx:else class="dir">
+    <view wx:for="{{dir}}" wx:key="index">{{item}}</view>
+  </view>
+</view>
+
+<view style="height: 51.2px;"></view>
+
+<!-- 按钮行 -->
+<view class="btns">
+  <view class="btn" bindtap="addToDesk">{{deskId===''? '加入书桌': '移出书桌'}}</view>
+  <view class="btn">阅读</view>
+</view>

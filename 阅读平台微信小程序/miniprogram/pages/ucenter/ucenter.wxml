@@ -1,2 +1,36 @@
-<!--pages/ucenter/ucenter.wxml-->
-<text>pages/ucenter/ucenter.wxml</text>
+<view class="info">
+  <view class="head-icon">
+    <image src="cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/ucenter/book8.jpg"></image>
+    <text class="iconfont icon-icmale"></text>
+  </view>
+  <view class="name">用户名</view>
+  <view class="detail-info">
+    <view class="detail-item">
+      <text>0分钟</text>
+      <text>读书时长</text>
+    </view>
+    <view class="detail-item">
+      <text>0</text>
+      <text>蜗牛壳</text>
+    </view>
+    <view class="line"></view>
+    <text class="iconfont icon-arrow-right"></text>
+  </view>
+</view>
+
+<view class="nav-btns">
+  <navigator>
+    <view>
+      <text class="iconfont icon-editor"></text>
+      <text class="nav-label">图书管理</text>
+    </view>
+    <text class="iconfont icon-arrow-right"></text>
+  </navigator>
+  <navigator>
+    <view>
+      <text class="iconfont icon-editor"></text>
+      <text class="nav-label">图书发布</text>
+    </view>
+    <text class="iconfont icon-arrow-right"></text>
+  </navigator>
+</view>

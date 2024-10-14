@@ -1,5 +1,6 @@
 const db = getApp().globalData.db
 const category = db.collection('category')
+const books = db.collection('books')
 
 // pages/category/detail/detail.js
 Page({
@@ -8,9 +9,14 @@ Page({
    * 页面的初始数据
    */
   data: {
+    id: '',
     desc: '',
     authorIcon: '',
     author: '',
+    // 分类名称
+    name: '',
+    // 列表数据
+    listData: []
   },
 
   /**
@@ -18,19 +24,39 @@ Page({
    */
   onLoad(options) {
     // 获取分类id 用于查询
-    let id = options.id
+    this.setData({
+      id: options.id
+    })
 
     // 查找分类数据
     category.where({
       // 通过id为参数查找对应数据
-      _id: id
+      _id: this.data.id
     }).get({
       success: res => {
         let data = res.data[0]
         this.setData({
           desc: data.desc,
           authorIcon: data.authorIcon,
-          author: data.author
+          author: data.author,
+          name: data.name
+        })
+
+        // 设置导航栏标题
+        wx.setNavigationBarTitle({
+          title: data.name,
+        })
+
+        // 查询对应分类下的图书列表
+        books.where({
+          category: this.data.name
+        }).get({
+          success: res => {
+            console.log(res);
+            this.setData({
+              listData: res.data
+            })
+          }
         })
       }
     })
