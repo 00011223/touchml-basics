@@ -21,7 +21,7 @@ Page({
         active: false
       },
     ],
-    id: 'cd045e75614060ec0da60b063df85a87',
+    id: '',
     // 封面图
     cover: 'cloud://cloud1-6gmm9gic002fb420.636c-cloud1-6gmm9gic002fb420-1306170251/books/QF7G3AOs606cf9a87126ed88be5a8f65358dc87c72d5.png',
     // 书名
@@ -41,9 +41,9 @@ Page({
    */
   onLoad(options) {
     // console.log(options);
-    // this.setData({
-    //   id: options.id
-    // })
+    this.setData({
+      id: options.id
+    })
 
     // 查询id对应的图书
     books.where({

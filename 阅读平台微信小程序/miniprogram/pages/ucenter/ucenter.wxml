@@ -16,6 +16,7 @@
     <view class="line"></view>
     <text class="iconfont icon-arrow-right"></text>
   </view>
+  <view class="edit">编辑</view>
 </view>
 
 <view class="nav-btns">

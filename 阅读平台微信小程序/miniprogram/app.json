@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/ucenter/ucenter",
     "pages/desk/desk",
+    "pages/ucenter/ucenter",
     "pages/bookDetail/bookDetail",
     "pages/category/category",
     "pages/category/detail/detail",

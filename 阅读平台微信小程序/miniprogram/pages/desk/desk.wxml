@@ -20,13 +20,13 @@
   <view>作者: {{booksData[currentIndex].author}}</view>
 </view>
 
-<text class="iconfont icon-caidan"></text>
+<text class="iconfont icon-caidan" bindtap="openCover"></text>
 
 <!-- 整理页面的遮罩 -->
-<view class="cover">
+<view class="cover {{isShowCover? 'active': ''}}">
   <!-- 按钮行 -->
   <view class="btns">
-    <view class="btn">关闭</view>
+    <view class="btn" bindtap="onClose">关闭</view>
     <view wx:if="{{!tidy}}" class="btn" bindtap="onTidy">整理</view>
     <view wx:else class="btn" bindtap="onCancel">取消</view>
   </view>
@@ -39,4 +39,6 @@
       <text wx:if="{{tidy}}" class="iconfont icon-renzheng" style="{{item.checked? 'color: orange': ''}}"></text>
     </view>
   </view>
+
+  <view wx:if="{{isShowRemoveBtn}}" class="remove-btn" bindtap="onRemove">删除</view>
 </view>
