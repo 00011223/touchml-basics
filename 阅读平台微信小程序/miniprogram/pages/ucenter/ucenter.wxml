@@ -20,14 +20,14 @@
 </view>
 
 <view class="nav-btns">
-  <navigator>
+  <navigator url="manager/manager">
     <view>
       <text class="iconfont icon-editor"></text>
       <text class="nav-label">图书管理</text>
     </view>
     <text class="iconfont icon-arrow-right"></text>
   </navigator>
-  <navigator>
+  <navigator url="edit/edit">
     <view>
       <text class="iconfont icon-editor"></text>
       <text class="nav-label">图书发布</text>

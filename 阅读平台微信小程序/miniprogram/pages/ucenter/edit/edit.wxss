@@ -1,0 +1,55 @@
+page {
+  width: calc(100% - 32px);
+  padding: 16px;
+}
+
+.form-item {
+  margin-bottom: 8px;
+}
+
+.form-item>input {
+  border-bottom: 1px solid rgb(231, 231, 231);
+}
+
+.upload-btn {
+  width: 64px;
+  height: 64px;
+  background-color: rgb(231, 231, 231);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-upload {
+  font-size: 32px;
+  color: rgb(167, 167, 167)
+}
+
+textarea {
+  width: 100%;
+  border-bottom: 1px solid rgb(231, 231, 231);
+}
+
+.btns {
+  display: flex;
+  color: #fff;
+}
+
+.btns>view {
+  flex-grow: 1;
+  text-align: center;
+  line-height: 32px;
+}
+
+.btns>view:nth-child(1) {
+  background-color: rgb(160, 160, 160);
+}
+
+.btns>view:nth-child(2) {
+  background-color: #0f0;
+}
+
+.preview {
+  width: 64px;
+  height: 64px;
+}

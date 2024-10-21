@@ -1,0 +1,35 @@
+<view class="form-item">
+  <label>书名</label>
+  <input type="text" value="{{name}}" bindinput="onNameInput" />
+</view>
+<view class="form-item">
+  <label>作者</label>
+  <input type="text" value="{{author}}" bindinput="onAuthorInput" />
+</view>
+<view class="form-item">
+  <label>分类</label>
+  <picker bindchange="onCategoryChange" range="{{categoryOptions}}" value="{{categroyIndex}}">
+    <view>当前选项: {{category}}</view>
+  </picker>
+</view>
+<view class="form-item">
+  <label>封面</label>
+  <view style="display: flex;">
+    <view class="upload-btn" bindtap="uploadCover">
+      <text class="iconfont icon-upload"></text>
+    </view>
+    <image src="{{fileID}}" wx:if="{{fileID}}" class="preview"></image>
+  </view>
+</view>
+<view class="form-item">
+  <label>简介</label>
+  <textarea auto-height value="{{desc}}" bindinput="onDescInput"></textarea>
+</view>
+<view class="form-item">
+  <label>目录</label>
+  <textarea auto-height value="{{dir}}" bindinput="onDirInput"></textarea>
+</view>
+<view class="btns">
+  <view>重置</view>
+  <view bindtap="submit">提交</view>
+</view>

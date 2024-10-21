@@ -11,7 +11,7 @@ page {
 
 .img-container {
   margin-top: 64px;
-  width: 120px;
+  width: 281.25rpx;
 }
 
 .box>swiper {

@@ -198,7 +198,8 @@ Page({
 
     this.setData({
       tidy: false,
-      deskData: this.data.deskData
+      deskData: this.data.deskData,
+      isShowRemoveBtn: false
     })
   },
 
