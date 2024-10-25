@@ -17,6 +17,13 @@ Page({
     categroyIndex: 0,
 
     // 要存储的数据
+
+    // 此处保存一个由导航传递的id值
+    // 若此值存在则说明此时在修改数据
+    // 否则为新增数据
+    id: '',
+    // 用于指示是否是编辑
+    isEdit: false,
     name: '',
     author: '',
     category: '',
@@ -39,6 +46,43 @@ Page({
         })
       }
     })
+
+
+    // 保存id
+    this.setData({
+      id: options.id,
+      isEdit: Boolean(options.id)
+    })
+
+    if (this.data.isEdit) {
+      // 修改标题
+      wx.setNavigationBarTitle({
+        title: '编辑图书',
+      })
+
+      // 查询图书id对应的数据 然后进行回显
+      books.where({
+        _id: this.data.id
+      }).get({
+        success: res => {
+          if (res.data.length === 0) {
+            wx.showToast({
+              title: '编辑的图书不存在',
+            })
+            return
+          }
+
+          this.setData({
+            name: res.data[0].name,
+            author: res.data[0].author,
+            category: res.data[0].category,
+            fileID: res.data[0].fileID,
+            desc: res.data[0].desc,
+            dir: res.data[0].dir,
+          })
+        }
+      })
+    }
   },
 
   /**
@@ -139,37 +183,66 @@ Page({
 
   // 提交
   submit() {
-    console.log(this.data);
 
     wx.showLoading({
       title: '保存中...',
     })
 
-    books.add({
-      data: {
-        name: this.data.name,
-        author: this.data.author,
-        category: this.data.category,
-        fileID: this.data.fileID,
-        desc: this.data.desc,
-        dir: this.data.dir,
-        createTime: Date.now(),
-        updateTime: Date.now()
-      },
-      success: res => {
-        // 返回上级菜单
-        wx.navigateBack({
-          success: () => {
-            wx.showToast({
-              title: '保存成功',
-            })
-          }
-        })
-      },
-      complete: () => {
-        wx.hideLoading()
-      }
-    })
+    if (!this.data.isEdit) {
+      // 新增数据
+      books.add({
+        data: {
+          name: this.data.name,
+          author: this.data.author,
+          category: this.data.category,
+          fileID: this.data.fileID,
+          desc: this.data.desc,
+          dir: this.data.dir,
+          createTime: Date.now(),
+          updateTime: Date.now()
+        },
+        success: res => {
+          // 返回上级菜单
+          wx.navigateBack({
+            success: () => {
+              wx.showToast({
+                title: '保存成功',
+              })
+            }
+          })
+        },
+        complete: () => {
+          wx.hideLoading()
+        }
+      })
+    } else {
+      // 编辑数据
+      let doc = books.doc(this.data.id)
+      doc.update({
+        data: {
+          name: this.data.name,
+          author: this.data.author,
+          category: this.data.category,
+          fileID: this.data.fileID,
+          desc: this.data.desc,
+          dir: this.data.dir,
+          updateTime: Date.now()
+        },
+        success: res => {
+          // 返回上级菜单
+          wx.navigateBack({
+            success: () => {
+              wx.showToast({
+                title: '保存成功',
+              })
+            }
+          })
+        },
+        complete: () => {
+          wx.hideLoading()
+        }
+      })
+    }
   },
 
   onNameInput(ev) {

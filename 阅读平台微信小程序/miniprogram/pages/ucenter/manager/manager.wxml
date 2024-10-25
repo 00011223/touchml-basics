@@ -1,2 +1,21 @@
-<!--pages/ucenter/manager/manager.wxml-->
-<text>pages/ucenter/manager/manager.wxml</text>
+<view class="list-item" wx:for="{{listData}}" wx:key="_id">
+  <view class="left">
+    <view class="img-container">
+      <view class="box box-3x4">
+        <image src="{{item.fileID}}"></image>
+      </view>
+    </view>
+    <view>
+      <view>书名: {{item.name}}</view>
+      <view>作者: {{item.author}}</view>
+    </view>
+  </view>
+  <view class="btns">
+    <view class="btn" data-id="{{item._id}}" bindtap="remove">删除</view>
+    <view class="btn" data-id="{{item._id}}" bindtap="toEdit">编辑</view>
+  </view>
+</view>
+
+<view wx:if="{{isDone}}" style="padding: 8px; background-color: #fff;">
+  我是有底线的~~~
+</view>

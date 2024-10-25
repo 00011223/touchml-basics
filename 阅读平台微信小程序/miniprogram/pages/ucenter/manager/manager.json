@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {},
+  "navigationBarTitleText": "图书管理",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
 }

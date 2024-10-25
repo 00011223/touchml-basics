@@ -1,13 +1,13 @@
 {
   "pages": [
     "pages/ucenter/ucenter",
+    "pages/ucenter/manager/manager",
     "pages/ucenter/edit/edit",
     "pages/desk/desk",
     "pages/bookDetail/bookDetail",
     "pages/category/category",
     "pages/category/detail/detail",
-    "pages/lead/lead",
-    "pages/ucenter/manager/manager"
+    "pages/lead/lead"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
