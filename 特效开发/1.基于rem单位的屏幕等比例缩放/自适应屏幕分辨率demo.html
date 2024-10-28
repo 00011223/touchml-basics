@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!-- 设置默认字体大小为我们所定义的标准字体大小 -->
+<html lang="en" style="font-size: 20px;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .box {
+            background-color: #f00;
+            /* width: 300px;
+            height: 300px; */
+            /* 3. 根据标准字体大小计算rem值 */
+            width: 15rem;
+            height: 15rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+</body>
+<script>
+    // 1. 确立参考系，定义标准设备的屏幕宽度和字体大小
+    // 2. 比例公式（等式左右两边比例尺相同，从而达到等比例缩放的目的）：标准屏幕宽度 / 标准字体大小 = 新的屏幕宽度 / 新的屏幕字体大小
+    // 3. 将页面样式中的 `px` 单位换算并替换为 `rem`，方法是`?rem = 元素的尺寸 / 标准字体大小`
+    // 4. 绑定窗口的 `resize` 和 `load` 事件，触发事件时计算出新的屏幕宽度时的字体大小，设置 `html` 的字体大小
+
+    const html = document.querySelector('html')
+
+    // 1. 我们定义 标准屏幕宽为 600px 标准字体大小为 20px;
+
+    // 2. 计算新的屏幕尺寸下的新的字体大小
+    let newFontSize = window.innerWidth / (600 / 20)
+
+    // 重新计算字体大小
+    function resize() {
+        let newFontSize = window.innerWidth / (600 / 20)
+        console.log(newFontSize);
+        // 设置html根节点的字体大小
+        html.style.fontSize = `${newFontSize}px`;
+    }
+
+    // 3. 绑定窗口尺寸变化事件和页面加载事件
+    window.addEventListener('resize', resize)
+    window.addEventListener('load', resize)
+
+</script>
+
+</html>
