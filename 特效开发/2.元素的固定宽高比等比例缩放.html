@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="font-size: 12px">
+<html lang="en" style="font-size: 16px">
 
 <head>
     <meta charset="UTF-8">
@@ -21,15 +21,69 @@
             如此以来只要不设置父元素高度，则父元素的高度就是第一个子元素的高度，从而让父元素宽高成比例
 
             具体操作步骤如下:
+            1. 创建一个等比例的比例盒，作为要填充元素的父元素使用
+            2. 创建不同比例尺的维元素例如: .box_3x4::before 并在其中使用 padding-top 来达成固定高宽比
+            3. 给所有 box 的子元素添加定位和宽高
+            4. 给 box 填入需要固定宽高比的子元素
         */
+
+        .box {
+            width: 100%;
+            background-color: #f00;
+            position: relative;
+        }
+
+        .box>* {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .box_3x4::before {
+            content: '';
+            display: block;
+            padding-top: 75%;
+        }
+
+        .box-container {
+            /* width: 300px; */
+            width: 18.75rem;
+        }
     </style>
 </head>
 
 <body>
+    <!-- box 作为容器 将需要比例为 3x4 的元素放入其中 -->
+    <div class="box box_3x4">
+        <img src="./img/big-img.png">
+    </div>
 
+
+    <!-- 设置指定宽度
+        给 box 创建一个容器 并设置固定宽度即可
+    -->
+    <div class="box-container">
+        <div class="box box_3x4">
+            <img src="./img/big-img.png">
+        </div>
+    </div>
 </body>
 
 <script>
+
+    // 定义标准屏幕宽度 600 px 标准字体大小 16px
+
+    const html = document.querySelector('html')
+
+    function resize() {
+        let newFontSize = innerWidth / (600 / 16)
+        html.style.fontSize = `${newFontSize}px`
+    }
+
+    window.addEventListener('resize', resize)
+    window.addEventListener('load', resize)
 
 </script>
 
