@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .nav-bar {
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            /* border-bottom: 1px solid #000; */
+            box-shadow: 0.3125rem 0.3125rem 0.3125rem 0.3125rem rgba(0, 0, 0, 0.134);
+        }
+
+        .list {
+            padding: 1rem 1rem 0;
+        }
+
+        .list-item {
+            /* border: 1px solid black; */
+            display: flex;
+            margin-bottom: 1rem;
+        }
+
+        .right {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-left: 1rem;
+        }
+
+        .box {
+            width: 100%;
+            position: relative;
+        }
+
+        .box>* {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .box_4x3::before {
+            content: '';
+            display: block;
+            padding-top: 133.3333333333333%;
+        }
+
+        .box-container {
+            width: 9.375rem;
+        }
+
+        .right>div:nth-child(1) {
+            font-size: 1.5rem;
+            font-weight: bolder;
+        }
+
+        .right>div:nth-child(2) {
+            font-weight: bolder;
+            font-size: 1.25rem;
+        }
+
+        .right>div:nth-child(3) {
+            color: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav-bar">
+        <div>首页</div>
+        <div>全部商品</div>
+        <div>热销</div>
+        <div>上新</div>
+        <div>店铺动态</div>
+    </div>
+    <div class="list">
+        <div class="list-item">
+            <div class="box-container">
+                <div class="box box_4x3">
+                    <img src="./iphone.png" alt="">
+                </div>
+            </div>
+            <div class="right">
+                <div>iPhoneX大降价, 原价9000元, 现在4500元, iPhoneX大降价</div>
+                <div>￥4500</div>
+                <div>46451条评价 99%</div>
+            </div>
+        </div>
+        <div class="list-item">
+            <div class="box-container">
+                <div class="box box_4x3">
+                    <img src="./iphone.png" alt="">
+                </div>
+            </div>
+            <div class="right">
+                <div>iPhoneX大降价, 原价9000元, 现在4500元, iPhoneX大降价</div>
+                <div>￥4500</div>
+                <div>46451条评价 99%</div>
+            </div>
+        </div>
+        <div class="list-item">
+            <div class="box-container">
+                <div class="box box_4x3">
+                    <img src="./iphone.png" alt="">
+                </div>
+            </div>
+            <div class="right">
+                <div>iPhoneX大降价, 原价9000元, 现在4500元, iPhoneX大降价</div>
+                <div>￥4500</div>
+                <div>46451条评价 99%</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+
+    // 规定: 标准屏幕宽 750px 字体大小 16px
+
+    const html = document.querySelector('html')
+
+
+    function resize() {
+        let newFontSize = innerWidth / (750 / 16)
+        html.style.fontSize = `${newFontSize}px`
+    }
+
+    window.addEventListener('resize', resize)
+    window.addEventListener('load', resize)
+
+</script>
+
+</html>
