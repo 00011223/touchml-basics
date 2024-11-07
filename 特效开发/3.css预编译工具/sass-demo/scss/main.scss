@@ -1,3 +1,11 @@
+// 引入其他scss文件
+// 后缀名可以省略
+@use './util/base';
+// 引入css文件
+// 后缀名不能省略
+@use '../css/other.css';
+
+
 // 变量
 $size: 32px;
 $color: #f00;
@@ -10,4 +18,22 @@ $color: #f00;
     // 访问变量
     font-size: $size;
     background-color: $color;
+}
+
+
+// 嵌套
+// 嵌套的本质就是后代选择器
+ul {
+    border: 5px solid #ff0;
+
+    li {
+        background-color: #f00;
+    }
+}
+
+.box2 {
+    // 引入其他 scss 文件内的变量
+    width: base.$width;
+    height: base.$height;
+    background-color: #0f0;
 }
