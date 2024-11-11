@@ -8,7 +8,7 @@
 
 // 变量
 $size: 32px;
-$color: #f00;
+$color: rgb(170, 0, 255);
 
 // 使用变量
 .box {
@@ -36,4 +36,59 @@ ul {
     width: base.$width;
     height: base.$height;
     background-color: #0f0;
+}
+
+
+// 定义一个混合
+@mixin fn($a: 50px, $b: orange){
+    height: $a;
+    color: $b;
+    border: 1px solid #000;
+}
+
+.box3 {
+    width: 100px;
+
+    // 不带参数调用混合
+    @include fn;
+
+    // 带指定参数
+    @include fn($b: rgb(132, 0, 255));
+
+    // 按顺序传参
+    @include fn(50px, #f00);
+}
+
+// 样式的继承
+// 声明父样式
+%parent {
+    width: 200px;
+    height: 200px;
+    background-color:rgb(132, 0, 255);
+}
+
+.box4 {
+    // 子样式继承父样式
+    @extend %parent;
+    // 子样式可以有自己的样式
+    color: #fff;
+    // 也可以覆盖父样式
+    width: 300px;
+}
+
+// 四则运算
+.box4 {
+    // 加减法需要相同单位进行运算
+    // width: 1px + 1em;
+    width: 100px + 100px;
+    width: 200px - 100px;
+    width: 100% - 50%;
+
+    // 乘除
+
+    // 乘法只能用一个带单位的值乘以一个不带单位的数字
+    width: 5px * 10;
+    // width: (50rem/25rem) * 1px;
+    // 除法只能使用 calc 计算函数
+    width: calc(50rem / 25rem) * 1px;
 }
