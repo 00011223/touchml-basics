@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 使用bootstrap的容器进行响应式布局的话，需要在head标签中加入此meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <style>
+        .box {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 参考：https://getbootstrap.com/docs/5.2/utilities/display/ -->
+    <!-- 语法:
+        在 xs 断点下: d-{value}
+        xs 以上: d-{breakpoints}-{value}
+    -->
+
+    <!-- 当屏幕宽度小于 sm 时显示 -->
+    <div class="container d-block d-sm-none">小于 sm</div>
+    <!-- 当屏幕宽度为 md 时 显示 -->
+    <div class="container d-none d-sm-block d-md-none">md</div>
+    <!-- 当屏幕宽度大于 lg 时 显示 -->
+    <div class="container d-none d-md-block">大于 lg</div>
+</body>
+
+</html>
