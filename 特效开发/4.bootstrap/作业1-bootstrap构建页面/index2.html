@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <style>
+        .item {
+            background-color: #f00;
+            margin-bottom: 16px;
+        }
+
+        .box {
+            width: 100%;
+            position: relative;
+            background-color: #f00;
+        }
+
+        .box>* {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .box_9x16::before {
+            content: '';
+            display: block;
+            padding-top: 56.25%;
+        }
+
+        .xs>.item {
+            width: 100%;
+        }
+
+        .md>.item {
+            width: calc(50% - 8px);
+        }
+
+        .xl>.item {
+            width: calc((100% / 3) - 16px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid xs d-flex d-md-none flex-wrap justify-content-between">
+        <div class="item">
+            <div class="box box_9x16"></div>
+        </div>
+        <div class="item">
+            <div class="box box_9x16"></div>
+        </div>
+        <div class="item">
+            <div class="box box_9x16"></div>
+        </div>
+        <div class="item">
+            <div class="box box_9x16"></div>
+        </div>
+        <div class="item">
+            <div class="box box_9x16"></div>
+        </div>
+        <div class="item">
+            <div class="box box_9x16"></div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid md d-none d-md-flex d-xl-none flex-wrap justify-content-between">
+        <div class="item">
+            <div class="box box_9x16"></div>
+        </div>
+        <div class="item">
+            <div class="box box_9x16"></div>
+        </div>
+        <div class="item">
+            <div class="box box_9x16"></div>
+        </div>
+        <div class="item">
+            <div class="box box_9x16"></div>
+        </div>
+        <div class="item">
+            <div class="box box_9x16"></div>
+        </div>
+        <div class="item">
+            <div class="box box_9x16"></div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid xl d-none d-xl-flex flex-wrap justify-content-between">
+        <div class="item">
+            <div class="box box_9x16"></div>
+        </div>
+        <div class="item">
+            <div class="box box_9x16"></div>
+        </div>
+        <div class="item">
+            <div class="box box_9x16"></div>
+        </div>
+        <div class="item">
+            <div class="box box_9x16"></div>
+        </div>
+        <div class="item">
+            <div class="box box_9x16"></div>
+        </div>
+        <div class="item">
+            <div class="box box_9x16"></div>
+        </div>
+    </div>
+</body>
+
+</html>
