@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/bootstrap.css">
+</head>
+
+<body class="d-flex flex-column align-items-center">
+    <!-- label 与 表单元素上下排列 -->
+    <div class="card p-3" style="width: 300px;">
+        <div class="vstack gap-2">
+            <div>
+                <label class="form-label">姓名</label>
+                <input class="form-control" type="text" />
+            </div>
+            
+            <div>
+                <label class="form-label">年龄</label>
+                <!-- 设置大小 -->
+                <input class="form-control form-control-sm" type="number" />
+                <input class="form-control form-control-lg" type="number" />
+                <!-- 禁用 disabled -->
+                <input class="form-control" type="number" disabled />
+                <!-- 只读 readonly -->
+                <input class="readonly form-control" type="number" readonly />
+            </div>
+
+            <div>
+                <label class="form-label">邮箱</label>
+                <!-- 朴素输入框 form-control-plaintext -->
+                <input class="form-control form-control-plaintext" type="text" readonly value="xxx@xxx.com" />
+            </div>
+
+            <div>
+                <label class="form-label">简介</label>
+                <!-- form-control 相关样式都可以用在文本域上 -->
+                <textarea disabled rows="4" class="form-control" type="text"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- label 与 表单元素 左右排列 -->
+    <div class="card p-3" style="width: 500px">
+        <div class="row">
+            <label class="col-3 col-form-label">姓名</label>
+            <div class="col">
+                <input class="form-control" type="text">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
