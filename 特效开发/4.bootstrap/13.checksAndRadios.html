@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/bootstrap.css">
+</head>
+
+<body class="d-flex justify-content-center">
+    <!-- https://getbootstrap.com/docs/5.2/forms/checks-radios/ -->
+    <div class="card p-3" style="width: 500px;">
+        <div class="row">
+            <label class="col-3 col-form-label">性别</label>
+            <div class="col">
+                <!-- 单选按钮 -->
+                <div class="form-check">
+                    <input class="form-check-input" id="male" type="radio" name="sex" value="male">
+                    <label class="form-check-label" for="male">男</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" id="female" type="radio" name="sex" value="female">
+                    <label class="form-check-label" for="female">女</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" id="other" type="radio" name="sex" value="other">
+                    <label class="form-check-label" for="other">其他</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-3 col-form-label">爱好</label>
+            <div class="col d-flex align-items-center">
+                <!-- form-check-inline 让选项排列在一行之中 -->
+                <div class="form-check-inline">
+                    <input class="form-check-input" id="dlq" type="checkbox" name="hobbies" value="dlq">
+                    <label class="form-check-label" for="dlq">打篮球</label>
+                </div>
+                <div class="form-check-inline">
+                    <input class="form-check-input" id="tzq" type="checkbox" name="hobbies" value="tzq">
+                    <label class="form-check-label" for="tzq">踢足球</label>
+                </div>
+                <div class="form-check-inline">
+                    <input class="form-check-input" id="ymq" type="checkbox" name="hobbies" value="ymq">
+                    <label class="form-check-label" for="ymq">羽毛球</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-3 col-form-label">不确定按钮</label>
+            <div class="col">
+                <div class="form-check">
+                    <!-- 不确定的checkbox 需要给输入框添加 indeterminate 属性
+                        但是该属性无法在html标签上直接添加
+                        只能使用js添加
+                    -->
+                    <input indeterminate id="indeterminate" class="form-check-input" type="checkbox">
+                    <label class="form-check-label">全选</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-3 col-form-label">你同意吗</label>
+            <div class="col">
+                <!-- form-switch 是开关 只要给普通的 checkbox 添加该类名即可 -->
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox">
+                    <label class="form-check-label">某某协议</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-3 col-form-label">类似按钮的单选或多选按钮</label>
+            <div class="col">
+                <!-- <div class="form-check-inline">
+                    <input id="a" class="btn-check" type="checkbox" value="a" name="btn">
+                    <label for="a" class="btn btn-outline-success">a</label>
+                </div>
+                <div class="form-check-inline">
+                    <input id="b" class="btn-check" type="checkbox" value="bg-light" name="btn">
+                    <label for="b" class="btn btn-outline-success">b</label>
+                </div> -->
+
+                <div class="form-check-inline">
+                    <!-- input 中添加 btn-check -->
+                    <input id="a" class="btn-check" type="radio" value="a" name="btn">
+                    <!-- label 中添加 btn btn-outline-{color} -->
+                    <!-- 注意: 为了能够勾选成功 必须给label添加for 给 input 添加id -->
+                    <label for="a" class="btn btn-outline-warning">a</label>
+                </div>
+                <div class="form-check-inline">
+                    <input id="b" class="btn-check" type="radio" value="bg-light" name="btn">
+                    <label for="b" class="btn btn-outline-warning">b</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    let inp = document.querySelector('#indeterminate')
+    // indeterminate 属性是一个 bool 值
+    inp.indeterminate = true
+</script>
+
+</html>
