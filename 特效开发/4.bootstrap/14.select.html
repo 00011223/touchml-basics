@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/bootstrap.css">
+</head>
+
+<body>
+    <!-- 参考：https://getbootstrap.com/docs/5.2/forms/select/ -->
+    <div class="card p-3" style="width: 300px;">
+        <div>
+            <label class="form-label">班级</label>
+            <select class="form-select">
+                <option value="" disabled selected>请选择</option>
+                <option value="1">一班</option>
+                <option value="2">二班</option>
+                <option value="3">三班</option>
+            </select>
+        </div>
+        <div>
+            <label class="form-label">班级</label>
+            <!-- 输入框用 list 属性关联 datalist -->
+            <input list="clazz" type="text" class="form-control">
+            <!-- 通过datalist 给输入框添加待选项 -->
+            <datalist id="clazz">
+                <option value="1">一班</option>
+                <option value="2">二班</option>
+                <option value="3">三班</option>
+            </datalist>
+        </div>
+    </div>
+</body>
+
+</html>
