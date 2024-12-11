@@ -1,0 +1,89 @@
+<!-- 
+    参考：https://getbootstrap.com/docs/5.2/forms/validation/
+    知识点
+    在不使用 html 自带的表单验证的情况下
+    在自行验证后 可以通过添加 is-valid is-invalid 手动指定输入框的验证结果
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/bootstrap.css">
+</head>
+
+<body class="d-flex justify-content-center">
+    <form class="card p-3" style="width: 500px" onsubmit="return false" novalidate>
+        <div class="vstack gap-3">
+            <div class="row">
+                <label class="col-3 col-form-label">姓名</label>
+                <div class="col">
+                    <input name="name" type="text" class="form-control">
+                    <div class="valid-feedback">ok</div>
+                    <div class="invalid-feedback">error</div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-3 col-form-label">年龄</label>
+                <div class="col">
+                    <input name="age" type="number" class="form-control">
+                    <div class="valid-feedback">ok</div>
+                    <div class="invalid-feedback">error</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col"><button class="btn btn-primary w-100">提交</button></div>
+            </div>
+        </div>
+    </form>
+</body>
+
+<script>
+    let nameInp = document.querySelector('input[name=name]')
+    let ageInp = document.querySelector('input[name=age]')
+    // 查询错误提示的元素
+    let nameErrTip = document.querySelector('input[name=name]~.invalid-feedback')
+    let ageErrTip = document.querySelector('input[name=age]~.invalid-feedback')
+
+    let btn = document.querySelector('button')
+
+    btn.addEventListener('click', () => {
+        // 手动通过代码进行验证
+
+        // 清空所有的 is-valid 和 is-invalid
+        nameInp.classList.remove('is-valid', 'is-invalid')
+        ageInp.classList.remove('is-valid', 'is-invalid')
+
+        // 定义一个代表验证通过的变量
+        let nameValid = true
+        if (nameInp.value.trim() === '') {
+            nameErrTip.textContent = '请输入姓名'
+            nameValid = false
+        } else if (nameInp.value.trim().length < 2 || nameInp.value.trim().length > 10) {
+            nameErrTip.textContent = '请输入2~10个字的姓名'
+            nameValid = false
+        }
+
+        let ageValid = true
+        if (Number(ageInp.value) < 0 || Number(ageInp.value) > 150) {
+            ageErrTip.textContent = '请输入0~150之间的年龄'
+            ageValid = false
+        }
+
+        nameInp.classList.add(nameValid ? 'is-valid' : 'is-invalid')
+        ageInp.classList.add(ageValid ? 'is-valid' : 'is-invalid')
+
+        if (nameValid && ageValid) {
+            // 整个表单输入正确的情况
+            // 可以执行后续的网络请求
+            console.log('验证通过');
+        }
+    })
+</script>
+
+</html>

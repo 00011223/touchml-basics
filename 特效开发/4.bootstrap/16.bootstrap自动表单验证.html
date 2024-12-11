@@ -1,0 +1,60 @@
+<!-- 
+    参考：https://getbootstrap.com/docs/5.2/forms/validation/
+    知识点
+    添加 valid-feedback invalid-feedback 验证报告
+    通过 was-validated 开启验证报告
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/bootstrap.css">
+</head>
+
+<body class="d-flex justify-content-center">
+    <!-- 给form添加类名 was-validated 就可以开启验证效果 -->
+    <form class="card p-3" style="width: 500px" onsubmit="return false" novalidate>
+        <div class="vstack gap-3">
+            <div>
+                <label class="form-label">姓名</label>
+                <input required type="text" class="form-control">
+                <!-- 验证的提示需要写在被验证的输入框下面 -->
+                <!-- valid-feedback 验证通过的提示文本 -->
+                <div class="valid-feedback">
+                    ok
+                </div>
+                <div class="invalid-feedback">
+                    请输入姓名
+                </div>
+            </div>
+            <div>
+                <label class="form-label">年龄</label>
+                <input min="0" max="150" type="number" class="form-control">
+                <div class="valid-feedback">
+                    ok
+                </div>
+                <div class="invalid-feedback">
+                    请输入0~150的年龄
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-primary w-100">提交</button>
+            </div>
+        </div>
+    </form>
+</body>
+
+<script>
+    let btn = document.querySelector('button')
+    let form = document.querySelector('form')
+    btn.addEventListener('click', () => {
+        form.classList.add('was-validated')
+    })
+</script>
+
+</html>
