@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/bootstrap.bundle.js"></script>
+</head>
+<body class="d-flex justify-content-center">
+<form class="card p-3" style="width: 400px" onsubmit="return false" novalidate>
+    <div class="vstack gap-3">
+        <div class="row">
+            <label class="col-3 col-form-label">姓名</label>
+            <div class="col">
+                <input name="name" type="text" class="form-control">
+                <div class="invalid-feedback">
+                    error
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-3 col-form-label">年龄</label>
+            <div class="col">
+                <input name="age" type="number" class="form-control">
+                <div class="invalid-feedback">
+                    error
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-3 col-form-label">简介</label>
+            <div class="col">
+                <textarea maxlength="200" name="desc" rows="4" class="form-control"></textarea>
+                <div class="invalid-feedback">
+                    error
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-3 col-form-label">班级</label>
+            <div class="col">
+                <select name="clazz" class="form-select">
+                    <option value="" selected disabled>请选择</option>
+                    <option value="一班">一班</option>
+                    <option value="二班">二班</option>
+                    <option value="三班">三班</option>
+                </select>
+                <div class="invalid-feedback">
+                    error
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-3 col-form-label">爱好</label>
+            <div class="col d-flex flex-column justify-content-center">
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input id="qin" type="checkbox" name="hobbies" value="qin" class="form-check-input">
+                        <label for="qin" class="form-check-label">琴</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input id="qi" type="checkbox" name="hobbies" value="qi" class="form-check-input">
+                        <label for="qi" class="form-check-label">棋</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input id="shu" type="checkbox" name="hobbies" value="shu" class="form-check-input">
+                        <label for="shu" class="form-check-label">书</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input id="hua" type="checkbox" name="hobbies" value="hua" class="form-check-input">
+                        <label for="hua" class="form-check-label">画</label>
+                    </div>
+                </div>
+                <div>
+                    <!-- type="hidden" 隐藏域 -->
+                    <input id="hobbies" type="hidden" class="form-control">
+                    <div class="invalid-feedback">
+                        error
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-3 col-form-label">是否入党</label>
+            <div class="col d-flex align-items-center">
+                <div class="form-switch">
+                    <input id="rd" type="checkbox" name="rd" class="form-check-input">
+                    <!--                    <label for="rd" class="form-check-label">入党</label>-->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col">
+                <button class="btn btn-primary w-100">提交</button>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+<script>
+    // html 自带的自动表单验证
+    // bootstrap 自动表单验证 was-validated
+    // bootstrap 手动表单验证 is-valid is-invalid
+
+    const btn = document.querySelector('button');
+    const form = document.querySelector('form');
+
+    const nameEl = document.querySelector('input[name=name]');
+    const ageEl = document.querySelector('input[name=age]');
+    const descEl = document.querySelector('textarea[name=desc]');
+    const clazzEl = document.querySelector('select[name=clazz]');
+    const hobbiesEl = document.querySelector('#hobbies');
+
+    const nameTip = document.querySelector('input[name=name]+.invalid-feedback');
+    const ageTip = document.querySelector('input[name=age]+.invalid-feedback');
+    const descTip = document.querySelector('textarea[name=desc]+.invalid-feedback');
+    const clazzTip = document.querySelector('select[name=clazz]+.invalid-feedback');
+    const hobbiesTip = document.querySelector('#hobbies+.invalid-feedback');
+
+    function reset() {
+        nameEl.classList.remove('is-valid', 'is-invalid')
+        ageEl.classList.remove('is-valid', 'is-invalid')
+        descEl.classList.remove('is-valid', 'is-invalid')
+        clazzEl.classList.remove('is-valid', 'is-invalid')
+        hobbiesEl.classList.remove('is-valid', 'is-invalid')
+    }
+
+    btn.addEventListener('click', () => {
+        reset()
+
+        let fd = new FormData(form)
+        // 读取数据
+        let name = fd.get('name')
+        let age = fd.get('age')
+        let desc = fd.get('desc')
+        let clazz = fd.get('clazz')
+        let hobbies = fd.getAll('hobbies')
+        let rd = fd.get('rd')
+
+        // 姓名是否有效
+        let nameValid = checkName(name)
+        // 赋值错误提示
+        nameTip.textContent = nameValid
+        // 赋值元素验证样式
+        nameEl.classList.add(nameValid === '' ? 'is-valid' : 'is-invalid')
+
+        let ageValid = checkAge(age)
+        ageTip.textContent = ageValid
+        ageEl.classList.add(ageValid === '' ? 'is-valid' : 'is-invalid')
+
+        let descValid = checkDesc(desc);
+        descTip.textContent = descValid
+        descEl.classList.add(descValid === '' ? 'is-valid' : 'is-invalid')
+
+        let clazzValid = checkClazz(clazz);
+        clazzTip.textContent = clazzValid
+        clazzEl.classList.add(clazzValid === '' ? 'is-valid' : 'is-invalid')
+
+        let hobbiesValid = checkHobbies(hobbies);
+        hobbiesTip.textContent = hobbiesValid
+        hobbiesEl.classList.add(hobbiesValid === '' ? 'is-valid' : 'is-invalid')
+    })
+
+    // 验证姓名
+    // 返回 字符串 若为空字符串则验证通过 否则字符串为错误提示
+    function checkName(name) {
+        name = name.trim()
+        if (name === '') return '请输入姓名'
+        if (name.length < 2 || name.length > 50) return '姓名长度需要在2~50字之间'
+        let regex = /^((?!共产党).)*$/
+        if (!regex.test(name)) return '姓名不能包含“共产党”'
+        return ''
+    }
+
+    function checkAge(age) {
+        if (age.trim() === '') return '请输入年龄'
+        age = Number(age)
+        if (age < 0 || age > 200) return '请输入0~200的年龄'
+        return ''
+    }
+
+    function checkDesc(desc) {
+        desc = desc.trim()
+        if (desc === '') return ''
+        let regex = /^((?!张三|奇迹).)*$/
+        if (!regex.test(desc)) return '简介不能包含"张三"和"奇迹"'
+        if (desc.length > 200) return '简介长度不能大于200'
+        return ''
+    }
+
+    function checkClazz(clazz) {
+        if (clazz === null) return '请选择班级'
+        return ''
+    }
+
+    function checkHobbies(hobbies) {
+        if (hobbies.length > 3) return '爱好不能超过3个'
+        return ''
+    }
+</script>
+</html>
