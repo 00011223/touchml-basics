@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+
+    <!-- 1. 引入库 -->
+
+    <!-- react 需要引入 react 核心库 和 react-dom 库 -->
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+
+    <!-- 为了更方便书写 react 通常会使用 jsx 语法，为了支持该语法 需要引入 babel -->
+    <script src="js/babel.min.js"></script>
+
+</head>
+<body>
+
+<!-- 2. 创建用于 react 渲染的根节点 -->
+<div id="root"></div>
+
+</body>
+<!-- 3. 给script标签添加 type="text/babel" -->
+<script type="text/babel">
+
+    // 4. 创建 root 节点对象
+    // 创建 react 的 root 根节点对象
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+
+    // 5. 渲染页面内容
+    // 使用 root.render 渲染页面内容
+    // render 函数中可以使用 jsx 语法声明页面内容
+    // jsx 写的内容 <h1>hello world</h1> 本质上是 js 代码
+    root.render(<h1>hello world</h1>)
+</script>
+
+</html>
