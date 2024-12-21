@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="js/babel.min.js"></script>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <style>
+        .box {
+            width: 200px;
+            height: 100px;
+            background: #000;
+        }
+
+        .box.active {
+            background: #ff0;
+        }
+    </style>
+</head>
+<body>
+<div id="app"></div>
+</body>
+<script type="text/babel">
+
+    const root = ReactDOM.createRoot(document.querySelector('#app'));
+
+    // 使用jsx创建一个react-dom对象
+    // react-dom 是 react 封装的类似 dom 对象的对象
+    // 作用: 用于描述页面元素
+    const h1 = <h1>hello world</h1>
+
+    // jsx 使用 圆括号 声明多行的 react-dom 对象
+    const box = (
+        <div className="box">
+            <span>hello box</span>
+        </div>
+    )
+
+    const element = (
+        <div>
+            root1
+        </div>
+        // react-dom 中只能有一个根节点
+        // <div>
+        //     root2
+        // </div>
+    )
+
+
+    let now = new Date()
+
+    // 插值
+    const chazhi = (
+        <div>
+            { /*使用花括号进行插值 插值的内容可以是js表达式*/}
+            {'当前时间: ' + now.toLocaleString()}
+        </div>
+    )
+
+    let id = 'thisIsMyId'
+
+    // 定义样式对象
+    let myStyle = {
+        width: '100px',
+        height: '100px',
+        backgroundColor: '#f00'
+    }
+
+    // 插值 html 属性
+    const htmlAttr = (
+        <div>
+            {/* 插值id */}
+            <div id={id}>
+                hello attr
+            </div>
+            {/* 插值 style */}
+            {/* style 属性无法直接赋值一个字符串如下: */}
+            {/*<div style="width: 100px; height: 100px; background-color: #f00"></div>*/}
+            <div style={myStyle}></div>
+
+            {/* 插值 class */}
+            <div className="box active"></div>
+        </div>
+    )
+
+    // 使用函数创建react-dom对象
+    const fnDom = React.createElement(
+        // 标签名
+        'div',
+        // 标签上的属性
+        {id: 'myFunctionDom', className: 'my-dom', style: {width: '500px', height: '50px', backgroundColor: '#00f'}},
+        // 子元素数组 或 标签体字符串
+        [
+            // 此处的第三个参数就是一个普通的字符串充当 span 标签的标签体
+            React.createElement('span', {key: '1'}, 'hello world'),
+            // 若此处 createElement 第三个参数是一个数组的话，需要给元素添加 key 属性
+            // key 属性是一个唯一值 不重复即可
+            React.createElement('span', {key: '2'}, 'hello world')
+        ]
+    )
+
+    // root.render 函数可以渲染一个 react-dom 对象
+    root.render((
+        <div className="container">
+            {/* 插值的内容 若是 react-dom 对象 那么就会被页面显示出来 */}
+            {h1}
+            {box}
+            {element}
+            {chazhi}
+            {htmlAttr}
+            {fnDom}
+        </div>
+    ))
+
+</script>
+</html>
