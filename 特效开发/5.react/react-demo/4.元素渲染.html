@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="js/babel.min.js"></script>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script type="text/babel">
+    let root = ReactDOM.createRoot(document.querySelector('#root'))
+
+    // 初始化渲染
+    let now = new Date()
+    root.render((
+        <div>
+            <div className="now">当前时间:</div>
+            <div className="time">
+                {now.toLocaleString()}
+            </div>
+        </div>
+    ))
+
+    // 渲染循环
+    let timer = setInterval(() => {
+        // 修改渲染逻辑
+        now = new Date()
+
+        // 渲染内容
+        root.render((
+            <div>
+                <div className="now">当前时间:</div>
+                {/* react 在每次更新的时候，都会去对比每一个 react-dom 节点
+                    只有发现该被对比的节点有变化时（标签体变化 子节点数量变化 节点元素变化等） 才会更新节点
+                 */}
+                <div className="time">
+                    {now.toLocaleString()}
+                </div>
+            </div>
+        ))
+    }, 1000)
+</script>
+</html>

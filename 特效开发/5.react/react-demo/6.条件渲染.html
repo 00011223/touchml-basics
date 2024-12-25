@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="js/babel.min.js"></script>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script type="text/babel">
+    let sex = 'male'
+
+    ReactDOM.createRoot(document.querySelector('#root')).render((
+        <div>
+            {/* 使用 && 进行短路运算 前一个表达式为true时 就显示后面表达式的内容 */}
+            {sex === 'male' && <div style={{color: '#00f'}}>男</div>}
+            {sex === 'female' && <div style={{color: 'pink'}}>女</div>}
+            {sex === 'other' && <div style={{color: '#ff0'}}>其他</div>}
+
+            {/* 使用三元运算符 按条件显示不同的内容 */}
+            {sex === 'male' ? <div style={{color: '#00f'}}>男</div> :
+                sex === 'female' ? <div style={{color: 'pink'}}>女</div> :
+                    <div style={{color: '#ff0'}}>其他</div>
+            }
+        </div>
+    ))
+</script>
+</html>

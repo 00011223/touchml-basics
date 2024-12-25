@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="js/babel.min.js"></script>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script type="text/babel">
+    let students = [
+        {
+            name: '张三',
+            sex: 'male',
+            age: 17
+        },
+        {
+            name: '李四',
+            sex: 'female',
+            age: 24
+        },
+        {
+            name: '隔壁老王',
+            sex: 'other',
+            age: 30
+        },
+    ]
+
+    ReactDOM.createRoot(document.querySelector('#root')).render((
+        <div>
+            <ul>
+                {/* 循环渲染，使用一个数组的map函数 返回一个由 react-dom 充当成员形成的一个新数组 */}
+                {students.map(item => <li>姓名: {item.name}; 性别: {item.sex === 'male' ? '男' :
+                    item.sex === 'female' ? '女' : '不详'
+                }; 年龄: {item.age}</li>)}
+            </ul>
+        </div>
+    ))
+</script>
+</html>
