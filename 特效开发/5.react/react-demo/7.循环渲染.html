@@ -34,8 +34,10 @@
     ReactDOM.createRoot(document.querySelector('#root')).render((
         <div>
             <ul>
-                {/* 循环渲染，使用一个数组的map函数 返回一个由 react-dom 充当成员形成的一个新数组 */}
-                {students.map(item => <li>姓名: {item.name}; 性别: {item.sex === 'male' ? '男' :
+                {/* 循环渲染，使用一个数组的map函数 返回一个由 react-dom 充当成员形成的一个新数组
+                    循环渲染一定要添加 key
+                */}
+                {students.map((item,index) => <li key={index}>姓名: {item.name}; 性别: {item.sex === 'male' ? '男' :
                     item.sex === 'female' ? '女' : '不详'
                 }; 年龄: {item.age}</li>)}
             </ul>

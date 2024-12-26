@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script type="text/babel">
+    let students = [
+        {
+            id: 3,
+            name: '张三',
+            sex: 'male',
+            age: 17
+        },
+        {
+            id: 0,
+            name: '李四',
+            sex: 'female',
+            age: 24
+        },
+        {
+            id: 2,
+            name: '老王',
+            sex: 'other',
+            age: 30
+        },
+    ]
+
+
+    ReactDOM.createRoot(document.querySelector('#root')).render((
+        <div className="container">
+            <table className="table table-striped">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>年龄</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {students.map(item => (
+                    <tr key={item.id}>
+                        <td>{item.id}</td>
+                        <td>{item.name}</td>
+                        <td>{item.sex === 'male' ?
+                            <span style={{color: '#00f', fontWeight: 'bolder'}}>男</span> :
+                            item.sex === 'female' ?
+                                <span style={{color: '#f00', textDecoration: 'solid underline'}}>女</span> :
+                                <i><span style={{color: '#ff0'}}>其他</span></i>
+                        }</td>
+                        <td>{item.age}</td>
+                        <td>
+                            <button className="btn btn-danger btn-sm">删除</button>
+                        </td>
+                    </tr>
+                ))}
+                </tbody>
+            </table>
+            <div className="card p-3" style={{width: '400px'}}>
+                <div className="vstack gap-3">
+                    <h3>添加数据</h3>
+                    <div className="row">
+                        <label className="col-3 col-form-label">id</label>
+                        <div className="col">
+                            <input name="id" type="text" className="form-control"/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <label className="col-3 col-form-label">姓名</label>
+                        <div className="col">
+                            <input name="name" type="text" className="form-control"/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <label className="col-3 col-form-label">性别</label>
+                        <div className="col d-flex align-items-center">
+                            <div className="form-check form-check-inline">
+                                <input id="male" className="form-check-input" name="sex" type="radio" value="male"/>
+                                <label htmlFor="male" className="form-check-label">男</label>
+                            </div>
+                            <div className="form-check form-check-inline">
+                                <input id="female" className="form-check-input" name="sex" type="radio" value="female"/>
+                                <label htmlFor="female" className="form-check-label">女</label>
+                            </div>
+                            <div className="form-check form-check-inline">
+                                <input id="other" className="form-check-input" name="sex" type="radio" value="other"/>
+                                <label htmlFor="other" className="form-check-label">其他</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <label className="col-3 col-form-label">年龄</label>
+                        <div className="col">
+                            <input name="age" type="number" className="form-control"/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-3"></div>
+                        <div className="col">
+                            <button className="btn btn-primary w-100">提交</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    ))
+</script>
+
+</html>
