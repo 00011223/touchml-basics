@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script type="text/babel">
+    // 知识点
+    // 什么是组件
+    //      组件具备以下特点
+    //      1. 独立显示的页面内容
+    //      2. 独立维护的组件状态
+    //      3. 组件被当作标签使用
+    //      所以，组件是一个具备独立显示内容，独立维护状态，被当作标签使用的可复用模组
+    // 应用场景
+    //      可复用的页面内容，就可以考虑封装成组件
+    // 声明组件
+    //      类组件
+    //          render函数
+    //          构造函数和props
+    //          props.children
+    //      函数组件
+    //          参数props
+    //          函数组件没有this
+
+
+    // react 中声明组件有两种方法
+    // 一种叫 类组件 另一种叫 函数组件
+    // 两种组件对于 react 来说是等价的
+
+
+    // 声明类组件
+    // 需要继承 React.Component
+    class AComponent extends React.Component {
+
+        // 可以有组件的属性
+        label = 'h'
+
+        // 构造函数中包含props参数
+        // props 代表组件的 html 属性
+        constructor(props) {
+            // 由于存在父类 React.Component
+            // 所以构造函数中应先调用super
+            super(props)
+
+            // render 函数中可以使用 this.props 访问此处的 props
+            console.log(props)
+            // 可以使用 props.children 代表组件标签体里的内容
+            console.log(props.children)
+        }
+
+        // 可以有组件方法
+        getTime() {
+            return new Date()
+        }
+
+        // 类组件中必须包含 render 方法
+        render() {
+            // render 方法必须返回一个 react-dom 对象
+            // 返回的 react-dom 对象用于描述组件长什么样子的
+            return (
+                <div>
+                    {/* 组件中可以调用自己的属性和方法 */}
+                    {this.label}: {this.getTime().getHours()}; m: {this.getTime().getMinutes()}; s: {this.getTime().getSeconds()}
+                    <br/>
+                    {/* 标签体的内容可以插值到 render 中 */}
+                    {this.props.children}
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.createRoot(document.querySelector('#root')).render((
+        <div>
+            {/* 组件被当作标签使用 */}
+            {/* 可以使用插值给属性赋值 这样赋值的属性就可以不是字符串 */}
+            <AComponent name="张三" age={16} isShow={false}>
+                <div>hello</div>
+                <div>world</div>
+            </AComponent>
+        </div>
+    ))
+</script>
+</html>
