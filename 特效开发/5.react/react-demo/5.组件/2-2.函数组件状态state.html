@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+
+    <script src="../js/babel.min.js"></script>
+</head>
+
+<body>
+<div id="app"></div>
+</body>
+
+<script type="text/babel">
+    // 文档：https://zh-hans.reactjs.org/docs/hooks-state.html
+
+    // 知识点
+    // useState
+    // setState 是异步的
+    // setState 依赖自己状态的时候，使用回调函数
+    // 状态值若为对象（或数组）时，为了状态能够被修改，需要赋值一个新的对象（或数组）
+
+    function App() {
+
+        // 在函数组件内使用 React.useState 来声明状态
+        // useState 参数代表状态的初始值
+        // 返回值是一个数组
+        // 0 号成员是 状态的 getter 用来读取状态
+        // 1 号成员是 状态的 setter 用来赋值状态
+        // const state = React.useState(0)
+        // console.log(state)
+        const [count, setCount] = React.useState(0)
+        const [obj, setObj] = React.useState({name: '张三'})
+
+        function increase() {
+            // 调用 setCount 修改状态
+            // setCount(5)
+
+
+            // setCount 也是异步的
+            // setCount(count + 1)
+            // setCount(count + 1)
+            // setCount(count + 1)
+            setCount(_count => _count + 1)
+            setCount(_count => _count + 1)
+            setCount(_count => _count + 1)
+        }
+
+        function updateName() {
+            // 若修改对象属性 setObj 还使用原来的 obj 对象的话
+            // 那么 react 会认为该对象没有变化（因为对象是引用传递的数据类型）
+            // 所以 页面无法跟新
+            obj.name = '李四'
+            // setObj(obj)
+            // 可以使用 扩展语法 克隆原有的obj对象来赋值
+            setObj({...obj})
+        }
+
+        return (
+            <div>
+                <div>count: {count}</div>
+                <div>obj.name: {obj.name}</div>
+                <div>
+                    <button onClick={increase}>+</button>
+                    <button onClick={updateName}>修改obj.name</button>
+                </div>
+            </div>
+        )
+    }
+
+    ReactDOM.createRoot(document.querySelector('#app')).render(<App/>)
+</script>
+
+</html>

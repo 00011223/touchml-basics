@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+</head>
+<body>
+<div id="app"></div>
+</body>
+<script type="text/babel">
+    // 文档：https://zh-hans.reactjs.org/docs/state-and-lifecycle.html
+
+    // 知识点
+    // 什么是组件状态?
+    //      在计算开发领域 怎么理解状态(state)这个英文？
+    //      假设我们制作一个时钟，时钟每秒钟的时间值都不一样
+    //      那么我们将描述某个 “时刻” 的时钟的 “数据” 称为该时钟在那个 “时刻” 的 “状态” (state)
+    //      所以 state 一词，通常指某个时刻用于描述某个对象的数据模型
+    //      因此 有时会听到上一个状态 下一个状态的说法 这指的就是不同时刻 描述同一个对象的数据模型
+    // 声明状态
+    // 组件的状态更新 this.setState 的使用
+    //      1. 不要直接修改 state 要通过 setState 修改
+    //      2. setState 的参数不要直接依赖 this.state 或 this.props；应使用 this.setState((state, props)=>{return {}}) 代替
+    //      3. setState 方法是异步的 可以通过 setState 的第二个回调函数 来执行赋值成功后的代码
+    //      4. setState 最终会修改 this.state
+
+    class App extends React.Component {
+
+        // 在属性的地方可以声明一个 state 状态对象
+        // state = {}
+
+        constructor(props) {
+            super(props);
+
+            // 在构造函数中使用 this.state 来声明状态
+            this.state = {
+                count: 0
+            }
+
+            setInterval(() => {
+                // 更新自身状态
+                // 1. 不要直接修改 state 要通过 setState 修改
+                // this.state.count++
+                // 2. setState 的参数不要直接依赖 this.state 或 this.props；应使用 this.setState((state, props)=>{return {}}) 代替
+                // this.setState({count: this.state.count + 1})
+                // setState 的参数是一个回调函数
+                // 回调函数中 state 代表当前状态 props 代表当前属性
+                // this.setState((state, props) => {
+                //     // 函数中需要返回一个要赋值的对象
+                //     return {count: state.count + 1}
+                // })
+
+                // 3. setState 是异步的
+                // 当执行第一句setState的时候 this.state.count 的值还是上一次的 0
+                // this.setState({count: this.state.count + 1})
+                // // 执行第二局 setState 时 由于第一句 setState 是异步的，当执行第二局 setState 时 第一句还没有生效
+                // // 所以 此时的 this.state.count 依然为 0
+                // this.setState({count: this.state.count + 1})
+                // this.setState({count: this.state.count + 1})
+
+                // 若希望依赖state对象来赋值新的state 还是应该使用函数的方法来赋值
+                // 第二个参数代表赋值完成后的回调函数
+                this.setState(state => ({count: state.count + 1}), () => {
+                    // console.log('第一次赋值count完成')
+                })
+                this.setState(state => ({count: state.count + 1}), () => {
+                    // console.log('第二次赋值count完成')
+                })
+                this.setState(state => ({count: state.count + 1}), () => {
+                    // console.log('第三次赋值count完成')
+                })
+
+
+                // 4. setState 最终会修改 this.state
+                console.log(this.state.count)
+            }, 1000)
+        }
+
+        render() {
+            return (
+                <div>
+                    {this.state.count}
+                </div>
+            )
+        }
+    }
+
+    let root = ReactDOM.createRoot(document.querySelector('#app'))
+
+
+    // 若不存在组件时 更新数据的办法是 重复调用 root.render 函数
+    // let count = 0
+    //
+    // function render() {
+    //     root.render((
+    //         <div>{count}</div>
+    //     ))
+    // }
+    //
+    // render()
+    //
+    // setInterval(() => {
+    //     count++
+    //     render()
+    // }, 1000)
+
+    root.render(<App/>)
+
+</script>
+</html>

@@ -46,6 +46,7 @@
 
         // 构造函数中包含props参数
         // props 代表组件的 html 属性
+        // props 是只读属性
         constructor(props) {
             // 由于存在父类 React.Component
             // 所以构造函数中应先调用super
@@ -69,13 +70,41 @@
             return (
                 <div>
                     {/* 组件中可以调用自己的属性和方法 */}
-                    {this.label}: {this.getTime().getHours()}; m: {this.getTime().getMinutes()}; s: {this.getTime().getSeconds()}
+                    {this.label}: {this.getTime().getHours()}; m: {this.getTime().getMinutes()};
+                    s: {this.getTime().getSeconds()}
                     <br/>
                     {/* 标签体的内容可以插值到 render 中 */}
                     {this.props.children}
                 </div>
             )
         }
+    }
+
+    // 函数组件
+    // 参数props就是标签的html属性
+    // props 中也包含 children
+    function BComponent(props) {
+
+        // 此处的this为 undefined
+        // 之所以为 undefined 是因为函数组件没有实例对象
+        console.log(this)
+        console.log(props)
+
+        // 可以在组件内声明其他函数和变量
+        let count = 0
+
+        function getCount() {
+            return count
+        }
+
+        // 函数组件必须返回一个react-dom对象
+        return (
+            <div>
+                <div>我是一个函数组件</div>
+                <div>{count}: {getCount()}</div>
+                <div>{props.children}</div>
+            </div>
+        )
     }
 
     ReactDOM.createRoot(document.querySelector('#root')).render((
@@ -86,6 +115,12 @@
                 <div>hello</div>
                 <div>world</div>
             </AComponent>
+            <AComponent></AComponent>
+            <BComponent name="张三" age={16} isShow={false}>
+                <h1>这是BComponent的标签体</h1>
+                <div>hello</div>
+                <div>world</div>
+            </BComponent>
         </div>
     ))
 </script>
