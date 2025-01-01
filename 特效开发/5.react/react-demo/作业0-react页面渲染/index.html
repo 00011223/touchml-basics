@@ -18,6 +18,13 @@
             width: calc((100% / 11) - 4px);
             height: 32px;
         }
+
+        .btn2 {
+        }
+
+        .video-viewer {
+            /*width: 150px;*/
+        }
     </style>
 </head>
 <body>
@@ -52,6 +59,22 @@
             '时尚',
             '更多',
         ]);
+        const [btns2, setBtns2] = React.useState([
+            '专栏',
+            '活动',
+            '社区中心',
+            '直播',
+            '课堂',
+            '新歌热榜',
+        ]);
+        const [video, setVideo] = React.useState([
+            '【最伟大的作品 | 官方MV】周杰伦化身时空旅人与艺术家们相遇',
+            '我这一刀下去，你可能会胖十斤【凭啥这么贵ep39-烧肉正好】',
+            '【明日方舟】“绿野幻梦”DV/S平民全关卡低配攻略',
+            '丸子解析：今天的游戏技术究竟发展到什么程度？',
+            '【怪物猎人-曙光】双刀毕业配装思路分享-Ver1.0版本',
+            '你管这叫上班吗?'
+        ]);
 
         return (
             <div className="container">
@@ -69,14 +92,29 @@
                         <div className="h-100 bg-danger d-flex flex-wrap justify-content-between align-content-between">
                             {btns.map(item => {
                                 return (
-                                    <div key={item} className="d-flex justify-content-center align-items-center bg-secondary rounded text-center nav-btn">
+                                    <div key={item}
+                                         className="d-flex justify-content-center align-items-center bg-secondary rounded text-center nav-btn">
                                         {item}
                                     </div>)
                             })}
                         </div>
                     </div>
                     <div className="col">
-                        <div className="bg-warning">3</div>
+                        <div
+                            className="bg-warning d-flex flex-wrap justify-content-between h-100 align-content-between">
+                            {btns2.map(item => <div key={item} className="btn2">{item}</div>)}
+                        </div>
+                    </div>
+                </div>
+                {/* 内容区域 */}
+                <div className="d-flex">
+                    <div className="bg-warning ratio ratio-4x3 flex-shrink-0" style={{width: '430px'}}></div>
+                    <div className="row row-cols-3">
+                        {video.map(item=>(
+                            <div className="col">
+                                <VideoViewer title={item}></VideoViewer>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
@@ -88,10 +126,22 @@
         return (
             <div className="d-flex flex-column align-items-center">
                 <div className="rounded rounded-circle"
-                     style={{width: '64px', height: '64px', backgroundColor: props.bgColor}}></div>
+                     style={{width: '48px', height: '48px', backgroundColor: props.bgColor}}></div>
                 <div>{props.title}</div>
             </div>
         )
+    }
+
+    // 视屏展示区域
+    class VideoViewer extends React.Component {
+        render() {
+            return (
+                <div>
+                    <div className="bg-danger ratio ratio-16x9 video-viewer"></div>
+                    <div className="fw-bolder">{this.props.title}</div>
+                </div>
+            )
+        }
     }
 
     ReactDOM.createRoot(document.querySelector('#root')).render(<App/>)
