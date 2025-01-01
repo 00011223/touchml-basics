@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <style>
+        .nav-bar {
+
+        }
+
+        .nav-btn {
+            width: calc((100% / 11) - 4px);
+            height: 32px;
+        }
+    </style>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script type="text/babel">
+    // 声明一个函数组件 App 作为根节点
+    function App() {
+        // 页面中对应的数据写在状态中
+        const [btns, setBtns] = React.useState([
+            '番剧',
+            '国创',
+            '综艺',
+            '动画',
+            '鬼畜',
+            '舞蹈',
+            '娱乐',
+            '科技',
+            '美食',
+            '汽车',
+            '运动',
+
+            '电影',
+            '电视剧',
+            '纪录片',
+            '游戏',
+            '音乐',
+            '影视',
+            '知识',
+            '咨询',
+            '生活',
+            '时尚',
+            '更多',
+        ]);
+
+        return (
+            <div className="container">
+                {/* 导航栏 */}
+                <div className="nav-bar row">
+                    <div className="col">
+                        <div className="bg-primary d-flex hstack gap-3">
+                            {/* 通过组件的props接收参数 */}
+                            <NavBigBtn bgColor="#ff0" title="动态"></NavBigBtn>
+                            <NavBigBtn bgColor="#f00" title="热门"></NavBigBtn>
+                            <NavBigBtn bgColor="#0f0" title="频道"></NavBigBtn>
+                        </div>
+                    </div>
+                    <div className="col-8">
+                        <div className="h-100 bg-danger d-flex flex-wrap justify-content-between align-content-between">
+                            {btns.map(item => {
+                                return (
+                                    <div key={item} className="d-flex justify-content-center align-items-center bg-secondary rounded text-center nav-btn">
+                                        {item}
+                                    </div>)
+                            })}
+                        </div>
+                    </div>
+                    <div className="col">
+                        <div className="bg-warning">3</div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    // 导航大按钮
+    function NavBigBtn(props) {
+        return (
+            <div className="d-flex flex-column align-items-center">
+                <div className="rounded rounded-circle"
+                     style={{width: '64px', height: '64px', backgroundColor: props.bgColor}}></div>
+                <div>{props.title}</div>
+            </div>
+        )
+    }
+
+    ReactDOM.createRoot(document.querySelector('#root')).render(<App/>)
+</script>
+</html>
