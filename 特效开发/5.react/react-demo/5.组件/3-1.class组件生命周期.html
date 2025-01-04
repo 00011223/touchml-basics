@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script type="text/babel">
+    // 文档：https://zh-hans.reactjs.org/docs/react-component.html#the-component-lifecycle
+    // 知识点
+    // 什么是生命周期
+    //      当我们以面向对象的思想看待组件时，可以将组件看成一个人
+    //      那么人就有生老病死的过程，那么组件的生老病死的过程是通过组件的方法来体现的
+    //      这些体现生命过程的方法，就称为生命周期
+    //      总结:
+    //      人->生老病死
+    //      代码->用函数来描述对象的生老病死
+    // 生命周期有哪些阶段
+    //      挂载
+    //          constructor()
+    //          static getDerivedStateFromProps() // https://zh-hans.reactjs.org/docs/react-component.html#static-getderivedstatefromprops
+    //          render()
+    //          componentDidMount()
+    //      更新
+    //          static getDerivedStateFromProps(props, state)=>{[key: string]: any} 每次调用渲染函数render前调用，返回值是希望改变的状态对象
+    //          shouldComponentUpdate(props, state)=>boolean 判断是否应该更新，返回一个布尔值
+    //          render()
+    //          getSnapshotBeforeUpdate(prevProps, prevState)=>{[key: string]: any} 每次更新前调用，返回值将被传递给 componentDidUpdate 充当第三个参数
+    //          componentDidUpdate(prevProps, prevState, snapshot)
+    //      卸载
+    //          componentWillUnmount()
+    //      异常捕获
+    //          static getDerivedStateFromError()
+    //          componentDidCatch()
+    // 应用场景
+    //      其中 挂载和卸载的 生命周期用得比较多
+    //      constructor() 常用于初始化组件，拉取远程数据
+    //      componentDidMount() 用于页面第一次渲染完成后，查询页面元素
+    //      componentWillUnmount() 卸载组件时对事件的解绑等需要处理的事
+    // 卸载组件
+    //      root.unmount()
+
+
+    const resize = () => {
+        console.log('resize')
+    }
+
+    class App extends React.Component {
+
+        // 1. 挂载
+        // 什么是挂载？
+        // react 将 react-dom 转换成 dom 对象并插入到页面节点中的过程，就叫做挂载
+
+        constructor(props) {
+            super(props);
+
+            this.state = {
+                count: 0
+            }
+
+            console.log('constructor')
+        }
+
+        // 每次渲染之前都会调用这个函数
+        // props 当前的属性
+        // state 当前的状态
+        static getDerivedStateFromProps(props, state) {
+            console.log('getDerivedStateFromProps')
+            // 返回值
+            // 返回一个对象包含需要更改的状态
+            return {count: state.count + 1}
+        }
+
+        // 挂载完成后
+        componentDidMount() {
+            console.log('componentDidMount')
+            window.addEventListener('resize', resize)
+        }
+
+        // 渲染
+        render() {
+            console.log('render')
+            return (
+                <div>
+                    <div className="my-count">count: {this.state.count}</div>
+                    <div>
+                        <button onClick={this.clickHandler.bind(this)}>+</button>
+                    </div>
+                </div>
+            )
+        }
+
+        clickHandler() {
+            this.setState(state => ({count: state.count + 1}))
+        }
+
+        // 2. 更新
+        // 更新阶段用于更新组件的显示的内容
+
+        // 是否需要更新组件
+        // props 当前的属性
+        // state 当前的状态
+        shouldComponentUpdate(props, state) {
+            console.log('shouldComponentUpdate')
+            console.log(state)
+            // 返回值是一个bool值
+            // 返回 true 代表需要更新
+            return true
+        }
+
+        // 获取更新快照
+        // prevProps 更新前的属性
+        // prevState 更新前的状态
+        getSnapshotBeforeUpdate(prevProps, prevState) {
+            console.log('getSnapshotBeforeUpdate')
+            console.log(prevState)
+
+            // 此处的返回值将被传入到 componentDidUpdate 的第三个阐述
+            // 我们称此处的返回值为 快照对象
+            // return null
+            return {x: 1, y: prevState.count}
+        }
+
+        // 组件更新完成
+        // prevProps 更新前的属性
+        // prevState 更新前的状态
+        // snapshot 来自 getSnapshotBeforeUpdate 返回的快照对象
+        componentDidUpdate(prevProps, prevState, snapshot) {
+            console.log('componentDidUpdate')
+            console.log(prevState)
+            console.log(snapshot)
+        }
+
+        // 3. 卸载
+        // 组件将要卸载之前
+        componentWillUnmount() {
+            console.log('componentWillUnmount')
+            window.removeEventListener('resize', resize)
+        }
+    }
+
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App/>)
+</script>
+</html>
