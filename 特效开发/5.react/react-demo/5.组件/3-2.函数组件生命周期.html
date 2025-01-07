@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script type="text/babel">
+    // 文档：https://zh-hans.reactjs.org/docs/hooks-effect.html
+    // 参考：https://tsh.io/blog/react-component-lifecycle-methods-vs-hooks/
+
+    // 知识点
+    // useEffect
+    // useEffect 不同参数代表的不同含义
+    // 使用useEffect监视状态的变化
+
+    function App(props) {
+        const [count, setCount] = React.useState(0);
+
+        // 使用 useEffect 添加声明周期函数
+        // 第一个参数是一个回调函数
+        // 第二个参数是一个数组
+        // 第二个参数的数组根据值不同，那么生命周期将有不同的含义
+
+        // 情况一: 第二个参数是空数组
+        React.useEffect(() => {
+            // 此处相当于 类组件中的 componentDidMount 挂在完成
+            console.log('componentDidMount')
+
+            // 返回值是一个函数
+            // 代表的是 componentDidUnmount
+            return () => {
+                console.log('componentDidUnmount')
+            }
+        }, [])
+
+        // 情况二: 第二个参数是一个状态值
+        React.useEffect(() => {
+            // 当 count 值发生变化时 将调用此处的代码
+            // 此处相当于 componentDidUpdate 发生在更新之前
+            console.log('componentDidUpdate')
+
+            // 可以在此处监视状态 count 的变化
+            console.log(count)
+            return () => {
+                // 此处相当于下一次更新时候的 getDerivedStateFromProps
+                console.log('getDerivedStateFromProps')
+                console.log(count)
+            }
+        }, [count])
+
+        function clickHandler() {
+            setCount(_count => _count + 1)
+        }
+
+        return (
+            <div>
+                <div>count: {count}</div>
+                <div>
+                    <button onClick={clickHandler}>+</button>
+                </div>
+            </div>
+        )
+    }
+
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App/>)
+</script>
+</html>
