@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script type="text/babel">
+    // 知识点
+    // 绑定事件的基本
+    //      1. on+事件名称
+    //      2. 使用花括号插值一个事件处理程序
+    //      3. 获取事件对象
+    //      4. 给事件处理程序传参
+    // react 中 无法使用 return false 直接屏蔽默认事件
+
+    function App() {
+        // 事件处理程序添加参数ev
+        // ev代表事件对象
+        function contextMenuHandler(ev, id) {
+            // 屏蔽默认事件
+            ev.preventDefault()
+            console.log('contextMenuHandler')
+            console.log(ev)
+            console.log(id)
+        }
+
+        return (
+            <div>
+                {/*<button onContextMenu={contextMenuHandler}>点击</button>*/}
+                {/* 使用箭头函数在调用事件处理程序的时候传递参数 */}
+                <button onContextMenu={ev => {
+                    contextMenuHandler(ev, 5)
+                }}>点击
+                </button>
+
+                {/* react 无法直接通过 return false 屏蔽默认事件 */}
+                <form onSubmit="return false">
+                    <button>提交</button>
+                </form>
+            </div>
+        )
+    }
+
+    ReactDOM.createRoot(document.querySelector('#root')).render(<App/>)
+</script>
+</html>
