@@ -5,8 +5,132 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Title</title>
+    <script src="js/babel.min.js"></script>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
 </head>
 <body>
-
+<div id="root"></div>
 </body>
+<script type="text/babel">
+    // 知识点
+    // 什么是受控组件？
+    //      被 react 的 state 控制显示和输入的表单元素称为受控组件
+    //      受控组件的数据来自 state 而不是表单元素自身
+    // react 中 所有的事件都不能通过 return false 来屏蔽默认事件
+    // 声明 input[type=text] 、select 和 textarea 的受控组件
+    // 声明 input[type=radio] input[type=checkbox] 的受控组件
+    function App() {
+        const [name, setName] = React.useState('')
+        const [clazz, setClazz] = React.useState('')
+        const [desc, setDesc] = React.useState('')
+        const [sex, setSex] = React.useState('other')
+        const [hobbies, setHobbies] = React.useState(['dlq', 'ymq'])
+
+        function submit(ev) {
+            ev.preventDefault()
+            console.log(name)
+            console.log(clazz)
+            console.log(desc)
+            console.log(sex)
+            console.log(hobbies)
+        }
+
+        function onNameInput(ev) {
+            console.log(ev)
+            console.log(ev.target.value)
+            // 由于此处的输入框是受控组件
+            // 所以若不改变状态， name 值不发生改变，页面就不会更新
+            setName(ev.target.value)
+        }
+
+        function onClazzChange(ev) {
+            console.log(ev.target.value)
+            setClazz(ev.target.value)
+        }
+
+        function onDescInput(ev) {
+            console.log(ev.target.value)
+            setDesc(ev.target.value)
+        }
+
+        function onSexChange(ev) {
+            console.log(ev.target.value)
+            setSex(ev.target.value)
+        }
+
+        function onHobbiesChange(ev) {
+            console.log(ev.target.value)
+            if (hobbies.includes(ev.target.value)) {
+                // 若已经包含就了删除
+                setHobbies(_hobbies => {
+                    let i = _hobbies.findIndex(item => item === ev.target.value)
+                    _hobbies.splice(i, 1)
+                    return [..._hobbies]
+                })
+            } else {
+                // 不存在时 就添加进数组
+                setHobbies(_hobbies => {
+                    _hobbies.push(ev.target.value)
+                    return [..._hobbies]
+                })
+            }
+        }
+
+        return (
+            <div>
+                <form>
+                    <div>
+                        <label>
+                            姓名:
+                            <input type="text" value={name} onInput={onNameInput}/>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            班级:
+                            <select value={clazz} onChange={onClazzChange}>
+                                <option value="" disabled>请选择</option>
+                                <option value="1">一班</option>
+                                <option value="2">二班</option>
+                                <option value="3">三班</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            简介:
+                            <textarea rows="4" value={desc} onInput={onDescInput}></textarea>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            性别:
+                            <label><input onChange={onSexChange} checked={sex === 'male'} type="radio" value="male"/>男</label>
+                            <label><input onChange={onSexChange} checked={sex === 'female'} type="radio"
+                                          value="female"/>女</label>
+                            <label><input onChange={onSexChange} checked={sex === 'other'} type="radio" value="other"/>其他</label>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            爱好:
+                            <label><input onChange={onHobbiesChange} checked={hobbies.includes('dlq')} type="checkbox"
+                                          value="dlq"/>打篮球</label>
+                            <label><input onChange={onHobbiesChange} checked={hobbies.includes('tzq')} type="checkbox"
+                                          value="tzq"/>踢足球</label>
+                            <label><input onChange={onHobbiesChange} checked={hobbies.includes('ymq')} type="checkbox"
+                                          value="ymq"/>羽毛球</label>
+                        </label>
+                    </div>
+                    <div>
+                        <button onClick={submit}>提交</button>
+                    </div>
+                </form>
+            </div>
+        )
+    }
+
+    ReactDOM.createRoot(document.querySelector('#root')).render(<App/>)
+</script>
 </html>
