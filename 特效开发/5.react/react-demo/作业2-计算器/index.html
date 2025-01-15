@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script type="text/babel">
+    class Computer extends React.Component {
+        state = {
+            // 第一个数字
+            num1: '',
+            // 第二个数字
+            num2: '',
+            // 运算符
+            op: '',
+            // 显示内容
+            preview: ''
+        }
+
+        onBtnClick(ev) {
+            let text = ev.target.textContent
+            if (this.state.num1 === '') {
+                this.setState({
+                    num1: text,
+                    preview: text
+                })
+            } else if (this.state.num1 !== '' && this.state.op === '' && this.state.num2 === '' && /^\d$/.test(text)) {
+                // 若 num1 有值 num2 无值 并且输入的还是一个数字
+                // 则覆盖 num1
+                this.setState(state => ({
+                    num1: text,
+                    preview: text
+                }))
+            } else if (this.state.num1 !== '' && /^[+\-*\/]$/.test(text)) {
+                // 若 num1 有值 且 text 是运算符
+                // 则记录运算符
+                this.setState(state => ({
+                    op: text,
+                    preview: state.num1 + text
+                }))
+            } else if (this.state.num1 !== '' && this.state.op !== '' && /^\d$/.test(text)) {
+                // 若 num1 存在 op 存在 且 输入的是数字
+                // 则 给第二个数字 num2 赋值
+                this.setState(state => ({
+                    num2: text,
+                    preview: state.num1 + state.op + text
+                }))
+            } else if (this.state.num1 !== ''
+                && this.state.num2 !== ''
+                && this.state.op !== ''
+                && text === '=') {
+                // 拼接算式
+                let temp = this.state.num1 + this.state.op + this.state.num2
+                temp = eval(temp)
+                this.setState(state => ({
+                    // 设置上一次预览值 并拼接一个结果
+                    preview: state.preview + '=' + temp
+                }))
+            }
+            console.log(this.state.num1)
+            console.log(this.state.op)
+
+
+        }
+
+        render() {
+            return (
+                <div className="container">
+                    <div className="card p-3" style={{width: '400px'}}>
+                        <input value={this.state.preview} type="text" className="form-control mb-2" readOnly/>
+                        <div className="row row-cols-4 g-2">
+                            <div className="col-3">
+                                <button onClick={this.onBtnClick.bind(this)}
+                                        className="btn btn-outline-secondary w-100">1
+                                </button>
+                            </div>
+                            <div className="col-3">
+                                <button onClick={this.onBtnClick.bind(this)}
+                                        className="btn btn-outline-secondary w-100">2
+                                </button>
+                            </div>
+                            <div className="col-3">
+                                <button onClick={this.onBtnClick.bind(this)}
+                                        className="btn btn-outline-secondary w-100">3
+                                </button>
+                            </div>
+                            <div className="col-3">
+                                <button onClick={this.onBtnClick.bind(this)}
+                                        className="btn btn-outline-secondary w-100">+
+                                </button>
+                            </div>
+
+                            <div className="col-3">
+                                <button onClick={this.onBtnClick.bind(this)}
+                                        className="btn btn-outline-secondary w-100">4
+                                </button>
+                            </div>
+                            <div className="col-3">
+                                <button onClick={this.onBtnClick.bind(this)}
+                                        className="btn btn-outline-secondary w-100">5
+                                </button>
+                            </div>
+                            <div className="col-3">
+                                <button onClick={this.onBtnClick.bind(this)}
+                                        className="btn btn-outline-secondary w-100">6
+                                </button>
+                            </div>
+                            <div className="col-3">
+                                <button onClick={this.onBtnClick.bind(this)}
+                                        className="btn btn-outline-secondary w-100">-
+                                </button>
+                            </div>
+
+                            <div className="col-3">
+                                <button onClick={this.onBtnClick.bind(this)}
+                                        className="btn btn-outline-secondary w-100">7
+                                </button>
+                            </div>
+                            <div className="col-3">
+                                <button onClick={this.onBtnClick.bind(this)}
+                                        className="btn btn-outline-secondary w-100">8
+                                </button>
+                            </div>
+                            <div className="col-3">
+                                <button onClick={this.onBtnClick.bind(this)}
+                                        className="btn btn-outline-secondary w-100">9
+                                </button>
+                            </div>
+                            <div className="col-3">
+                                <button onClick={this.onBtnClick.bind(this)}
+                                        className="btn btn-outline-secondary w-100">*
+                                </button>
+                            </div>
+
+                            <div className="col-3">
+                                <button onClick={this.onBtnClick.bind(this)}
+                                        className="btn btn-outline-secondary w-100">c
+                                </button>
+                            </div>
+                            <div className="col-3">
+                                <button onClick={this.onBtnClick.bind(this)}
+                                        className="btn btn-outline-secondary w-100">0
+                                </button>
+                            </div>
+                            <div className="col-3">
+                                <button onClick={this.onBtnClick.bind(this)}
+                                        className="btn btn-outline-secondary w-100">=
+                                </button>
+                            </div>
+                            <div className="col-3">
+                                <button onClick={this.onBtnClick.bind(this)}
+                                        className="btn btn-outline-secondary w-100">/
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.createRoot(document.querySelector('#root')).render(<Computer/>)
+</script>
+</html>
