@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="js/babel.min.js"></script>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script type="text/babel">
+    // 知识点
+    // 什么是组件通信
+    //      父组件和子组件相互传递参数的过程，就是组件间的通信
+    // 应用场景
+    //      子组件的状态依赖于父组件传入的 props
+    //      由于 props 是只读的
+    //      所以要修改 props 子组件只能通知父组件更新数据
+    //      这个过程就会用到组件间的通信方法
+    // 通信方法:
+    //      1. 父组件将自身 state 作为参数传入子组件 props
+    //      2. 子组件依赖 props 显示内容
+    //      3. 子组件内希望修改 props 中的值，则发出一个事件
+    //      4. 父组件绑定子组件发出的事件并接收参数
+    //      5. 父组件接收事件后更新自身 state，此时 react 会自动更新子组件 props
+
+    class MyTr extends React.Component {
+        onNameInput(ev) {
+            console.log(ev.target.value)
+            // 若想修改 this.props.name
+            // 那么只能通过通知父组件，让父组件修改
+            this.props.onNameInput(this.props.listId, ev.target.value)
+        }
+
+        render() {
+            return (
+                <tr>
+                    <td>{this.props.listId}</td>
+                    <td><input type="text" value={this.props.name} onInput={this.onNameInput.bind(this)}/></td>
+                    <td>{this.props.sex}</td>
+                    <td>{this.props.age}</td>
+                    <td>
+                        <button>删除</button>
+                    </td>
+                </tr>
+            )
+        }
+    }
+
+    function App() {
+        const [list, setList] = React.useState([
+            {
+                id: 0,
+                name: '张三',
+                sex: 'male',
+                age: 17
+            },
+            {
+                id: 1,
+                name: '李四',
+                sex: 'female',
+                age: 24
+            },
+            {
+                id: 2,
+                name: '老王',
+                sex: 'other',
+                age: 30
+            },
+        ]);
+
+        // 父组件接收子组件的状态提升
+        function onNameInput(listId, newValue) {
+            console.log(listId, newValue)
+            // 修改父组件的状态
+            // 从而更新子组件
+            setList(_list => {
+                // 查找id相同的对象索引
+                let i = _list.findIndex(item => item.id === listId)
+                // 赋值新的值
+                _list[i].name = newValue
+                return [..._list]
+            })
+        }
+
+        return (
+            <div>
+                <table border="true">
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>年龄</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {list.map(item => <MyTr onNameInput={onNameInput} key={item.id} listId={item.id} name={item.name}
+                                            sex={item.sex}
+                                            age={item.age}></MyTr>)}
+                    </tbody>
+                </table>
+            </div>
+        )
+    }
+
+    ReactDOM.createRoot(document.querySelector('#root')).render(<App/>)
+</script>
+</html>
