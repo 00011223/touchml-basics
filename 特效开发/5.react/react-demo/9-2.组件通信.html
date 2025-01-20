@@ -33,7 +33,8 @@
             console.log(ev.target.value)
             // 若想修改 this.props.name
             // 那么只能通过通知父组件，让父组件修改
-            this.props.onNameInput(this.props.listId, ev.target.value)
+            // this.props.onNameInput(this.props.listId, ev.target.value)
+            console.log(this)
         }
 
         render() {
