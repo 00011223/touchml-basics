@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="js/babel.min.js"></script>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script type="text/babel">
+    // 知识点
+    // 什么是错误边界
+    //      react 的错误边界类似 js 的 catch
+    //      错误边界是一个 react 组件，其内部的子组件一旦发生异常就会触发错误边界
+    // 应用场景
+    //      需要对页面异常做出更友好的提示的时候，可以使用错误边界
+    // 如何使用？
+    //      1. 错误边界需要是一个 class 组件（函数组件不能充当错误边界）
+    //      2. 错误边界需要声明一个 hasError 状态
+    //      3. 错误边界需要实现生命周期钩子函数： static getDerivedStateFromError(error) 该函数返回要修改的状态，通常是{hasError: true} ； componentDidCatch(error, errorInfo) [该函数非必要]
+    //      4. 错误边界的渲染函数的内容，根据 hasError 状态进行调整
+    //      5. 使用错误边界的时候，在错误边界的标签体中嵌入其他子组件
+    //      6. 子组件生命周期任何阶段发生异常，都会被错误边界捕获到，从而显示错误的提示
+
+    // 使用 类组件声明错误边界
+    class ErrorBoundary extends React.Component {
+        state = {
+            // hasError 状态值用于指示 错误边界 内的子组件是否有错误
+            hasError: false
+        }
+
+        // 当组件发生异常时，在调用 render 函数前先会调用此函数
+        // error 当前正被触发的异常对象
+        static getDerivedStateFromError(error) {
+            console.log('getDerivedStateFromError')
+            console.log(error)
+            // 此处在渲染之前修改 hasError 状态为 true 代表产生了异常
+            return {hasError: true}
+        }
+
+        // 此为非必填函数
+        // 该生命周期将在捕获异常完成并渲染完成后触发
+        componentDidCatch(error, errorInfo) {
+            console.log('componentDidCatch')
+            console.log(error)
+            console.log(errorInfo)
+        }
+
+        render() {
+            // render 函数通过 hasError 判断应该显示什么内容
+            // 没有异常就显示 ErrorBoundary 的标签体里的内容 否则显示一个友好的错误提示
+            return this.state.hasError ? <div>错误时候看到的内容</div> :
+                <div>{this.props.children}</div>
+        }
+    }
+
+    class Child extends React.Component {
+        render() {
+            // 子组件中任意位置出现异常 则会被错误边界捕获到
+            abc.ok()
+
+            return (
+                <div>
+                    this is child
+                </div>
+            )
+        }
+    }
+
+    function App() {
+        return (
+            <div>
+                {/* 使用错误边界包裹正常显示的内容，此处的显示内容为 Child组件
+                    那么当 Child 组件抛出异常时 则 ErrorBoundary 就显示友好的提示
+                 */}
+                <ErrorBoundary>
+                    <Child></Child>
+                </ErrorBoundary>
+            </div>
+        )
+    }
+
+    ReactDOM.createRoot(document.querySelector('#root')).render(<App/>)
+</script>
+</html>

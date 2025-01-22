@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="js/babel.min.js"></script>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script type="text/babel">
+    function App() {
+        const [list, setList] = React.useState([
+            {
+                name: '张三',
+                sex: 'male'
+            },
+            {
+                name: '李四',
+                sex: 'female'
+            },
+        ]);
+
+        return (
+            <div>
+                {/* React.Fragment 内置组件起到一个给元素分组的作用，最终不会显示到页面上
+                    作用类似小程序中的 <block> 标签
+                 */}
+                {list.map((item, i) => (
+                    <React.Fragment key={i}>
+                        <div>{item.name}</div>
+                        <div>{item.sex}</div>
+                    </React.Fragment>
+                ))}
+            </div>
+        )
+    }
+
+    ReactDOM.createRoot(document.querySelector('#root')).render(<App/>)
+</script>
+</html>
