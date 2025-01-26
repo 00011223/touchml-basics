@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="js/babel.min.js"></script>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script type="text/babel">
+
+    // 文档：https://zh-hans.reactjs.org/docs/forwarding-refs.html
+    // https://zh-hans.reactjs.org/docs/refs-and-the-dom.html
+
+    // 知识点
+    // 什么是转发？
+    //      转发(ref) 的作用是获取组件中的 dom 或 一个组件
+    // 应用场景
+    //      1. 在 react 项目中 若希望通过 document.querySelector 获取某个元素时，我们应该使用 ref 替代
+    //      2. 当需要获取某个子组件的状态或调用组件的方法的时候
+    // 注意：函数组件上 不能添加 ref
+    // 使用方法:
+    //      类组件使用 React.createRef()
+    //      函数组件使用 React.useRef()
+    //      通用方法 使用箭头函数 el => { temp = el }
+    // React.forwardRef
+
+    class ClazzComponent extends React.Component {
+
+        // 创建一个 ref 对象 并保存到组件属性中
+        inpRef = React.createRef()
+
+        inpEl
+
+        // 声明属性保存子组件
+        child
+        child2
+
+        onClick() {
+            // 可以通过 this.inpRef.current 来获取 input 元素
+            // console.log(this.inpRef.current.value)
+
+            console.log(this.inpEl.value)
+        }
+
+        onClick2() {
+            // 获取子组件
+            console.log(this.child)
+            // 调用子组件的属性
+            console.log(this.child.state)
+            // 调用子组件的方法
+            this.child.clear()
+
+            console.log(this.child2.value)
+        }
+
+        render() {
+            return (
+                <div>
+                    <h1>类组件</h1>
+                    {/* 给元素的 ref 属性 赋值一个 ref 对象 */}
+                    {/*<input ref={this.inpRef} type="text"/>*/}
+                    {/* 此处 el 代表的就是当前元素 input  */}
+                    <input ref={el => {
+                        this.inpEl = el
+                    }} type="text"/>
+                    <button onClick={this.onClick.bind(this)}>读取输入框的值</button>
+                    {/* 注意: ref 属性可以写在 类组件上 但不可以写在函数组件上 */}
+                    <Child ref={child => {
+                        this.child = child
+                    }}></Child>
+                    <Child2 ref={child2 => {
+                        this.child2 = child2
+                    }}></Child2>
+                    <button onClick={this.onClick2.bind(this)}>清空child的输入框</button>
+                </div>
+            )
+        }
+    }
+
+    function FnComponent() {
+
+        // 函数组件内使用 useRef 来创建ref 对象
+        const inpRef = React.useRef()
+
+        const [inpEl, setInpEl] = React.useState(null)
+
+        function onClick() {
+            // 此处的 inpRef 和类组件相同
+            // 可以使用 inpRef.current 读取元素
+            // console.log(inpRef.current.value)
+
+            console.log(inpEl.value)
+        }
+
+        return (
+            <div>
+                <h1>函数组件</h1>
+                {/*<input ref={inpRef} type="text"/>*/}
+                <input ref={el => {
+                    setInpEl(el)
+                }} type="text"/>
+                <button onClick={onClick}>读取输入框的值</button>
+            </div>
+        )
+    }
+
+    class Child extends React.Component {
+        state = {
+            value: ''
+        }
+
+        // 清空输入框
+        clear() {
+            this.setState({value: ''})
+        }
+
+        render() {
+            return (
+                <div>
+                    <h3>child</h3>
+                    <input value={this.state.value} onInput={ev => {
+                        this.setState({value: ev.target.value})
+                    }} type="text"/>
+                </div>
+            )
+        }
+    }
+
+    // 函数组件上无法使用 ref
+    // function Child2() {
+    //     return (
+    //         <div>child2</div>
+    //     )
+    // }
+
+    // 我们可以使用 React.forwardRef 来创建一个函数组件
+    // React.forwardRef 创建的函数组件就可以使用ref
+    // props: 函数组件的 props
+    // ref: ref对象
+    // 返回值: 函数组件
+    const Child2 = React.forwardRef((props, ref) => {
+        // 此处的内容就是函数组件的内容
+
+        const [value, setValue] = React.useState('');
+
+        return (
+            <div>
+                <h3>child2</h3>
+                <input ref={ref} value={value} onInput={ev => {
+                    setValue(ev.target.value)
+                }} type="text"/>
+            </div>
+        )
+    })
+
+    function App() {
+        return (
+            <div>
+                <ClazzComponent></ClazzComponent>
+                <FnComponent></FnComponent>
+            </div>
+        )
+    }
+
+    ReactDOM.createRoot(document.querySelector('#root')).render(<App/>)
+</script>
+</html>
