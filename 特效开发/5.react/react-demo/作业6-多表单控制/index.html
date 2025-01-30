@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script type="text/babel">
+
+    // 表单组件
+    // 函数组件无法使用 ref
+    // function MyForm2() {
+    //
+    //     // 声明表单组件的状态
+    //     // 受控组件的状态
+    //     const [name, setName] = React.useState('');
+    //     const [sex, setSex] = React.useState('other');
+    //     const [age, setAge] = React.useState(0);
+    //
+    //     function submit() {
+    //         console.log(name, sex, age)
+    //     }
+    //
+    //     function clear() {
+    //         setName('')
+    //         setSex('other')
+    //         setAge(0)
+    //     }
+    //
+    //     return <div></div>
+    // }
+
+    class MyForm extends React.Component {
+
+        state = {
+            name: '',
+            sex: 'other',
+            age: 0
+        }
+
+        submit() {
+            console.log(this.state)
+        }
+
+        clear() {
+            this.setState({
+                name: '',
+                sex: 'other',
+                age: 0
+            })
+        }
+
+        render() {
+            return (
+                <div className="card p-3" style={{width: '400px'}}>
+                    <div className="row">
+                        <label className="col-3 col-form-label">姓名</label>
+                        <div className="col">
+                            <input value={this.state.name} onInput={ev => {
+                                this.setState({name: ev.target.value})
+                            }} type="text" className="form-control"/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <label className="col-3 col-form-label">性别</label>
+                        <div className="col d-flex align-items-center">
+                            <div className="form-check-inline">
+                                <input onChange={ev => {
+                                    this.setState({sex: ev.target.value})
+                                }} checked={this.state.sex === 'male'} type="radio" value="male"
+                                       className="form-check-input"/>
+                                <label className="form-check-label">男</label>
+                            </div>
+                            <div className="form-check-inline">
+                                <input onChange={ev => {
+                                    this.setState({sex: ev.target.value})
+                                }} checked={this.state.sex === 'female'} type="radio" value="female"
+                                       className="form-check-input"/>
+                                <label className="form-check-label">女</label>
+                            </div>
+                            <div className="form-check-inline">
+                                <input onChange={ev => {
+                                    this.setState({sex: ev.target.value})
+                                }} checked={this.state.sex === 'other'} type="radio" value="other"
+                                       className="form-check-input"/>
+                                <label className="form-check-label">其他</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <label className="col-3 col-form-label">年龄</label>
+                        <div className="col">
+                            <input value={this.state.age} onInput={ev => {
+                                this.setState({
+                                    age: Number(ev.target.value)
+                                })
+                            }} type="number" className="form-control"/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col">
+                            <button onClick={this.submit.bind(this)} className="btn btn-primary w-100">提交</button>
+                        </div>
+                        <div className="col">
+                            <button onClick={this.clear.bind(this)} className="btn btn-secondary w-100">重置</button>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+    }
+
+    function App() {
+        // 创建ref对象
+        const form1 = React.useRef();
+        const form2 = React.useRef();
+
+        // 提交所有
+        function submitAll() {
+            form1.current.submit()
+            form2.current.submit()
+        }
+
+        // 清空所有
+        function clearAll() {
+            form1.current.clear()
+            form2.current.clear()
+        }
+
+        return (
+            <div>
+                <MyForm ref={form1}></MyForm>
+                <MyForm ref={form2}></MyForm>
+                <button onClick={submitAll} className="btn btn-warning">提交所有</button>
+                <button onClick={clearAll} className="btn btn-danger">清空所有</button>
+            </div>
+        )
+    }
+
+    ReactDOM.createRoot(document.querySelector('#root')).render(<App/>)
+</script>
+
+</html>
