@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="js/babel.min.js"></script>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/bootstrap.bundle.js"></script>
+
+    <!-- 组件需要在 react 和 bootstrap 引入之后再引入 -->
+    <script type="text/babel" src="js/components/navbar.js"></script>
+</head>
+<body>
+<div id="app"></div>
+</body>
+<script type="text/babel">
+    function App() {
+        return (
+            <div>
+                {/* 导航栏 */}
+                <Navbar></Navbar>
+            </div>
+        )
+    }
+
+    ReactDOM.createRoot(document.querySelector('#app')).render(<App/>)
+</script>
+</html>

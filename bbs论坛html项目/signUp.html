@@ -22,14 +22,14 @@
     function App() {
         const [account, setAccount] = React.useState('');
         const [pwd, setPwd] = React.useState('');
-        const [remember, setRemember] = React.useState(false);
+        const [nickname, setNickname] = React.useState('');
 
         return (
             <div className="vh-100 d-flex justify-content-center"
                  style={{backgroundColor: '#f9f9f9', paddingTop: '120px'}}>
                 <div className="form d-flex flex-column align-items-center" style={{width: '280px'}}>
                     <img style={{height: '53px'}} src="./img/logo.png"/>
-                    <h2 className="p-3">用户登录</h2>
+                    <h2 className="p-3">用户注册</h2>
                     <div className="card p-3 my-fs w-100">
                         <div className="vstack gap-2">
                             <div>
@@ -39,29 +39,24 @@
                                 }} type="text" className="form-control form-control-sm" placeholder="请输入账号"/>
                             </div>
                             <div>
-                                <div className="d-flex justify-content-between">
-                                    <label className="form-label fw-bolder">密码</label>
-                                    <a href="#">忘记密码?</a>
-                                </div>
+                                <label className="form-label fw-bolder">密码</label>
                                 <input value={pwd} onInput={ev => {
                                     setPwd(ev.target.value)
                                 }} type="password" className="form-control form-control-sm" placeholder="请输入密码"/>
                             </div>
                             <div>
-                                <div className="form-check">
-                                    <input checked={remember} onChange={ev => {
-                                        setRemember(ev.target.checked)
-                                    }} id="remember" type="checkbox" className="form-check-input"/>
-                                    <label htmlFor="remember">记住我</label>
-                                </div>
+                                <label className="form-label fw-bolder">昵称</label>
+                                <input value={nickname} onInput={ev => {
+                                    setNickname(ev.target.value)
+                                }} type="text" className="form-control form-control-sm" placeholder="请输入昵称"/>
                             </div>
                             <div>
-                                <button className="btn btn-success w-100 btn-sm">登录</button>
+                                <button className="btn btn-success w-100 btn-sm">注册</button>
                             </div>
                         </div>
                     </div>
                     <div className="card p-2 my-fs d-flex flex-row mt-3 w-100" style={{backgroundColor: 'transparent'}}>
-                        <span>没有账号?</span><a href="./signUp.html">点击创建</a>
+                        <span>已有账号?</span><a href="./signIn.html">点击登录</a>
                     </div>
                 </div>
             </div>
