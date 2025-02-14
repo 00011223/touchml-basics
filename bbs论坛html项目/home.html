@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Title</title>
+    <title>首页</title>
     <script src="js/babel.min.js"></script>
     <script src="js/react.development.js"></script>
     <script src="js/react-dom.development.js"></script>
@@ -13,16 +13,62 @@
 
     <!-- 组件需要在 react 和 bootstrap 引入之后再引入 -->
     <script type="text/babel" src="js/components/navbar.js"></script>
+    <script type="text/babel" src="js/components/listItem.js"></script>
+    <script type="text/babel" src="js/components/copyright.js"></script>
 </head>
 <body>
 <div id="app"></div>
 </body>
 <script type="text/babel">
     function App() {
+        const [list, setList] = React.useState([
+            {
+                id: '1',
+                headIcon: './img/avatar-max-img.png',
+                title: '这是标题1'
+            },
+            {
+                id: '2',
+                headIcon: './img/avatar-max-img.png',
+                title: '这是标题2'
+            },
+            {
+                id: '3',
+                headIcon: './img/avatar-max-img.png',
+                title: '这是标题3'
+            },
+        ]);
+
         return (
             <div>
                 {/* 导航栏 */}
                 <Navbar></Navbar>
+                <div className="container">
+                    <div className="list py-3">
+                        <div className="vstack gap-2">
+                            {list.map(item => <ListItem key={item.id} id={item.id} headIcon={item.headIcon}
+                                                        title={item.title}></ListItem>)}
+                        </div>
+                    </div>
+                    <nav aria-label="Page navigation example">
+                        <ul className="pagination">
+                            <li className="page-item">
+                                <a className="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li className="page-item"><a className="page-link" href="#">1</a></li>
+                            <li className="page-item"><a className="page-link" href="#">2</a></li>
+                            <li className="page-item"><a className="page-link" href="#">3</a></li>
+                            <li className="page-item">
+                                <a className="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <Copyright></Copyright>
+                </div>
             </div>
         )
     }

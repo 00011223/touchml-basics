@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心</title>
+    <script src="js/babel.min.js"></script>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/bootstrap.bundle.js"></script>
+
+    <!-- 组件需要在 react 和 bootstrap 引入之后再引入 -->
+    <script type="text/babel" src="js/components/navbar.js"></script>
+    <script type="text/babel" src="js/components/copyright.js"></script>
+
+    <style>
+        .list-group-item {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script type="text/babel">
+    function App() {
+        const imgStyle = {width: '100px', height: '100px'}
+
+        // 声明文件上传的ref
+        const fileUploader = React.useRef()
+
+        // 列表数据
+        const [list, setList] = React.useState([
+            {text: '基本信息', active: true},
+            {text: '账户设置', active: false},
+        ]);
+        // 表单数据
+        const [account, setAccount] = React.useState('xxx@xxx.com');
+        const [nickname, setNickname] = React.useState('张三');
+        const [desc, setDesc] = React.useState('张三大魔王的传奇生涯\n由出生到\n入土');
+        const [sex, setSex] = React.useState('other');
+        const [birthday, setBirthday] = React.useState('1997-07-01');
+        // 头像
+        const [headIcon, setHeadIcon] = React.useState('/bbs论坛html项目/img/avatar-max-img.png');
+
+        // 切换列表项
+        function switchItem(i) {
+            console.log(i)
+            setList(_list => {
+                // 清空所有的 active
+                _list.forEach(item => {
+                    item.active = false
+                })
+                // 设置指定的active为true
+                _list[i].active = true
+                return [..._list]
+            })
+        }
+
+        // 生日变化事件
+        function onBirthdayChange(ev) {
+            console.log(ev.target.value)
+            setBirthday(ev.target.value)
+        }
+
+        // 头像文件变化事件
+        function onFileChange(ev) {
+            console.dir(ev.target)
+            // 读取文件信息
+            let file = ev.target.files[0]
+            // 将 file 文件对象转换成 url
+            let url = URL.createObjectURL(file)
+
+            // url 转 base64 的函数
+            const getBase64FromUrl = async (url) => {
+                const data = await fetch(url);
+                const blob = await data.blob();
+                return new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(blob);
+                    reader.onloadend = () => {
+                        const base64data = reader.result;
+                        resolve(base64data);
+                    }
+                });
+            }
+
+            getBase64FromUrl(url).then(base64=>{
+                // base64: 转换成功后的 base64 字符串
+                console.log(base64)
+                // 设置头像
+                setHeadIcon(base64)
+            })
+        }
+
+        return (
+            <div>
+                <Navbar></Navbar>
+                <div className="container py-3">
+                    <div className="row">
+                        {/* 列表 */}
+                        <div className="col-3">
+                            <ul className="list-group">
+                                {list.map((item, i) => <li onClick={() => {
+                                    switchItem(i)
+                                }} key={item.text}
+                                                           className={"list-group-item" + (item.active ? ' active' : '')}>{item.text}</li>)}
+                            </ul>
+                        </div>
+                        {/* 右侧内容 */}
+                        <div className="col">
+
+                            {/* 基本信息 */}
+                            {list[0].active && (
+                                <div className="row">
+                                    <div className="col-8">
+                                        <div className="vstack gap-3">
+
+                                            <div>
+                                                <label className="form-label fw-bolder">账号</label>
+                                                <input value={account} readOnly type="text"
+                                                       className="form-control form-control-plaintext"/>
+                                            </div>
+
+                                            <div>
+                                                <label className="form-label fw-bolder">昵称</label>
+                                                <input value={nickname} onInput={ev => {
+                                                    setNickname(ev.target.value)
+                                                }} type="text" className="form-control"/>
+                                            </div>
+
+                                            <div>
+                                                <label className="form-label fw-bolder">简介</label>
+                                                <textarea value={desc} onInput={ev => {
+                                                    setDesc(ev.target.value)
+                                                }} rows="4" className="form-control"></textarea>
+                                            </div>
+
+                                            <div>
+                                                <label className="form-label fw-bolder">性别</label>
+                                                <div>
+                                                    <div className="form-check form-check-inline">
+                                                        <input checked={sex === 'male'} onChange={ev => {
+                                                            setSex(ev.target.value)
+                                                        }} id="male" type="radio" value="male"
+                                                               className="form-check-input"/>
+                                                        <label htmlFor="male" className="form-check-label">男</label>
+                                                    </div>
+                                                    <div className="form-check form-check-inline">
+                                                        <input checked={sex === 'female'} onChange={ev => {
+                                                            setSex(ev.target.value)
+                                                        }} id="female" type="radio" value="female"
+                                                               className="form-check-input"/>
+                                                        <label htmlFor="female" className="form-check-label">女</label>
+                                                    </div>
+                                                    <div className="form-check form-check-inline">
+                                                        <input checked={sex === 'other'} onChange={ev => {
+                                                            setSex(ev.target.value)
+                                                        }} id="other" type="radio" value="other"
+                                                               className="form-check-input"/>
+                                                        <label htmlFor="other" className="form-check-label">其他</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <label className="form-label fw-bolder">生日</label>
+                                                <input value={birthday} onChange={onBirthdayChange} type="date"
+                                                       className="form-control"/>
+                                            </div>
+
+                                            <div>
+                                                <button className="btn btn-success">保存</button>
+                                            </div>
+
+                                            <Copyright></Copyright>
+                                        </div>
+                                    </div>
+                                    <div className="col">
+                                        <label className="fw-bolder pb-3">头像设置</label>
+                                        <img style={imgStyle} onClick={() => {
+                                            fileUploader.current.click()
+                                        }} src={headIcon}/>
+                                        <input ref={fileUploader} onChange={onFileChange} className="d-none"
+                                               type="file"/>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* 账户设置 */}
+                            {list[1].active && (
+                                <div className="row">
+                                    <div className="col-8">账户设置</div>
+                                    <div className="col"></div>
+                                </div>
+                            )}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    ReactDOM.createRoot(document.querySelector('#root')).render(<App/>)
+</script>
+</html>

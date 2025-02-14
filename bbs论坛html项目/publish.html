@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>发布</title>
+    <script src="js/babel.min.js"></script>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+
+    <script type="text/babel" src="js/components/navbar.js"></script>
+    <script type="text/babel" src="js/components/copyright.js"></script>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script type="text/babel">
+
+    function App() {
+        const formStyle = {width: '500px'}
+
+        const [template, setTemplate] = React.useState('');
+        const [title, setTitle] = React.useState('');
+        const [content, setContent] = React.useState('');
+
+        function submit() {
+            console.log('submit')
+            console.log(template)
+            console.log(title)
+            console.log(content)
+        }
+
+        return (
+            <div>
+                <Navbar></Navbar>
+                <div className="container py-3">
+                    <div className="my-form" style={formStyle}>
+                        <div className="vstack gap-3">
+                            <div>
+                                <label className="form-label fw-bolder">选择模板</label>
+                                <select className="form-select" value={template} onChange={ev => {
+                                    setTemplate(ev.target.value)
+                                }}>
+                                    <option value="" disabled>请选择</option>
+                                    <option value="讨论">讨论</option>
+                                    <option value="生活">生活</option>
+                                    <option value="学习">学习</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label className="form-label fw-bolder">标题</label>
+                                <input value={title} onInput={ev => {
+                                    setTitle(ev.target.value)
+                                }} type="text" className="form-control" placeholder="请输入标题"/>
+                            </div>
+                            <div>
+                                <label className="form-label fw-bolder">内容</label>
+                                <textarea value={content} onInput={ev => {
+                                    setContent(ev.target.value)
+                                }} className="form-control" rows="4" placeholder="请输入内容"></textarea>
+                            </div>
+                            <div>
+                                <button className="btn btn-success" onClick={submit}>提交</button>
+                            </div>
+
+                            <Copyright></Copyright>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    ReactDOM.createRoot(document.querySelector('#root')).render(<App/>)
+</script>
+</html>

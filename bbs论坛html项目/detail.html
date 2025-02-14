@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>详情页</title>
+    <script src="js/babel.min.js"></script>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/github-markdown.css">
+
+    <script type="text/babel" src="js/components/navbar.js"></script>
+    <script type="text/babel" src="js/components/copyright.js"></script>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script type="text/babel">
+
+    function App() {
+        const [title, setTitle] = React.useState('是管理环境');
+        const [content, setContent] = React.useState('爱上了对方国家\nsglkasdf斯蒂芬库里规划思路\n三点零开始公司的');
+        const [list, setList] = React.useState([
+            {
+                id: '1',
+                time: '1分钟前',
+                content: '这是一句经典的评论1'
+            },
+            {
+                id: '2',
+                time: '2分钟前',
+                content: '这是一句经典的评论2'
+            },
+            {
+                id: '3',
+                time: '3分钟前',
+                content: '这是一句经典的评论3'
+            },
+        ]);
+        const [comment, setComment] = React.useState('');
+
+        function submit() {
+            console.log('submit')
+            console.log(comment)
+        }
+
+        return (
+            <div>
+                <Navbar></Navbar>
+                <div className="markdown-body container py-3 mx-auto">
+                    <div className="vstack gap-3">
+                        <div className="card p-3">
+                            <h2 className="m-0 mb-3"><a id="user-content-inline-html" className="anchor"
+                                                        href="#inline-html"
+                                                        aria-hidden="true"><span
+                                className="octicon octicon-link"></span></a>{title}</h2>
+                            <blockquote className="mb-0">
+                                <p>{content}</p>
+                            </blockquote>
+                        </div>
+
+                        {list.map(item => (
+                            <div key={item.id} className="card">
+                                <div className="card-header d-flex justify-content-between">
+                                    <div>{item.time}</div>
+                                    <div>点赞图标</div>
+                                </div>
+                                <div className="card-body">
+                                    {item.content}
+                                </div>
+                            </div>
+                        ))}
+
+                        <div>
+                            <label className="form-label fw-bolder">添加回复</label>
+                            <textarea value={comment} onInput={ev => {
+                                setComment(ev.target.value)
+                            }} rows="4" className="form-control"></textarea>
+                        </div>
+
+                        <div>
+                            <button className="btn btn-success" onClick={submit}>回复</button>
+                        </div>
+
+                        <Copyright></Copyright>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    ReactDOM.createRoot(document.querySelector('#root')).render(<App/>)
+</script>
+</html>
