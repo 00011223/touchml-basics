@@ -179,8 +179,8 @@
                                         </div>
                                     </div>
                                     <div className="col">
-                                        <label className="fw-bolder pb-3">头像设置</label>
-                                        <img style={imgStyle} onClick={() => {
+                                        <label className="d-block fw-bolder pb-3">头像设置</label>
+                                        <img className="d-block" style={imgStyle} onClick={() => {
                                             fileUploader.current.click()
                                         }} src={headIcon}/>
                                         <input ref={fileUploader} onChange={onFileChange} className="d-none"
