@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 1. 引入资源 -->
+    <link rel="stylesheet" href="./css/fullpage.min.css">
+    <script src="./js/fullpage.min.js"></script>
+</head>
+<body>
+    <!-- 2. 布局 -->
+    <div class="fp-container">
+        <div class="section">section1</div>
+        <div class="section">
+            <div class="slide">slide1</div>
+            <div class="slide">slide2</div>
+            <div class="slide">slide3</div>
+        </div>
+        <div class="section">section3</div>
+    </div>
+</body>
+<script>
+    // 实例化 fullpage 对象
+    let fp = new fullpage('.fp-container', {
+        // 配置项写在此处
+    })
+</script>
+</html>
