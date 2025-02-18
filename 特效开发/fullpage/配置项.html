@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 1. 引入资源 -->
+    <link rel="stylesheet" href="./css/fullpage.min.css">
+    <script src="./js/fullpage.min.js"></script>
+
+    <style>
+        .fp-container {
+            color: #fff;
+            font-size: 64px;
+        }
+
+        .section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide>* {
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fp-slidesNav {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <ul style="position: relative; z-index: 9999;" class="nav">
+        <li><a href="#an1">section1</a></li>
+        <li>
+            <ul>
+                <li><a href="#an2/0">slide1</a></li>
+                <li><a href="#an2/1">slide2</a></li>
+                <li><a href="#an2/2">slide3</a></li>
+            </ul>
+        </li>
+        <li><a href="#an3">section3</a></li>
+    </ul>
+
+    <!-- 2. 布局 -->
+    <div class="fp-container">
+        <div data-anchor="an1" class="section">section1</div>
+        <div data-anchor="an2" class="section">
+            <div class="slide">
+                <div>slide1</div>
+            </div>
+            <div class="slide">
+                <div>slide2</div>
+            </div>
+            <div class="slide">
+                <div>slide3</div>
+            </div>
+        </div>
+        <div data-anchor="an3" class="section">section3</div>
+    </div>
+</body>
+<script>
+    // 实例化 fullpage 对象
+    let fp = new fullpage('.fp-container', {
+        // 配置项写在此处
+
+        // 锚点
+        // 添加锚点后可以通过锚点名来访问页面
+        // 数组中每个成员是分配给section的名称
+        // 访问时就通过名称访问 例如: index.html#a2
+        // anchors: ['a1', 'a2', 'a3']
+
+        // menu 选项不会具体的添加菜单 只会给对应元素预留一个页面区域 用于显示
+        menu: '.nav',
+        // 导航小圆点
+        navigation: true,
+        // 导航按钮的位置 left right
+        navigationPosition: 'left',
+        // 在当行小圆点上，鼠标悬停时的提示框
+        navigationTooltips: ['section1', 'section2', 'section3'],
+        // 主动显示小圆点上的提示信息
+        showActiveTooltip: true,
+        // slide 上的小圆点
+        slidesNavigation: true,
+        // slide 上的小圆点的位置 top bottom
+        slidesNavPosition: 'top',
+        // 滚动动画时长 单位毫秒
+        scrollingSpeed: 1000,
+        // 显示 左右箭头
+        controlArrows: false,
+        // section的背景颜色
+        sectionsColor: ['#ccc', '#00f', '#f00'],
+        // 事件配置
+
+        // 当 离开一个 section 时触发onLeave事件
+        // onLeave: (from, to, direction) => {
+        //     console.log('onLeave')
+        //     console.log(from)
+        //     console.log(to)
+        //     console.log(direction)
+
+        //     // 返回false 将不允许屏幕离开当前section
+        //     // return false
+        // },
+        // 当 加载一个section时（进入一个新的section时）触发
+        // afterLoad: (from, to, direction) => {
+        //     console.log('afterLoad')
+        //     console.log(from)
+        //     console.log(to)
+        //     console.log(direction)
+
+        //     // 返回false 将不允许屏幕离开当前section
+        //     // return false
+        // },
+        // 当html文档构建完成，准备渲染时触发
+        // 可以理解成 fullpage 加载完成时 触发 类似于 window.onload
+        afterRender: () => {
+            console.log('afterRender')
+        },
+        // 重置窗口尺寸时触发
+        afterResize: function (width, height) {
+            console.log(width)
+            console.log(height)
+        },
+         // 当 slide 进入时触发
+        // afterSlideLoad: function (section, origin, destination, direction) {
+        //     console.log('afterSlideLoad')
+        //     console.log(section)
+        //     console.log(origin)
+        //     console.log(destination)
+        //     console.log(direction)
+        // },
+        // 当 离开slide时触发
+        onSlideLeave: function (section, origin, destination, direction) {
+            console.log('onSlideLeave')
+            console.log(section)
+            console.log(origin)
+            console.log(destination)
+            console.log(direction)
+        }
+    })
+</script>
+
+</html>
