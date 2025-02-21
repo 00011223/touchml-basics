@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .container {
+            height: 100vh;
+            overflow: auto;
+        }
+
+        .content {
+            height: 2000px;
+            display: flex;
+            align-items: flex-end;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="content">
+            <img class="img" height="200" src="./img/avatar-max-img.png" data-src="./img/1.png" alt="">
+        </div>
+    </div>
+</body>
+<script>
+    const container = document.querySelector('.container')
+    const content = document.querySelector('.content')
+    const img = document.querySelector('.img')
+
+    // 绑定滚动事件
+    container.addEventListener('scroll', ev => {
+        // console.log(ev);
+        console.log('scrollTop1', ev.target.scrollTop);
+
+        // 计算显示图片的临界值
+        // scrollTop = 内容高 - 图片高 - 窗口高
+        let scrollTop = content.clientHeight - 200 - innerHeight
+        console.log('scrollTop2', scrollTop);
+
+        if (ev.target.scrollTop >= scrollTop) {
+
+            console.log('done');
+            console.log(img.src);
+            console.log(!img.src);
+
+            // 通过自定义属性 done 来控制懒加载的触发
+            if (!img.getAttribute('done')) {
+                // 加载图片
+                // 读取资源url
+                let url = img.getAttribute('data-src')
+                // 赋值图片 url 赋值后 图片会被自动加载
+                img.src = url
+
+                img.setAttribute('done', 'true')
+            }
+        }
+    })
+
+    // 总结
+
+    // 1. 给需要懒加载的元素添加 data-src
+    // 2. 给滚动元素添加 scroll 事件监听器
+    // 3. 计算显示图片的临界值 scrollTop = 内容高 - 图片高 - 窗口高
+    // 4. 判断容器元素的 scrollTop 大于临界值 加载 data-src
+</script>
+
+</html>
