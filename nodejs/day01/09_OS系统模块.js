@@ -13,3 +13,7 @@ const os = require('os')
 // 安装两个插件
 // Express Snippets
 // node-snippets
+
+//  npm  init -y   初始化项目
+//  npm install  @types/node
+

@@ -9,10 +9,7 @@
         __dirname 当前执行文件所在的目录路径
 
 
-
         console 控制台对象
-
-    
 
 
 
@@ -30,13 +27,12 @@ console.log(setTimeout === global.setTimeout) // true
 // global.xx = 'xxx'
 // console.log(xx)
 
-// 2-给为定义的变量进行赋值，该变量也会挂载到global对象身上
+// 2-给未定义的变量进行赋值，该变量也会挂载到global对象身上
 // yy = '666'
 // console.log(yy,global.yy)
 // console.log(global === globalThis)
 
-
 console.log(__dirname)
 console.log(__filename)
 
-console.log(globalThis.__dirname)//undifined
+console.log(globalThis.__dirname) //undifined
