@@ -27,11 +27,24 @@
 // 同步操作来完成以上需求
 const fs = require('fs')
 
-let filename = fs.readFileSync('./txt/1.txt','utf-8')
-let data = fs.readFileSync(`./txt/${filename}`,'utf-8')
-fs.writeFileSync('./txt/3.txt',data)
-console.log('任务完成！')
+// let filename = fs.readFileSync('./txt/1.txt','utf-8')
+// let data = fs.readFileSync(`./txt/${filename}`,'utf-8')
+// fs.writeFileSync('./txt/3.txt',data)
+// console.log('任务完成！')
 
 
 
 // 异步操作来完成以上需求
+fs.readFile('./txt/1.txt','utf-8',(err,data)=>{
+    if(err) throw err
+    console.log(data) //2.txt
+    fs.readFile(`./txt/${data}`,'utf-8',(err,data)=>{
+        if(err) throw err
+        console.log(data)//南朝四百八十寺，多少楼台烟雨中！
+        fs.writeFile('./txt/3.txt',data,err=>{
+            if(err) throw err
+            console.log('任务完成！')
+        })
+    })
+    
+})
