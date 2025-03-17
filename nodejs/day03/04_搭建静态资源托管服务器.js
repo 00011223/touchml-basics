@@ -54,7 +54,7 @@ server.on('request', (req, res) => {
       res.end(data)
     })
     // login.html
-  } else if (url == '/R-C.jpg') {
+  } else if (url == '/_0.png') {
     fs.readFile(path.join(publicPath, url), (err, data) => {
       if (err) throw err
       res.setHeader('Content-Type', 'image/jpeg;charset=utf-8')
@@ -63,6 +63,7 @@ server.on('request', (req, res) => {
   } else {
     res.end('404...')
   }
+
 })
 
 // 设置服务器实例的端口监听
