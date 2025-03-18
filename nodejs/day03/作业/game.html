@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.6.1.min.js"></script>
+</head>
+<body>
+    <div>
+        <button type="button" data-sign="0">剪刀</button>
+        <button type="button" data-sign="1">石头</button>
+        <button type="button" data-sign="2">布</button>
+    </div>
+
+
+    <script>
+        // 获取三个按钮元素
+        let btns = document.querySelectorAll('button')
+        // 给三个按钮绑定点击事件
+        btns.forEach((el)=>{
+            el.addEventListener('click',(ev)=>{
+                let data = ev.target.getAttribute('data-sign')
+                
+                // 发送ajax请求将数据传输给后端（服务器）
+                $.get(`http://127.0.0.1:3000/game/?sign=${data}`,(data)=>{
+                    // console.log(data)
+                    console.log(JSON.parse(data))
+                })
+                
+            })
+        })
+
+      
+
+
+    </script>
+</body>
+</html>

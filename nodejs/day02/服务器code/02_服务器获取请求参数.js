@@ -38,7 +38,7 @@ server.on('request',(req,res)=>{
 
     // GET方式获取请求时URL中携带的参数
     // console.log(url.parse(req.url,true).query)
-    // let data = url.parse(req.url,true).query
+    let data = url.parse(req.url,true).query
     // console.log(data.name,data.age)
     // console.log(666)
     // console.log(666)
