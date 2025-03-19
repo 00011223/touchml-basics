@@ -2,6 +2,7 @@ const http = require('http')
 const url = require('url')
 const path = require('path')
 const fs = require('fs')
+const { json } = require('stream/consumers')
 
 const server = http.createServer()
 
@@ -18,15 +19,82 @@ server.on('request', (req, res) => {
       res.end(data)
     })
   } else if (req.url.startsWith('/game')) {
-    let num = Math.floor(Math.random()*(3-0)+0)
-    console.log(data,num)
+    let num = Math.floor(Math.random() * (3 - 0) + 0)
+    let { sign } = data
+    console.log(sign, num)
 
-    // end方法只能返回二进制数据和字符串数据
-    let obj = {
-        msg:'客户端赢了',
-        code:200
+    if (sign == 0) {
+      switch (num) {
+        case 0:
+          res.end('ok')
+          break
+        case 1:
+          res.end('ok')
+          break
+        case 2:
+          res.end(
+            JSON.stringify({
+              msg: '用户赢了',
+              code: 300,
+            })
+          )
+          break
+      }
+    } else if (sign == 1) {
+      switch (num) {
+        case 0:
+          res.end(
+            JSON.stringify({
+              msg: '平局',
+              code: 200,
+            })
+          )
+          break
+        case 1:
+          res.end(
+            JSON.stringify({
+              msg: '服务器赢了',
+              code: 100,
+            })
+          )
+          break
+        case 2:
+          res.end(
+            JSON.stringify({
+              msg: '用户赢了',
+              code: 300,
+            })
+          )
+          break
+      }
+    } else if (sign == 2) {
+      switch (num) {
+        case 0:
+          res.end(
+            JSON.stringify({
+              msg: '平局',
+              code: 200,
+            })
+          )
+          break
+        case 1:
+          res.end(
+            JSON.stringify({
+              msg: '服务器赢了',
+              code: 100,
+            })
+          )
+          break
+        case 2:
+          res.end(
+            JSON.stringify({
+              msg: '用户赢了',
+              code: 300,
+            })
+          )
+          break
+      }
     }
-    res.end(JSON.stringify(obj))
   }
 })
 
