@@ -10,7 +10,7 @@ const filePath = __dirname
 server.on('request',(req,res)=>{
     let {url} = req
     // 静态资源的路由托管
-    if(url.includes('/public')){
+    if(url.startsWith('/public')){
         //  /public/index.html
         fs.readFile(path.join(filePath,url),'utf-8',(err,data)=>{
             if(err) throw err

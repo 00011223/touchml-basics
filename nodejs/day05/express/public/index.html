@@ -5,8 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/public/css/index.css">
 </head>
 <body>
     <h1>主页面</h1>
+
+    <form action="http://127.0.0.1:3000/" enctype="multipart/form-data" method="post">
+        姓名：<input type="text" name="username"><br>
+        年龄: <input type="text" name="userage"><br>
+        图片: <input type="file" name="img01">
+        <button type="submit">提交</button>
+        <!-- x-www-form  name='张三'&age=18 -->
+    </form>
 </body>
 </html>
