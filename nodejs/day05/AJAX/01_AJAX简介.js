@@ -15,7 +15,7 @@
     发起AJAX请求的工具，也称为 ‘Http Client’ 客户端
     发送ajax请求的手段有很多种:
 
-    其中常见的有一下几种：
+    其中常见的有以下几种：
         - 通过浏览器原生对象XMLHttpRequest对象
         - 通过浏览器原生全局方法 fetch
         - jquery框架

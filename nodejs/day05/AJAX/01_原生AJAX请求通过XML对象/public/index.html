@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>get方式-xml请求</h1>
+    <form class="formdata01">
+      账号:<input type="text" name="uname" /><br />
+      密码:<input type="password" name="upwd" /><br />
+      <button type="button" class="btn1">提交</button>
+    </form>
+
+    <h1>post方式-xml请求</h1>
+    <form class="formdata02">
+      账号:<input type="text" name="uname" /><br />
+      密码:<input type="password" name="upwd" /><br />
+      <button type="button" class="btn2">提交</button>
+    </form>
+
+    <!-- <script>
+        // 获取到表单对象
+        let  formdata01 = document.querySelector('.formdata01')
+
+        // 提交按钮
+        let btn1 = document.querySelector('.btn1')
+
+
+        // 给提交按钮绑定事件
+        btn1.addEventListener('click',()=>{
+            console.log('click')
+            // 获取表单中的数据
+            let formdata = new FormData(formdata01)
+            console.log(formdata.get('uname'))
+            console.log(formdata.get('upwd'))
+
+
+            // 需求:
+            // 当用户点击提交按钮时
+            // 将发送ajax请求，并携带响应的数据到服务器
+
+            // 以下是原生ajax请求的步骤
+            // 1-创建xhr实例对象
+            let xhr = new XMLHttpRequest()
+
+            // 2-建立连接 通过open方法
+            xhr.open('get',`http://127.0.0.1:3000/get_xhr?uname=${formdata.get('uname')}&upwd=${formdata.get('upwd')}`)
+
+
+            // 3-监听请求成功时的事件
+            xhr.addEventListener('load',(el)=>{
+                console.log(el.target.response)
+            })
+
+            // 4-发送请求
+            xhr.send()
+
+        })
+    </script> -->
+
+    <script>
+      // 获取到表单对象
+      let formdata02 = document.querySelector('.formdata02')
+      // 提交按钮
+      let btn2 = document.querySelector('.btn2')
+    
+      // 给提交按钮绑定事件
+      btn2.addEventListener('click', () => {
+        console.log('click')
+        // 获取表单中的数据
+        let formdata = new FormData(formdata02)
+        console.log(formdata.get('uname'))
+        // 需求:
+        // 当用户点击提交按钮时
+        // 将发送ajax请求，并携带响应的数据到服务器
+
+        // 以下是原生ajax请求的步骤
+        // 1-创建xhr实例对象
+        let xhr = new XMLHttpRequest()
+
+        // 2-建立连接 通过open方法
+        xhr.open('post', `http://127.0.0.1:3000/post_xhr`)
+
+        // 3-监听请求成功时的事件
+        xhr.addEventListener('load', (el) => {
+          console.log(el.target.response)
+        })
+
+        // 4-发送请求
+        // post请求时body中的参数通过send方法传入！
+        console.log(JSON.stringify({
+            uname:formdata.get('uname'),
+            upwd:formdata.get('upwd')
+        }))
+        xhr.send('xxxxxx')
+      })
+    </script>
+  </body>
+</html>
