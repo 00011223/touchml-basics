@@ -10,12 +10,11 @@
 <body>
     <h1>主页面</h1>
 
-    <form action="http://127.0.0.1:3000/" enctype="multipart/form-data" method="post">
-        姓名：<input type="text" name="username"><br>
-        年龄: <input type="text" name="userage"><br>
-        图片: <input type="file" name="img01">
+    <form action="http://127.0.0.1:3000/upload" enctype="multipart/form-data" method="post">
+        文件1: <input type="file" name="f1"><br>
+        文件2: <input type="file" name="f2"><br>
+        文件3: <input type="file" name="f3"><br>
         <button type="submit">提交</button>
-        <!-- x-www-form  name='张三'&age=18 -->
     </form>
 </body>
 </html>
