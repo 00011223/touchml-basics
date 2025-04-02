@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>get方式-ajax请求</h1>
+    <form class="formdata01">
+      账号:<input type="text" name="uname" /><br />
+      密码:<input type="password" name="upwd" /><br />
+      <button type="button" class="btn1">提交</button>
+    </form>
+
+    <h1>post方式-ajax请求</h1>
+    <form class="formdata02">
+      账号:<input type="text" name="uname" /><br />
+      密码:<input type="password" name="upwd" /><br />
+      <button type="button" class="btn2">提交</button>
+    </form>
+    <!-- <script>
+      // 获取到表单对象
+      let formdata01 = document.querySelector('.formdata01')
+      // 提交按钮
+      let btn1 = document.querySelector('.btn1')
+    
+
+      // 给提交按钮绑定事件
+      btn1.addEventListener('click', () => {
+        // 获取表单中的数据
+        let formdata = new FormData(formdata01)
+          // 需求：当用户点击提交按钮，就访问对应的服务器并且发送相关的数据
+
+          // 通过浏览器中的一个全局方法fetch实现ajax的请求
+          // fetch(url,配置项)
+          // 注意：fetch方法会返回一个promise实例
+          fetch(`http://127.0.0.1:3000/get_fetch?name=${formdata.get('uname')}&pwd=${formdata.get('upwd')}`)
+          .then(res=>{
+            // res 响应对象
+            // 通过res.json方法去解析后端返回的数据
+            // res.text()
+            return res.json()
+          })
+          .then(data=>{
+            console.log(data)
+          })
+      })
+    </script> -->
+
+
+
+    <script>
+      // 获取到表单对象
+      let formdata02 = document.querySelector('.formdata02')
+      // 提交按钮
+      let btn2 = document.querySelector('.btn2')
+    
+
+      // 给提交按钮绑定事件
+      btn2.addEventListener('click', () => {
+        // 获取表单中的数据
+        let formdata = new FormData(formdata02)
+          // 需求：当用户点击提交按钮，就访问对应的服务器并且发送相关的数据
+
+          // 通过浏览器中的一个全局方法fetch实现ajax的请求
+          // fetch(url,配置项)
+          // 注意：fetch方法会返回一个promise实例
+          fetch('http://127.0.0.1:3000/post_fetch',{
+            method:'post',
+            // 注意：使用fetch方法实现post请求时其数据是存放在body属性中的
+            body:JSON.stringify({
+              name:formdata.get('uname'),
+              pwd:formdata.get('upwd')
+            }),
+            headers:{
+              'Content-Type':'application/json'
+            }
+          })
+          .then(res=>{
+            return res.json()
+          })
+          .then(data=>{
+            console.log(data)
+          })
+      })
+    </script>
+  </body>
+</html>

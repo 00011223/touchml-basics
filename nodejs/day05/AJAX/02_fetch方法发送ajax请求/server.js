@@ -9,7 +9,7 @@ app.use('/public', express.static(`${__dirname}/public`))
 app.get('/', (req, res) => res.send('Hello World!'))
 
 // 原生ajax请求 '/get_xhr'接口
-app.get('/get_xhr', (req, res) => {
+app.get('/get_fetch', (req, res) => {
   res.send({
     msg: '我收到你的数据啦',
     data: req.query,
@@ -17,7 +17,7 @@ app.get('/get_xhr', (req, res) => {
 })
 
 // 原生ajax请求 '/post_xhr'接口
-app.post('/post_xhr', (req, res) => {
+app.post('/post_fetch', (req, res) => {
   res.send({
     msg: '我收到你的数据啦',
     data: req.body,
