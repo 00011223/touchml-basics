@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 这是正常内容 -->
+    <h1>这是标题</h1>
+    <span>我是文本</span>
+    <%# 这是一段ejs的注释内容 %>
+    <%# 演示输出模板语法,注意输出模板语句中更多的是输出标准的html字符串以及外部传入的数据 %>
+    姓名:<%= name %>
+    <%= '<h1>这是标题&gt;</h1>' %>
+
+    <div class='<%= name %>'>xxxxx</div>
+
+    <%- '<h1>这是标题&gt;</h1>' %>
+
+    <%- name %>
+    <% age++ %>
+    <div>姓名:<%= name %></div>
+    <div>年龄:<%= age %></div>
+</body>
+</html>
