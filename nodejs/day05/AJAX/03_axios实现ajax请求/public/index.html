@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="/public/js/axios.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>axios-get方式-ajax请求</h1>
+    <form class="formdata01">
+      账号:<input type="text" name="uname" /><br />
+      密码:<input type="password" name="upwd" /><br />
+      <button type="button" class="btn1">提交</button>
+    </form>
+
+    <h1>axios-post方式-ajax请求</h1>
+    <form class="formdata02">
+      账号:<input type="text" name="uname" /><br />
+      密码:<input type="password" name="upwd" /><br />
+      <button type="button" class="btn2">提交</button>
+    </form>
+    <!-- <script>
+      // 获取到表单对象
+      let formdata01 = document.querySelector('.formdata01')
+      // 提交按钮
+      let btn1 = document.querySelector('.btn1')
+    
+
+      // 获取表单中的数据
+      // let formdata = new FormData(formdata01)
+
+      // 给提交按钮绑定事件
+      btn1.addEventListener('click', () => {
+          // 需求：当用户点击提交按钮，就访问对应的服务器并且发送相关的数据
+          // 通过axios网络请求库的方式发送ajax请求
+          axios.get('http://127.0.0.1:3000/get_axios',{
+            params:{
+              name:'李四',
+              age:18
+            }
+          })
+          .then(res=>{
+            console.log(res.data)
+          })
+          .catch(err=>{
+            console.log(err)
+          })
+
+      })
+    </script> -->
+
+
+
+<script>
+  // 获取到表单对象
+  let formdata02 = document.querySelector('.formdata02')
+  // 提交按钮
+  let btn2 = document.querySelector('.btn2')
+
+
+  // 获取表单中的数据
+  // let formdata = new FormData(formdata01)
+
+  // 给提交按钮绑定事件
+  btn2.addEventListener('click', () => {
+      // 需求：当用户点击提交按钮，就访问对应的服务器并且发送相关的数据
+      // 通过axios网络请求库的方式发送ajax请求
+      axios.post('http://127.0.0.1:3000/post_axios',{
+        name:'哈哈哈',
+        age:1000
+      })
+      .then(res=>{
+        console.log(res.data)
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+
+  })
+</script>
+
+
+    
+  </body>
+</html>
