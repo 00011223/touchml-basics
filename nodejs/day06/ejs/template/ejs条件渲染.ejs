@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        需求:
+            1.在该模板中通过判断某些数据的值,决定是否渲染对应的一些html标签
+     -->
+
+    <h1>ejs单分支条件渲染</h1>
+    <div>姓名:<%= user.name %> 年龄:<%= user.age %></div>
+    <% if(user.age>=18) { %>
+    <p>哈哈哈,我终于可以上网了!</p>
+    <% } %>
+
+    
+    <h1>ejs双分支条件渲染</h1>
+    <div>姓名:<%= user.name %> 年龄:<%= user.age %></div>
+    <% if(user.age>=18) { %>
+    <p>哈哈哈,我终于可以上网了!</p>
+    <% } else { %>
+    <p>很遗憾,未成年!</p>
+    <p>你的年龄只有:<%= user.age %></p>
+    <% } %>
+
+
+    <h1>ejs多分支渲染</h1>
+    <div>姓名:<%= user.name %> 年龄:<%= user.age %></div>
+    <% if(user.age>=18) { %>
+    <p>哈哈哈,我终于可以上网了!</p>
+    <% } else if(user.and_father) { %>
+    <p>有大人陪同,还是可以上网!</p>
+    <% } else { %>
+    <p>很遗憾,不满足条件</p>
+    <% } %>
+  </body>
+</html>
