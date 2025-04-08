@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>西游师徒个人信息</h1>
+
+   
+
+
+    <% for(let i=0;i<userinfo.length;i++){ %> 
+        <div>
+            姓名:<p><%= userinfo[i].name %> </p>
+            年龄:<p><%= userinfo[i].age %> </p>
+            住址:<p><%= userinfo[i].address %> </p>
+            称号:<p><%= userinfo[i].title %> </p>
+        </div>
+        <div>---------------------------</div>
+    <% } %> 
+
+
+    <% userinfo.forEach(el => {%> 
+        <div>
+            姓名:<p><%= el.name %> </p>
+            年龄:<p><%= el.age %> </p>
+            住址:<p><%= el.address %> </p>
+            称号:<p><%= el.title %> </p>
+        </div>
+        <div>---------------------------</div>
+    <% }) %> 
+
+  
+
+
+</body>
+</html>
