@@ -37,6 +37,7 @@ app.get('/', (req, res) => {
 
 
     ejs.renderFile('./template/ejs列表渲染.ejs',data,(err,html)=>{
+        if(err) throw err
         res.send(html)
     })
 
