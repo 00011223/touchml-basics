@@ -28,7 +28,7 @@ function Navbar(props) {
                                     <img style={{width: '32px'}} src={headIcon}/>
                                 </button>
                                 <ul className="dropdown-menu">
-                                    <li><a className="dropdown-item" href="/bbs论坛html项目/setting.html">个人中心</a></li>
+                                    <li><a className="dropdown-item" href="/setting.html">个人中心</a></li>
                                     <li><a className="dropdown-item" href="/bbs论坛html项目/setting.html">设置</a></li>
                                     <li><a className="dropdown-item" href="#">退出</a></li>
                                 </ul>
