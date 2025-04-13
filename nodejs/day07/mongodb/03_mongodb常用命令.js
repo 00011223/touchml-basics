@@ -1,5 +1,7 @@
 /* 
 
+   mongodb中文文档手册：https://www.mongodb.org.cn/manual/
+
   对数据库进行操作：本质上对数据的操作主要就是增删查改(CRUD)
 
     //注释语句 不会被执行
