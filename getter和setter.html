@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    let user = {
+        _sex: 'male'
+    }
+
+    // 什么时访问器？作用时什么
+    // getter 和 setter 称为访问器 作用是 用于控制访问
+
+    // 给对象定义属性
+    Object.defineProperty(user, 'sex', {
+        // 属性值
+        // value: 'male',
+        // 添加访问器 getter 和 setter
+        // 添加访问器时不能添加属性的初始值 value
+
+        // 取值访问器
+        get: function () {
+            // 访问器内的 this 代表对象自身
+            // console.log(this);
+            return this._sex === 'male' ? '男' : '女'
+        },
+        // 赋值访问器
+        set: function (value) {
+            // console.log(value);
+
+            if (value === '男') value = 'male'
+            else if (value === '女') value = 'female'
+
+            this._sex = value
+        }
+    })
+
+    console.log(user);
+</script>
+
+</html>

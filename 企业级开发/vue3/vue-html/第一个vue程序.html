@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入 vue.js -->
+    <script src="./js/vue.global.js"></script>
+</head>
+<body>
+    <!-- 声明根节点 -->
+    <div id="root"></div>
+</body>
+<script>
+    
+    // 创建 vue 对象
+    // 参数为 配置对象
+    Vue.createApp({
+        // 模板
+        // 相当于react中的reactDom
+        template: `
+            <h1>
+                hello vue.js
+            </h1>
+        `
+    })
+        // mount 函数相当于 react 的 render 函数
+        .mount('#root')
+
+    
+</script>
+</html>
