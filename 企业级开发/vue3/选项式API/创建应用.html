@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.global.js"></script>
+</head>
+<body>
+<!-- 根节点外的内容无法被vue识别 -->
+<div>{{title}}</div>
+<div id="root">
+    <!-- 1. 根节点中声明模板  -->
+    <div>{{title}}</div>
+</div>
+</body>
+<script>
+    // 知识点：
+    // vue应用创建的必要步骤
+    //      引入依赖
+    //      创建应用根节点
+    //      创建app对象
+    //      挂载应用
+    // 关于模板的声明方法
+    //   1. 在根节点中
+    //   2. 在配置对象中使用 template 属性
+    //   3. 在配置对象中使用 render 函数
+
+    // viewModel
+    let app = Vue.createApp({
+        // 2. 添加 template 属性 声明模板
+        // template: `
+        //     <div>
+        //           <h1>{{title}}</h1>
+        //     </div>
+        // `,
+
+        // 3. 通过 render 函数声明模板
+        render() {
+            // h 是一个创建 VNode 虚拟节点的函数
+            // VNode 相当于 react 中的 reactDom 是一个虚拟节点
+
+            // h 函数接收三个参数
+            // 第一个参数：标签或组件
+            // 第二个参数：props属性
+            // 第三个参数：children数组(可以当作innerHTML使用)，用来描述 innerHTML，该参数和第二个参数的innerHTML属性冲突
+            // return Vue.h('h3', {class: 'active', id: 'my-id'}, 'hello vue.js')
+            return Vue.h('div', {class: 'active', id: 'my-id'}, [
+                Vue.h('h1', {}, 'hello h1'),
+                Vue.h('h2', {}, 'hello h2'),
+            ])
+        },
+
+
+        // 声明数据对象
+        data() {
+            return {
+                // 此处的属性可以在模板中访问
+                title: 'hello vue.js'
+            }
+        }
+    }).mount('#root')
+</script>
+</html>
