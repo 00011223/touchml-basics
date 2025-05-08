@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="js/vue.global.js"></script>
+</head>
+<body>
+<div id="app">
+    <div>
+        <!-- 插值
+            插值可以访问以下内容
+            1. data 中的数据
+            2. methods 中的方法
+            3. 组件中可访问的任意内容
+            插值可以插入的都是vue组件中的内容，且插值的内容实际是js表达式
+        -->
+        <div>{{title}}</div>
+        <div>{{getTitle()}}</div>
+        <div>{{'count: ' + count}}</div>
+
+        <!-- v-once 只插入一次静态值，之后修改属性值，则不再更新 -->
+        <div v-once>{{'count once: ' + count}}
+            <button @click="increaseCount">+</button>
+        </div>
+
+        <!-- 插入 html (相当于 innerHTML)
+            尽量不要使用，因为该技术可能导致注入漏洞
+        -->
+        <div v-html="html"></div>
+        <!--        <div v-html="html2"></div>-->
+
+        <!-- 插入纯文本 (相当于 innerText) -->
+        <div v-text="html"></div>
+
+        <!-- 属性绑定
+            绑定html属性的值
+        -->
+        <img v-bind:style="myStyle" v-bind:src="srcData"/>
+        <!-- 一次绑定多个属性
+            v-bind 后面不用冒号指定具体的属性
+            二十直接赋值一个对象
+            对象中有哪些属性就绑定哪些属性给元素
+         -->
+        <img v-bind="imgProps">
+        <button @click="changeImage">修改图片</button>
+
+
+        <!-- 指令 https://staging-cn.vuejs.org/api/built-in-directives.html#built-in-directives -->
+        <!-- 指令就是在 vue 模板中 又 v- 开头，写在html属性上的表达式 -->
+
+        <!--
+            v-bind
+            v-on
+            v-once
+            v-if
+            v-for
+            v-slot
+            v-html
+            v-text
+         -->
+
+        <!-- 指令修饰符
+            .once
+            .prevent
+            .stop
+            .trim
+            .number
+        -->
+        <form>
+            <button @click.prevent="submit">提交</button>
+        </form>
+    </div>
+</div>
+</body>
+<script>
+    const App = {
+        // 定义数据的时候 必须是一个 data 函数 且必须返回一个数据对象
+        data() {
+            return {
+                title: '这是标题',
+                count: 0,
+                html: `<span style="color: #f00">hello</span>&nbsp;world`,
+                html2: `<img src="xxx" onerror="alert('这是用户注入的代码')"/>`,
+                srcData: './img/hand.png',
+                myStyle: 'width: 100px; height: 100px;',
+                imgProps: {
+                    src: './img/hand.png',
+                    style: 'width: 100px; height: 100px;'
+                }
+            }
+        },
+        // 组件方法
+        methods: {
+            // getTitle 是组件内声明的方法
+            getTitle() {
+                // 组件方法中的 this 代表的是组件实例对象
+                return this.title
+            },
+
+            increaseCount() {
+                this.count++
+            },
+
+            changeImage() {
+                this.srcData = './img/head.png'
+            },
+
+            submit(event) {
+                // event.preventDefault()
+                console.log('submit')
+            }
+        }
+    }
+
+    Vue.createApp(App).mount('#app')
+</script>
+</html>
