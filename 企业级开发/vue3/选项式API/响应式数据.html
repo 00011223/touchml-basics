@@ -17,6 +17,10 @@
         </div>
         <div>{{value}}</div>
         <button @click="createValue">添加新属性value</button>
+        <div>
+            <h1 v-bind:style="textStyle">hello world</h1>
+            <button @click="changeTextStyle">修改文本样式</button>
+        </div>
     </div>
 </div>
 </body>
@@ -35,7 +39,7 @@
     // 当该属性发生变化，页面会自动更新，这样的属性就是响应式属性
 
     // 应用场景
-    // 当数据变化需要更新页面时就是用响应式属性（平时书写的时候，几乎所有的属性都是响应式属性）
+    // 当数据变化需要更新页面时就是用响应式属性（编程时，几乎所有的属性都可以写成响应式属性）
 
     Vue.createApp({
         // 声明响应式属性
@@ -46,7 +50,8 @@
                 count: 0,
                 // 若动态创建的属性，一定要在data中添加初始值
                 // 否则该动态添加的属性就不是响应式的
-                value: undefined
+                value: undefined,
+                textStyle: ''
             }
         },
         methods: {
@@ -63,6 +68,10 @@
 
             createValue() {
                 this.value = '这是动态创建的属性'
+            },
+
+            changeTextStyle() {
+                this.textStyle = 'color: #f00;'
             }
         }
     }).mount('#app')
