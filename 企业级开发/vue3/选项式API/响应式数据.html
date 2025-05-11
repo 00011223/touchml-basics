@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="js/vue.global.js"></script>
+</head>
+<body>
+<div id="app">
+    <div>
+        <!-- 在页面中可以访问响应式属性 -->
+        <div>{{'count: ' + count}}</div>
+        <div>
+            <button v-bind:src="count" @click="increaseCount">+</button>
+        </div>
+        <div>{{value}}</div>
+        <button @click="createValue">添加新属性value</button>
+    </div>
+</div>
+</body>
+<script>
+    // 知识点：
+    // 什么是响应式属性？
+    // 应用场景
+    // 声明响应式属性
+    // 访问属性
+    //     1. 页面中访问
+    //     2. 组件中访问
+    // 和非响应式属性做对比
+    // $data
+
+    // 什么是响应式属性？
+    // 当该属性发生变化，页面会自动更新，这样的属性就是响应式属性
+
+    // 应用场景
+    // 当数据变化需要更新页面时就是用响应式属性（平时书写的时候，几乎所有的属性都是响应式属性）
+
+    Vue.createApp({
+        // 声明响应式属性
+        // 使用data方法声明响应式属性
+        data() {
+            // 一定要返回一个数据对象
+            return {
+                count: 0,
+                // 若动态创建的属性，一定要在data中添加初始值
+                // 否则该动态添加的属性就不是响应式的
+                value: undefined
+            }
+        },
+        methods: {
+            increaseCount() {
+                console.log(this)
+
+                // this.$data 是响应式属性真正存在的地方
+                console.log(this.$data)
+
+                // 通过this.<属性名>来访问响应式属性
+                // 该形式的访问方法实际上是访问的“快捷方式”，本质上就是访问器
+                this.count++
+            },
+
+            createValue() {
+                this.value = '这是动态创建的属性'
+            }
+        }
+    }).mount('#app')
+</script>
+</html>
