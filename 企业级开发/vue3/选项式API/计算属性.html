@@ -6,10 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Title</title>
     <script src="js/vue.global.js"></script>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .nav {
+            height: 100px;
+            background-color: #f00;
+        }
+
+        .div {
+            background-color: #00f;
+        }
+    </style>
 </head>
 <body>
 <div id="app">
-
+    <div>
+        <div class="nav"></div>
+        <!--        <div class="div" v-bind:style="`height: ${divHeight}px`"></div>-->
+        <h1>货币格式化</h1>
+        <div>CNY: {{CNY}}</div>
+        <div>USD: {{USD}}</div>
+        <button @click="changeCNY">修改人名币值</button>
+        <button @click="changeUSD">修改美元值</button>
+    </div>
 </div>
 </body>
 <script>
@@ -19,9 +41,60 @@
     // 声明计算属性
     // 访问计算属性
     // 计算属性的get和set
+    // 注意: 计算属性有缓存，当影响计算属性的因素没有变时，读取的计算属性就是从缓存中读取的
 
-    Vue.createApp({
+    // 什么是计算属性？
+    // 一个通过计算得到的属性就是计算属性，在vue中计算属性本质上就是函数
 
-    }).mount('#app')
+    // 应用场景
+    // 页面中某个内容需要由计算而得到，这样的内容可以使用计算属性，例如:
+    // 1. 加入有个导航栏名为nav，除去导航栏外，另外部分名为div的元素的高度等于窗口高度减去nav高度，此时div的高度就可以使用计算属性
+    // 2. 页面中拥有一个响应式属性，通过该属性格式化出不同的显示效果时，可以使用计算属性，例如: 时间格式化，货币格式化
+
+    const App = {
+
+        data() {
+            return {
+                CNY: 100
+            }
+        },
+
+        // 计算属性声明在 computed 中
+        computed: {
+            divHeight() {
+                // 计算属性一定要返回值
+                return window.innerHeight - 100
+            },
+
+            // USD() {
+            //     return this.CNY * 0.14
+            // }
+
+            // 给计算属性声明getter和setter访问器
+            USD: {
+                get() {
+                    return this.CNY * 0.14
+                },
+                set(value) {
+                    // 赋值计算属性时将调用set函数
+                    // value 是被赋予的值
+                    this.CNY = value * 7.2
+                }
+            }
+        },
+
+        methods: {
+            changeCNY() {
+                this.CNY = 1000
+            },
+
+            changeUSD() {
+                // 计算属性被当作普通属性访问
+                this.USD = 100
+            }
+        }
+    }
+
+    Vue.createApp(App).mount('#app')
 </script>
 </html>
