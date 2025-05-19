@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="js/vue.global.js"></script>
+    <style>
+        button {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <table>
+        <tr>
+            <td>商品</td>
+            <td>
+                <button @click="chooseNG">南瓜15元/斤</button>
+            </td>
+            <td>
+                <button @click="chooseQZ">茄子5元/斤</button>
+            </td>
+            <td>
+                <button @click="chooseFQ">番茄10元/斤</button>
+            </td>
+        </tr>
+        <tr>
+            <td>数量</td>
+            <td>
+                <button @click="choose1">1斤</button>
+            </td>
+            <td>
+                <button @click="choose2">2斤</button>
+            </td>
+            <td>
+                <button @click="choose3">3斤</button>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="text-align: center">商品</td>
+            <td style="text-align: center">数量</td>
+            <td style="text-align: center">总价</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td v-bind:style="`background-color: ${goods === ''? '#f00': '#0f0'}; color: #fff; text-align: center`">
+                {{goods === '' ? '无' : goods + `(单价: ${price})`}}
+            </td>
+            <td v-bind:style="`background-color: ${count === 0? '#f00': '#0f0'}; color: #fff; text-align: center`">
+                {{count === 0 ? '无' : `${count}斤`}}
+            </td>
+            <td v-bind:style="`background-color: ${total === 0? '#f00': '#0f0'}; color: #fff; text-align: center`">{{total === 0 ? '0' : total}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button @click="clearGoods">清空</button>
+            </td>
+            <td>
+                <button @click="clearCount">清空</button>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+<script>
+    Vue.createApp({
+        data() {
+            return {
+                // 商品
+                goods: '',
+                // 数量
+                count: 0,
+                // 单价
+                price: 0,
+            }
+        },
+
+        methods: {
+            chooseNG() {
+                this.goods = '南瓜'
+                this.price = 15
+            },
+            chooseQZ() {
+                this.goods = '茄子'
+                this.price = 5
+            },
+            chooseFQ() {
+                this.goods = '番茄'
+                this.price = 10
+            },
+            choose1() {
+                this.count = 1
+            },
+            choose2() {
+                this.count = 2
+            },
+            choose3() {
+                this.count = 3
+            },
+            clearGoods() {
+                this.goods = ''
+                this.price = 0
+            },
+            clearCount() {
+                this.count = 0
+            }
+        },
+
+        computed: {
+            // 总价 = 单价 * 数量
+            total() {
+                return this.price * this.count
+            }
+        }
+    }).mount('#app')
+</script>
+</html>
