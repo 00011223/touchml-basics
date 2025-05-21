@@ -22,12 +22,33 @@
         .size2 {
             font-size: 32px
         }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: #000;
+        }
+
+        .box.active {
+            background-color: #ff0;
+        }
     </style>
 </head>
 <body>
 <div id="app">
     <div>
-        <div>hello world</div>
+        <!-- v-bind的缩写为 : 冒号 -->
+        <div :class="clazz1">hello world</div>
+        <div :class="clazz2">hello world</div>
+        <div :class="clazz3">hello world</div>
+        <div :class="box">
+            <button @click="toggleLight">开关灯</button>
+        </div>
+
+
+        <div :style="style1">hello world</div>
+        <div :style="style2">hello world</div>
+        <div :style="style3">hello world</div>
     </div>
 </div>
 </body>
@@ -49,7 +70,45 @@
 
     Vue.createApp({
         data() {
-            return {}
+            return {
+                box: {
+                    box: true,
+                    active: false
+                },
+
+                clazz1: 'color1 size1',
+                // class 值为对象时
+                // key: 类名 value: 一个bool值 代表该类名是否存在
+                clazz2: {
+                    color2: false,
+                    size2: true
+                },
+                // class 值为数组时
+                // 数组成员可以是字符串也可以是对象
+                clazz3: ['color1', {size2: true}],
+
+
+                style1: 'color: #f00; font-size: 24px;',
+                // style 值为对象时
+                // key: css属性名 value: css 属性值
+                style2: {
+                    color: '#0f0',
+                    fontSize: '32px'
+                },
+                // style 值为数组时
+                // 数组成员必须是对象
+                style3: [{color: '#ff0', backgroundColor: '#0f0'}, {fontSize: '24px'}],
+                // 同一个属性可以写多个值
+                // 浏览器渲染时只会取多个值中最后一个有效值
+                // 这种写法可以提高代码的兼容性
+                style4: { display: ['-webkit-box', '-ms-flexbox', 'flex'] }
+            }
+        },
+
+        methods: {
+            toggleLight() {
+                this.box.active = !this.box.active
+            }
         }
     }).mount('#app')
 </script>
