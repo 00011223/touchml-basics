@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="js/vue.global.js"></script>
+</head>
+<body>
+<div id="app">
+    <div>
+        <!-- v-if 条件渲染 -->
+        <div v-if="sex === 'male'">男</div>
+        <div v-else-if="sex === 'female'">女</div>
+        <div v-else>其他</div>
+        
+        <!-- v-show 条件渲染 -->
+        <div v-show="sex === 'male'">男</div>
+        <div v-show="sex === 'female'">女</div>
+        <div v-show="sex === 'other'">其他</div>
+    </div>
+</div>
+</body>
+<script>
+    // 知识点：
+    // v-if
+    // v-show
+    // v-if 和 v-show 区别
+    
+    // v-if 和 v-show 的区别
+    // v-if 根据条件选择是否渲染元素，没有渲染的元素不会出现在文档中
+    // v-show 条件无论成立还是失败，该元素都会渲染到文档中，但 v-show 会通过 style 的 display 属性来控制元素的显示和隐藏
+    
+    let vm = Vue.createApp({
+        data() {
+            return {
+                sex: 'male'
+            }
+        }
+    }).mount('#app')
+</script>
+</html>
