@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="js/vue.global.js"></script>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <!-- stu 当前遍历到的数组成员
+            students 遍历的数组
+            key 每个循环渲染的元素的唯一标识
+            index 当前成员的索引
+         -->
+        <li v-for="(stu, index) in students" :key="stu.name">索引: {{index}}; 姓名: {{stu.name}}; 性别: {{stu.sex === 'male' ? '男' :
+                stu.sex === 'female' ? '女' : '其他'
+            }}; 年龄: {{stu.age}}
+        </li>
+    </ul>
+</div>
+</body>
+<script>
+    // 知识点：
+    // v-for key
+    // 注意事项
+    // 若要修改数组，请尽量使用数组的方法，例如 push splice unshift shift pop，而不是给数组的索引赋值
+    // 因为在 vue2 给数组索引直接赋值，会导致数组成员变成非响应式的
+    
+    let vm = Vue.createApp({
+        data() {
+            return {
+                students: [
+                    {
+                        name: '张三',
+                        sex: 'male',
+                        age: 17
+                    },
+                    {
+                        name: '李四',
+                        sex: 'female',
+                        age: 24
+                    },
+                    {
+                        name: '老王',
+                        sex: 'other',
+                        age: 30
+                    },
+                ]
+            }
+        }
+    }).mount('#app')
+</script>
+</html>
