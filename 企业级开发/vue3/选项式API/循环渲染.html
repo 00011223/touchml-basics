@@ -12,7 +12,7 @@
     <ul>
         <!-- stu 当前遍历到的数组成员
             students 遍历的数组
-            key 每个循环渲染的元素的唯一标识
+            key 每个循环渲染的元素的唯一标识，将影响重新排序后的元素顺序
             index 当前成员的索引
          -->
         <li v-for="(stu, index) in students" :key="stu.name">索引: {{index}}; 姓名: {{stu.name}}; 性别: {{stu.sex === 'male' ? '男' :
@@ -23,6 +23,15 @@
         <!-- 指定固定循环次数 -->
         <li v-for="(str, i) in 3">{{str + ':' + i}}</li>
     </ul>
+    
+    <div>
+        <!-- 此处没有添加key的div，若重新排序数组，将发生以下现象：
+            name 值被重新赋值了 但后面的输入框并没有重新排序
+            此处若添加 key，则被添加key的div元素，在数组排序后也会重新排序
+         -->
+        <div v-for="stu in students">name: {{stu.name}}; <input type="text"></div>
+    </div>
+    
 </div>
 </body>
 <script>
