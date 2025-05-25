@@ -19,6 +19,9 @@
                 stu.sex === 'female' ? '女' : '其他'
             }}; 年龄: {{stu.age}}
         </li>
+        
+        <!-- 指定固定循环次数 -->
+        <li v-for="(str, i) in 3">{{str + ':' + i}}</li>
     </ul>
 </div>
 </body>
