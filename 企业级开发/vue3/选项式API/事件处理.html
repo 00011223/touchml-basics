@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="js/vue.global.js"></script>
+</head>
+<body>
+<div id="app">
+    <div>
+        <!-- 绑定事件基础语法
+            v-on:<事件名>="<事件处理程序>"
+         -->
+        <button v-on:click="clickHandler">点击</button>
+        <!--  v-on 缩写为 @ -->
+        <button @click="clickHandler">点击</button>
+        
+        <!-- 绑定事件的两种写法： -->
+        <!-- 1. 赋值一个函数值充当事件处理程序 -->
+        <button @click="clickHandler">点击</button>
+        <!-- 赋值一个箭头函数 -->
+        <button @click="()=>{clickHandler()}">点击</button>
+        <!-- 2. 赋值一个js表达式
+            在表达式中包含一个隐式声明的变量 $event 此变量就是事件对象
+         -->
+        <button @click="clickHandler($event)">点击</button>
+        
+        <!-- 通过事件传递参数的办法 -->
+        <button data-id="abc" @click="passParams">传递参数</button>
+        <button @click="passParams2($event, 123)">传递参数</button>
+        
+        <!-- 事件修饰符  -->
+        <!-- 1.prevent 屏蔽默认事件 -->
+        <div @contextmenu.prevent="onContextMenu">hello prevent</div>
+        
+        <!-- 2. stop 阻止冒泡 -->
+        <div @click="onDivClick">
+            <button @click.stop="onBtnClick">阻止冒泡</button>
+            <!-- 同时可以添加多个修饰符 -->
+            <button @click.stop.prevent="onBtnClick">阻止冒泡</button>
+        </div>
+        
+        <!-- 3. once 事件只会触发一次 -->
+        <button @click.once="onOnce">once</button>
+        
+        <!-- 案件修饰符
+            用于修饰按键事件的修饰符
+         -->
+        <!-- tabindex 给元素添加 按tab键的索引，可以让原本不能获取焦点的元素获取焦点 -->
+        <!-- 1. 按钮修饰 -->
+        <div tabindex="0" style="height: 100px; background-color: #f00" @keyup.q="onDivClick2"></div>
+        <!-- 2. 系统修饰符 -->
+<!--        <div tabindex="0" style="height: 100px; background-color: #0f0" @keyup.ctrl.shift="onSystemClick"></div>-->
+        <!-- 3. exact 精确匹配按键 -->
+        <div tabindex="0" style="height: 100px; background-color: #0f0" @keyup.ctrl.i.exact="onSystemClick"></div>
+        
+        
+        
+        <!-- 鼠标修饰符
+            专门用于鼠标事件的修饰符
+            待选项包括 left right middle 分别代表鼠标左键右键和中键
+         -->
+        <div @click.middle="onDivClick3" style="height: 100px; background-color: #ff0"></div>
+    </div>
+</div>
+<div>
+    <button class="my-once">my Once</button>
+</div>
+</body>
+<script>
+    // 知识点：
+    // v-on绑定事件基础
+    //    1. 绑定函数值
+    //    2. 绑定js表达式
+    //    3. $event
+    // 指令修饰符
+    //    1. 事件修饰符
+    //        1. .prevent
+    //        2. .stop
+    //        3. .once
+    //    2. 按键修饰符
+    //        1. 按键修饰符（例如按下w键等指定字母键）
+    //        2. 系统修饰符
+    //        3. 按键别名（enter space left right 等）
+    //        4. .exact
+    //    3. 鼠标修饰符
+    
+    Vue.createApp({
+        methods: {
+            clickHandler(ev) {
+                // ev 事件对象
+                console.log(ev)
+                console.log('click')
+            },
+            passParams(ev) {
+                let dataId = ev.target.getAttribute('data-id')
+                console.log(dataId)
+            },
+            passParams2(ev, dataId) {
+                console.log(ev)
+                console.log(dataId)
+            },
+            onContextMenu() {
+                console.log('右键被点击了')
+            },
+            onBtnClick() {
+                console.log('button被点击了')
+            },
+            onDivClick() {
+                console.log('div被点击了')
+            },
+            onOnce() {
+                console.log('once 事件被触发了')
+            },
+            onDivClick2() {
+                console.log('按下了Q键')
+            },
+            onSystemClick(){
+                console.log('系统修饰符按键被触发了')
+            },
+            onDivClick3(){
+                console.log('鼠标事件被触发了')
+            }
+        }
+    }).mount('#app')
+    
+    // 自己实现一个 .once 修饰符的效果
+    let myOnceBtn = document.querySelector('.my-once')
+    myOnceBtn.addEventListener('click', function () {
+        console.log('my once processed')
+        
+        // arguments.callee 是当前被调用的函数本身
+        myOnceBtn.removeEventListener('click', arguments.callee)
+    })
+</script>
+</html>
