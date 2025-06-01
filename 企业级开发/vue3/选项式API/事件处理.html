@@ -53,7 +53,10 @@
         <div tabindex="0" style="height: 100px; background-color: #f00" @keyup.q="onDivClick2"></div>
         <!-- 2. 系统修饰符 -->
 <!--        <div tabindex="0" style="height: 100px; background-color: #0f0" @keyup.ctrl.shift="onSystemClick"></div>-->
-        <!-- 3. exact 精确匹配按键 -->
+        <!-- 3. 按钮别名 enter space backspace left right up down -->
+        <div tabindex="0" style="height: 100px; background-color: #00f" @keyup.backspace="onDivClick2"></div>
+        
+        <!-- 4. exact 精确匹配按键 -->
         <div tabindex="0" style="height: 100px; background-color: #0f0" @keyup.ctrl.i.exact="onSystemClick"></div>
         
         
