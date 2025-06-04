@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="js/vue.global.js"></script>
+</head>
+<body>
+<div id="app">
+    <form>
+        <!-- 手动实现双向绑定 -->
+        <div>
+            name: {{name}}
+            <label>手动双向绑定 姓名: <input type="text" :value="name" @input="(ev)=>{name = ev.target.value}"></label>
+        </div>
+        
+        <div>
+            name: {{name}}
+            <label>姓名: <input type="text" v-model.trim.lazy="name"></label>
+        </div>
+        <div>
+            age: {{age}}
+            <label>年龄: <input type="number" v-model.number="age"></label>
+        </div>
+        <div>
+            sex: {{sex}}
+            <div>
+                <label><input v-model="sex" type="radio" value="male"> 男</label>
+                <label><input v-model="sex" type="radio" value="female"> 女</label>
+                <label><input v-model="sex" type="radio" value="other"> 其他</label>
+            </div>
+        </div>
+        <div>
+            hobbies: {{hobbies}}
+            <div>
+                <label><input v-model="hobbies" type="checkbox" value="dlq"> 打篮球</label>
+                <label><input v-model="hobbies" type="checkbox" value="tzq"> 踢足球</label>
+                <label><input v-model="hobbies" type="checkbox" value="ymq"> 羽毛球</label>
+            </div>
+        </div>
+        <div>
+            clazz: {{clazz}}
+            <select v-model="clazz">
+                <option value="" disabled>请选择</option>
+                <option v-for="option in options" :key="option.value" :value="option.value">{{option.text}}</option>
+            </select>
+        </div>
+        <div>
+            desc:
+            <pre>{{desc}}</pre>
+            <label>简介: <textarea rows="4" v-model="desc"></textarea></label>
+        </div>
+        <div>
+            <button @click.prevent.stop="submit">提交</button>
+        </div>
+    </form>
+</div>
+</body>
+<script>
+    
+    // 知识点：
+    // 什么是双向绑定
+    // 各种表单元素的v-model双向绑定
+    // 指令修饰符
+    //   1. .trim
+    //   2. .number
+    //   3. .lazy
+    //   4. .prevent
+    //   5. .stop
+    // 双向绑定和响应式的区别
+    
+    
+    // 什么是双向绑定
+    // 双向绑定就是同时给表单元素绑定输入事件和初始值，本质上就是绑定 value 属性和 change（input） 事件
+    // 类似于 react 的受控组件，需要同时赋予 value={} 和 onChange onInput
+    // 双向绑定的表单元素特点:
+    // 1. 当绑定的值发生变化的时候，页面会响应式更新
+    // 2. 当页面用户进行输入时，会响应式的触发数据的更新
+    // 总结：什么是双向绑定? 表单元素，数据修改页面立即更新，表单元素接收输入数据立即更新
+    
+    
+    // 双向绑定和响应式的区别
+    // 双向绑定只能用在表单元素或自定义组件上
+    // 响应式属性可以添加到任意元素或组件
+    // 响应式属性只有单向更新，即: 数据变化响应式更新页面
+    
+    let vm = Vue.createApp({
+        data() {
+            return {
+                options: [
+                    {text: '一班', value: '1'},
+                    {text: '二班', value: '2'},
+                    {text: '三班', value: '3'},
+                ],
+                name: '张三',
+                age: 17,
+                sex: 'male',
+                hobbies: ['dlq', 'ymq'],
+                clazz: '3',
+                desc: '法外\n狂徒'
+            }
+        },
+        
+        methods: {
+            submit() {
+                console.log(this.$data)
+            }
+        }
+    }).mount('#app')
+</script>
+</html>
