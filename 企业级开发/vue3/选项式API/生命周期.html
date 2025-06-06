@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="js/vue.global.js"></script>
+</head>
+<body>
+<div id="app">
+    <div>count: {{count}}</div>
+    <button @click="()=>{count++}">+</button>
+</div>
+</body>
+<script>
+    // 知识点：
+    // 什么是生命周期
+    // 应用场景
+    // setup
+    // beforeCreate
+    // created
+    // beforeMount
+    // mounted
+    // beforeUpdate
+    // updated
+    // beforeUnmount
+    // unmounted
+    
+    
+    // 什么是生命周期
+    // vue组件通过方法来体现组件从出生到消亡的过程，这些方法就是生命周期函数
+    // 也称为生命周期钩子函数
+    // 所谓的钩子（Hook）就是一个能够钩住某个过程的函数，可以在某个过程中添加自定义的代码来执行
+    
+    
+    // 应用场景
+    // setup: 添加组合式api
+    // created 和 mounted 从服务器首次拉取数据，初始化页面
+    // mounted 有时可以用来查询页面元素，但是 created 中不可以
+    // created 中可以添加 window 的全局事件
+    // unmounted 中可以解绑 window 的全局事件
+    
+    function onWindowResize() {
+        console.log('resize')
+    }
+    
+    let app = Vue.createApp({
+        // vue3新增的生命周期
+        // 用于执行组合式API
+        // 在 setup 中不能使用 this 关键字
+        // 因为 setup 被调用时 组件实例还未生成
+        setup() {
+            // 声明一个响应式属性
+            const count = Vue.ref(0)
+            // 返回的对象中所包含的内容，将可以在页面模板中调用
+            return {
+                count
+            }
+        },
+        
+        // 创建组件完成前
+        beforeCreate() {
+            console.log('beforeCreate')
+        },
+        
+        // 组件创建完成后
+        created() {
+            console.log('created')
+            console.log(document.querySelector('button'))
+            
+            window.addEventListener('resize', onWindowResize)
+        },
+        
+        // 挂载前
+        beforeMount() {
+            console.log('beforeMount')
+        },
+        
+        // 挂载完成后
+        mounted() {
+            // 挂载完成后，就意味着页面元素已经正常的显示在文档中了
+            console.log('mounted')
+            console.log(document.querySelector('button'))
+        },
+        
+        // 更新前
+        // 当响应式属性发生变化后，会更新页面，该生命周期就是更新页面前 触发
+        beforeUpdate() {
+            console.log('beforeUpdate')
+        },
+        // 更新后
+        updated() {
+            console.log('updated')
+        },
+        
+        // 卸载前
+        beforeUnmount() {
+            console.log('beforeUnmount')
+        },
+        
+        // 卸载完成后
+        unmounted() {
+            console.log('unmounted')
+            
+            window.removeEventListener('resize', onWindowResize)
+        }
+    })
+    
+    let vm = app.mount('#app')
+    
+    // 调用 app.unmount 卸载已经挂载的内容
+    // app.unmount()
+</script>
+</html>
