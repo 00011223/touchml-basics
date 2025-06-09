@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="js/vue.global.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+<div id="app">
+    <div class="container pt-3">
+        <div class="vstack gap-3">
+            
+            <!-- 工具栏 -->
+            <div>
+                <button class="btn btn-primary" @click="add">添加</button>
+            </div>
+            <!-- 表格 -->
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>书名</th>
+                    <th>作者</th>
+                    <th>性别</th>
+                    <th>国家</th>
+                    <th>简介</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="book in books" :key="book.id">
+                    <td>{{book.id}}</td>
+                    <td>{{book.name}}</td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.sex === 'male' ? '男' :
+                            book.sex === 'female' ? '女' : '不详'
+                        }}
+                    </td>
+                    <td>{{book.country}}</td>
+                    <td>
+                        <pre>{{book.desc}}</pre>
+                    </td>
+                    <td>
+                        <div class="hstack gap-2">
+                            <button class="btn btn-outline-dark btn-sm" @click="edit(book.id)">编辑</button>
+                            <button class="btn btn-danger btn-sm" @click="remove(book.id)">删除</button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            
+            <!-- 表单 -->
+            <div v-show="isShowForm" class="card" style="width: 500px;">
+                <div class="card-header">{{isNaN(id) ? '添加数据' : '编辑数据'}}</div>
+                <div class="card-body">
+                    <div class="vstack gap-2">
+                        <div>
+                            <label class="form-label">书名</label>
+                            <input v-model="formData.name" type="text" class="form-control">
+                        </div>
+                        <div>
+                            <label class="form-label">作者</label>
+                            <input v-model="formData.author" type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary" @click="confirm">确定</button>
+                    <button class="btn" @click="cancel">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    let id = 3
+    
+    Vue.createApp({
+        data() {
+            return {
+                isShowForm: false,
+                books: [
+                    {
+                        id: 0,
+                        name: '西游记',
+                        author: '吴承恩',
+                        sex: 'male',
+                        country: 'CN',
+                        desc: '81难十万八千里的公路片故事'
+                    },
+                    {
+                        id: 1,
+                        name: '红楼梦',
+                        author: '曹雪芹',
+                        sex: 'female',
+                        country: 'CN',
+                        desc: '包罗万象的中国故事'
+                    },
+                    {
+                        id: 2,
+                        name: '水浒传',
+                        author: '施耐庵 罗贯中',
+                        sex: 'other',
+                        country: 'CN',
+                        desc: '105个男人和三个女人的故事'
+                    }
+                ],
+                id: NaN,
+                formData: {
+                    name: '',
+                    author: ''
+                }
+            }
+        },
+        methods: {
+            add() {
+                this.isShowForm = true
+            },
+            
+            edit(bookId) {
+                // 保存要编辑的数据id
+                this.id = bookId
+                this.isShowForm = true
+                
+                // 回显数据
+                // 查找数据
+                let book = this.books.find(_book => _book.id === bookId)
+                // 显示数据
+                this.formData.name = book.name
+                this.formData.author = book.author
+            },
+            
+            cancel() {
+                // 取消的过程中 通常要重置表单
+                this.id = NaN
+                this.formData.name = ''
+                this.formData.author = ''
+                this.isShowForm = false
+            },
+            
+            confirm() {
+                
+                // 更具id值是否存在，执行添加或编辑逻辑
+                if (isNaN(this.id)) {
+                    // 添加数据
+                    
+                    // 构造要添加的数据
+                    let book = {...this.formData}
+                    // 添加id
+                    book.id = id++
+                    
+                    this.books.unshift(book)
+                } else {
+                    // 编辑数据
+                    
+                    // 构造参数
+                    let book = {...this.formData}
+                    book.id = this.id
+                    
+                    // 替换数据
+                    // 查询数据索引
+                    let i = this.books.findIndex(_book => _book.id === book.id)
+                    // 替换数据
+                    this.books.splice(i, 1, book)
+                }
+                
+                // 重置表单
+                this.cancel()
+            },
+            
+            remove(bookId) {
+                // 由于删除是危险操作
+                // 所以需要用户确认
+                let r = confirm('确定删除吗?')
+                
+                if (r) {
+                    // 查找索引
+                    let i = this.books.findIndex(book => book.id === bookId);
+                    // 删除
+                    this.books.splice(i, 1)
+                }
+            }
+        }
+    }).mount('#app')
+</script>
+</html>
