@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="js/vue.global.js"></script>
+    <style>
+        td {
+            width: 200px;
+        }
+        
+        input {
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <table border>
+        <tbody>
+        <tr v-for="(user,index) in users" :key="user.name">
+            <td>姓名:
+                <span v-if="!editData[index]">{{user.name}}</span>
+                <input v-else type="text" v-model.trim="editData[index].name">
+            </td>
+            <td>性别:
+                <span v-if="!editData[index]">{{user.sex === 'male' ? '男' :
+                        user.sex === 'female' ? '女' : '其他'
+                    }}</span>
+                <select v-else v-model="editData[index].sex">
+                    <option value="male">男</option>
+                    <option value="female">女</option>
+                    <option value="other">其他</option>
+                </select>
+            </td>
+            <td>年龄:
+                <span v-if="!editData[index]">{{user.age}}</span>
+                <input v-else type="number" v-model.number="editData[index].age">
+            </td>
+            <td>
+                <button v-if="!editData[index]" @click="edit(index)">编辑</button>
+                <div v-else>
+                    <button @click="confirm(index)">确定</button>
+                    <button @click="cancel(index)">取消</button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<script>
+    Vue.createApp({
+        data() {
+            return {
+                // 编辑框保存的值
+                editData: {
+                    // key: 数据的索引
+                    // value: 输入框中双向绑定的值
+                },
+                users: [
+                    {
+                        name: '张三',
+                        sex: 'male',
+                        age: 17
+                    },
+                    {
+                        name: '李四',
+                        sex: 'female',
+                        age: 24
+                    },
+                    {
+                        name: '老王',
+                        sex: 'other',
+                        age: 30
+                    },
+                ]
+            }
+        },
+        methods: {
+            edit(index) {
+                // 查找数据
+                let user = this.users[index]
+                // 创建数据缓存用于页面绑定v-model
+                this.editData[index] = {...user}
+            },
+            
+            cancel(index) {
+                // 删除对应数据
+                delete this.editData[index]
+            },
+            
+            confirm(index) {
+                // 查找editData中对应数据
+                let u = this.editData[index]
+                // 应用数据到users中
+                let user = this.users[index]
+                // 复制属性
+                for (const key in user) {
+                    user[key] = u[key]
+                }
+                // 删除editData中的数据
+                this.cancel(index)
+            }
+        }
+    }).mount('#app')
+</script>
+</html>
