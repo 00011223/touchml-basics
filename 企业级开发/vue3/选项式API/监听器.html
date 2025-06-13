@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="js/vue.global.js"></script>
+</head>
+<body>
+<div id="app">
+    <div>CNY: <input type="number" v-model.number="CNY"></div>
+    <div>obj.name: <input type="text" v-model.trim="obj.name"></div>
+    <div>
+        arr[1]:
+        <label><input type="radio" v-model="arr[1]" :value="true"> true</label>
+        <label><input type="radio" v-model="arr[1]" :value="false"> false</label>
+    </div>
+    <div>arr[3].name <input type="text" v-model.trim="arr[3].name"></div>
+</div>
+</body>
+<script>
+    // 知识点：
+    // 什么是监听器
+    // 应用场景
+    // 声明监听器
+    //      1. 属性
+    //      2. 对象属性
+    //      3. 数组成员
+    //      4. 数组成员的属性
+    // 触发监听器
+    // 总结: 监听器的 key 可以使用字符串，通过 . 运算符连接想要访问的引用路径
+    
+    
+    // 什么是监听器
+    // 用于监听某一响应式属性变化的方法
+    
+    // 应用场景
+    // 监视属性变化时可以使用监听器
+    
+    
+    Vue.createApp({
+        data() {
+            return {
+                CNY: 100,
+                obj: {
+                    name: '张三'
+                },
+                arr: [1, true, 'hello', {name: '老王'}]
+            }
+        },
+        
+        // 声明监视器
+        watch: {
+            // key: 监视器名
+            // value: 监视器的处理程序
+            
+            
+            // 1. 属性
+            // key写为要监视的属性名
+            // newVal 新值
+            // oldVal 旧值
+            CNY(newVal, oldVal) {
+                console.log(newVal)
+                console.log(oldVal)
+            },
+            
+            // 2. 对象属性
+            'obj.name': function (newVal, oldVal) {
+                console.log(newVal)
+                console.log(oldVal)
+            },
+            
+            // 3. 数组成员
+            'arr.1': function (newVal, oldVal) {
+                console.log(newVal)
+                console.log(oldVal)
+            },
+            
+            // 4. 数组成员的属性
+            'arr.3.name': function (newVal, oldVal) {
+                console.log(newVal)
+                console.log(oldVal)
+            }
+        }
+    }).mount('#app')
+</script>
+</html>
