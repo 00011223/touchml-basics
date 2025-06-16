@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="js/vue.global.js"></script>
+</head>
+<body>
+<div id="app">
+    <div>
+        <div>
+            <h2>给html元素添加ref</h2>
+            <input ref="inp" type="text">
+            <br>
+            <button @click="readInpValue">读取输入框的值</button>
+        </div>
+        <div>
+            <h2>给组件添加ref</h2>
+            <my-child ref="chi"></my-child>
+            <br>
+            <button @click="readComponent">读取组件内容</button>
+        </div>
+        <div>
+            <h2>函数形式添加ref</h2>
+            <input :ref="el => {inp = el}" type="text">
+            <br>
+            <button @click="readInput">读取输入框的值</button>
+        </div>
+        <div>
+            <h2>v-for中使用ref</h2>
+            <ul>
+                <li v-for="(str, i) in 5">{{i}}: <input ref="li" type="text"></li>
+            </ul>
+            <button @click="readVforRef">读取ref值</button>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    // 知识点：
+    // 什么是ref？
+    // 应用场景
+    // 给html元素添加ref
+    // 读取ref的值
+    // 给组件添加ref
+    // 结合组件expose暴露属性
+    // 函数形式声明ref
+    // v-for 中使用 ref
+    
+    // 什么是ref
+    // vue 用于获取页面元素或组件的属性
+    // 注意: 所有 document.querySelect 取获取元素的地方，就应该替换成ref
+    
+    // 应用场景
+    // 需要获取页面元素或获取组件时可以使用ref
+    
+    
+    // 定义一个组件
+    const Child = {
+        // 结合组件expose暴露属性
+        // expose 的作用 用于暴露属性或方法给父组件，没有暴露的内容将不能被父组件访问
+        expose: ['value', 'getValue', 'getNum'],
+        
+        template: `
+            <div>
+            {{ value }}
+            <br>
+            <input type="text" v-model.trim="value">
+            <br>
+            <button @click="getValue">读取child的value值</button>
+            </div>
+        `,
+        data() {
+            return {
+                value: '',
+                
+                // 声明一个响应式属性来保存ref的值
+                inp: null
+            }
+        },
+        methods: {
+            getValue() {
+                console.log(this.value)
+                return this.value
+            },
+            getNum() {
+                return 123
+            }
+        }
+    }
+    
+    
+    Vue.createApp({
+        // 注册组件
+        components: {
+            // key: 组件在模板中使用的标签名
+            // value: 组件配置对象
+            'my-child': Child
+        },
+        
+        methods: {
+            readInpValue() {
+                // 通过 this.$refs 来读取页面中添加了 ref 属性的元素或组件
+                console.log(this.$refs)
+                // 通过 ref 的名称获取元素
+                console.log(this.$refs.inp)
+                // 读取输入框的值
+                console.log(this.$refs.inp.value)
+            },
+            
+            readComponent() {
+                // 读取组件
+                console.log(this.$refs.chi)
+                
+                // 读取组件里的属性
+                console.log(this.$refs.chi.value)
+                // 调用组件的方法
+                console.log(this.$refs.chi.getValue())
+                console.log(this.$refs.chi.getNum())
+            },
+            
+            readInput() {
+                // 由于input标签已经被保存到 this.inp 中
+                // 所以此处可以使用 this.inp 访问输入框
+                console.log(this.inp)
+                console.log(this.inp.value)
+            },
+            
+            readVforRef() {
+                // 由于在v-for中使用了ref
+                // 所以此处取出的值是一个数组
+                console.log(this.$refs.li)
+            }
+        }
+    }).mount('#app')
+</script>
+</html>
