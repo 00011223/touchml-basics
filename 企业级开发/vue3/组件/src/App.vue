@@ -1,27 +1,25 @@
 <template>
-  <div class="box"></div>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App !!!!!!!!"/>
+  <div>
+    <ComponentBasic></ComponentBasic>
+<!--    <global-component></global-component>-->
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ComponentBasic from './components/组件基础.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    ComponentBasic
   }
 }
 </script>
 
+<!-- 若创建项目的时候 选择了 css 预编译器 则此处可以添加 lang 属性来指定预编译语法 -->
+<!--
+<style lang="scss">
+-->
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
