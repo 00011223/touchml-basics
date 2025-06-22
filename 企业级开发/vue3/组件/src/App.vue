@@ -1,17 +1,20 @@
 <template>
   <div>
-    <ComponentBasic></ComponentBasic>
+<!--    <ComponentBasic></ComponentBasic>-->
 <!--    <global-component></global-component>-->
+    <ComponentProps></ComponentProps>
   </div>
 </template>
 
 <script>
 import ComponentBasic from './components/组件基础.vue'
+import ComponentProps from './components/组件props.vue'
 
 export default {
   name: 'App',
   components: {
-    ComponentBasic
+    ComponentBasic,
+    ComponentProps
   }
 }
 </script>
