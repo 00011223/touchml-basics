@@ -2,19 +2,22 @@
   <div>
 <!--    <ComponentBasic></ComponentBasic>-->
 <!--    <global-component></global-component>-->
-    <ComponentProps></ComponentProps>
+<!--    <ComponentProps></ComponentProps>-->
+    <ComponentEvent></ComponentEvent>
   </div>
 </template>
 
 <script>
 import ComponentBasic from './components/组件基础.vue'
 import ComponentProps from './components/组件props.vue'
+import ComponentEvent from './components/组件事件.vue'
 
 export default {
   name: 'App',
   components: {
     ComponentBasic,
-    ComponentProps
+    ComponentProps,
+    ComponentEvent
   }
 }
 </script>

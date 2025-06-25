@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="js/vue.global.js"></script>
+    <style>
+        td {
+            border: 3px solid #000;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    
+    <my-tr @update-data="updateData" v-for="(user,i) in users" :key="i" v-bind="user" :index="i"></my-tr>
+
+</div>
+</body>
+<script>
+    
+    const MyTr = {
+        template: `
+            <tr>
+            <td>姓名:
+                <span v-if="!isEditMode">{{ name }}</span>
+                <input v-model="editData.name" v-else type="text">
+            </td>
+            <td>性别:
+                <span v-if="!isEditMode">{{ sex }}</span>
+                <select v-model="editData.sex" v-else>
+                    <option value="male">男</option>
+                    <option value="female">女</option>
+                    <option value="other">其他</option>
+                </select>
+            </td>
+            <td>年龄:
+                <span v-if="!isEditMode">{{ age }}</span>
+                <input v-model="editData.age" v-else type="number">
+            </td>
+            <td>
+                <button v-if="!isEditMode" @click="edit">编辑</button>
+                <div v-else>
+                    <button @click="confirm">确定</button>
+                    <button @click="cancel">取消</button>
+                </div>
+            </td>
+            </tr>
+        `,
+        // 声明事件
+        events: ['updateData'],
+        props: {
+            index: {
+                required: true,
+                type: Number
+            },
+            name: {
+                required: true,
+                type: String
+            },
+            sex: {
+                required: true,
+                type: String
+            },
+            age: {
+                required: true,
+                type: Number
+            }
+        },
+        data() {
+            return {
+                // 是否开启编辑模式
+                isEditMode: false,
+                // 双向绑定用到的属性
+                editData: {
+                    name: '',
+                    sex: 'other',
+                    age: 0
+                }
+            }
+        },
+        methods: {
+            edit() {
+                this.isEditMode = true
+                // 回显数据
+                this.editData.name = this.name
+                this.editData.sex = this.sex
+                this.editData.age = this.age
+            },
+            
+            cancel() {
+                // 重置数据
+                this.editData.name = ''
+                this.editData.sex = 'other'
+                this.editData.age = 0
+                // 关闭编辑模式
+                this.isEditMode = false
+            },
+            
+            confirm() {
+                // 赋值数据
+                // this.name = this.editData.name
+                
+                this.$emit('updateData', {
+                    // 要修改的数据索引
+                    index: this.index,
+                    // 要更新的数据值
+                    data: this.editData
+                })
+                // 关闭编辑模式
+                this.cancel()
+            }
+        }
+    }
+    
+    Vue.createApp({
+        components: {
+            MyTr
+        },
+        data() {
+            return {
+                users: [
+                    {
+                        name: '张三',
+                        sex: 'male',
+                        age: 17
+                    },
+                    {
+                        name: '李四',
+                        sex: 'female',
+                        age: 24
+                    },
+                    {
+                        name: '老王',
+                        sex: 'other',
+                        age: 30
+                    },
+                ]
+            }
+        },
+        methods: {
+            updateData({index, data}) {
+                // 查找要修改的数据
+                let user = this.users[index]
+                // 赋值新数据
+                for (const key in user) {
+                    user[key] = data[key]
+                }
+            }
+        }
+    }).mount('#app')
+</script>
+</html>

@@ -12,6 +12,7 @@
 // 声明和访问props
 // props 校验
 // props 是只读的
+// $props
 
 // 什么是props？
 // 组件上的 html 属性就是 props

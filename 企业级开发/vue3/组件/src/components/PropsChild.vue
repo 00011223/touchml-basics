@@ -40,6 +40,9 @@ export default {
       }
     }
   },
+  created() {
+    console.log(this.$props)
+  },
   methods: {
     onNameInput(ev) {
       // props 是只读的，无法赋值，此处的代码会报错
