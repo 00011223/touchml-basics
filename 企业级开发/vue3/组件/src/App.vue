@@ -3,7 +3,8 @@
 <!--    <ComponentBasic></ComponentBasic>-->
 <!--    <global-component></global-component>-->
 <!--    <ComponentProps></ComponentProps>-->
-    <ComponentEvent></ComponentEvent>
+<!--    <ComponentEvent></ComponentEvent>-->
+    <ComponentSlot></ComponentSlot>
   </div>
 </template>
 
@@ -11,13 +12,15 @@
 import ComponentBasic from './components/组件基础.vue'
 import ComponentProps from './components/组件props.vue'
 import ComponentEvent from './components/组件事件.vue'
+import ComponentSlot from './components/插槽.vue'
 
 export default {
   name: 'App',
   components: {
     ComponentBasic,
     ComponentProps,
-    ComponentEvent
+    ComponentEvent,
+    ComponentSlot
   }
 }
 </script>
