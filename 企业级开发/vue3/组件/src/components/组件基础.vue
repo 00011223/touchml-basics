@@ -12,6 +12,7 @@
 // 声明组件
 // 注册组件
 // 使用组件
+// defineComponent 该方法可以给编辑器提供组件声明时的代码提示
 
 // 什么是组件？
 // 组件就是一个独立可用的页面内容
@@ -27,9 +28,9 @@
 // 或者用驼峰式命名 例如: HelloWorld.vue
 // 总结: 命名规范请根据未来开发的项目来决定
 
-import {h} from 'vue'
+import {h, defineComponent} from 'vue'
 
-let MyComponent = {
+let MyComponent = defineComponent({
   render() {
     // 返回VNode
     return h('div', null, [
@@ -49,21 +50,21 @@ let MyComponent = {
   mounted() {
     console.log('mounted')
   },
-}
+})
 
 
 // 组件注册
 // 1. 局部注册: 局部注册的组件，只能在注册的地方使用
 // 2. 全局注册: 全局注册的组件，整个项目中都能使用，请参考 main.js 全局注册的写法
 
-export default {
+export default defineComponent({
   // 局部注册
   components: {
     // key: 组件在模板中使用时的标签名
     // value: 组件的配置对象
     MyComponent
   }
-}
+})
 </script>
 
 <style scoped>
