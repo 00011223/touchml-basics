@@ -3,7 +3,7 @@
 // 1. 引入 createRouter createWebHashHistory
 import {createRouter, createWebHashHistory} from 'vue-router'
 // 同步加载页面
-import Page1 from "@/components/Page1.vue";
+import Page1 from "@/pages/Page1.vue";
 
 // 2. 创建 router 对象
 const router = createRouter({
@@ -22,7 +22,7 @@ const router = createRouter({
         {
             path: '/p2',
             // 异步加载页面
-            component: () => import('@/components/Page2.vue')
+            component: () => import('@/pages/Page2.vue')
         }
     ]
 })
