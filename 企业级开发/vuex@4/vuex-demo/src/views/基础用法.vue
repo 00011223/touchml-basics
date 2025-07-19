@@ -1,6 +1,6 @@
 <template>
     <div>
-        <router-view></router-view>
+        <h1>基础用法</h1>
     </div>
 </template>
 
@@ -9,5 +9,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
 </style>
