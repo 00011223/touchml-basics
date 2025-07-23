@@ -2,7 +2,9 @@ import {createApp} from 'vue'
 import App from './App.vue'
 import router from '@/router'
 // 引入 store 仓库
-import store from '@/store/基础用法.js'
+// import store from '@/store/基础用法.js'
+// import store from '@/store/getters.js'
+import store from '@/store/mapState和mapActions.js'
 
 createApp(App)
     // 安装插件
