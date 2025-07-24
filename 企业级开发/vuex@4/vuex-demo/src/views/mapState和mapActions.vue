@@ -20,7 +20,6 @@
 import {mapState, mapActions} from 'vuex'
 
 export default {
-    name: 'mapState和mapActions',
     data() {
         return {
             name: '老王',
