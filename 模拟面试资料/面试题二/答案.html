@@ -61,6 +61,7 @@
 <script>
 
     // 谈谈你对重绘和回流的理解
+    
     // https://juejin.cn/post/6844903569087266823
 
     // 如何实现图片懒加载？
@@ -88,7 +89,7 @@
 
     // CSS 中 link 和 @import 的区别是？
     // link除了引入css文件外 还可以引入其他内容例如：图标 dns-prefetch
-    // @import 只能引入文件 且不是所有浏览器都支持 老浏览器不支持
+    // @import 只能引入css文件 且不是所有浏览器都支持 老浏览器不支持
 
 
 
@@ -139,14 +140,30 @@
 
 
 // 解释 React 中 render() 的目的。
-// render 函数用来描绘组件长什么样子，他将返回一个 react-dom 对象
-// react-dom 可以和真实文档做对比，react-dom部分更新真实文档只会更新发生变化的部分
+
+// 该题目分两种情况
+
+// 1. 组件的 render 函数
+// 返回 react-dom，用来描述组件长什么样子
+
+// 2. react root对象的 render 函数
+// let root = ReactDOM.createRoot()
+// root.render()
+
+// 作用:
+// 1. 类似于 Vue.createApp().mount() mount函数，作用是挂载，翻译react-dom并插入元素到根节点
+// 2. 若反复调用 root.render 则react会判断上一次render的内容和本次render内容的区别，并做增量更新，类似于 vue的 Diff 函数
+
+
+
 
 
 
 // 在react中，列出一些应该使用 Refs 的情况。
 // 1. 需要获取dom元素
 // 2. 需要获取第三方组件，例如: ant-design 的 a-form, 若要重置表单， 需要获取组件对象，然后调用对象的 resetFields 方法
+
+
 
 
 
