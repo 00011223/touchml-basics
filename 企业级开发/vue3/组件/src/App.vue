@@ -5,7 +5,8 @@
         <!--    <ComponentProps></ComponentProps>-->
         <!--    <ComponentEvent></ComponentEvent>-->
 <!--        <ComponentSlot></ComponentSlot>-->
-        <ComponentDynamic></ComponentDynamic>
+<!--        <ComponentDynamic></ComponentDynamic>-->
+        <Parent></Parent>
     </div>
 </template>
 
@@ -15,6 +16,7 @@ import ComponentProps from './components/组件props.vue'
 import ComponentEvent from './components/组件事件.vue'
 import ComponentSlot from './components/插槽.vue'
 import ComponentDynamic from './components/异步组件.vue'
+import Parent from '@/components/Parent.vue'
 
 export default {
     name: 'App',
@@ -23,7 +25,8 @@ export default {
         ComponentProps,
         ComponentEvent,
         ComponentSlot,
-        ComponentDynamic
+        ComponentDynamic,
+        Parent
     }
 }
 </script>
