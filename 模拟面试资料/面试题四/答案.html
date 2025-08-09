@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+
+    // 数字和字面的映射表
+    let facesMap = {
+        11: 'J',
+        12: 'Q',
+        13: 'K',
+        14: 'A',
+    }
+
+    class Card {
+        face
+        point
+
+        constructor(face, point) {
+            this.face = face
+            this.point = point
+        }
+
+        // 返回扑克牌的点数
+        // 若扑克牌为 1 11 12 13 则对应 A J Q K
+        getPoint() {
+            return facesMap[this.point] ? facesMap[this.point] : String(this.point)
+        }
+    }
+
+    // 创建扑克牌
+    function createPockerCards() {
+        // 扑克牌堆
+        let desk = []
+        // 花色数组
+        let faces = ['♠', '♥', '♦', '♣']
+        faces.forEach(face => {
+            for (let i = 2; i <= 14; i++) {
+                desk.push(new Card(face, i))
+            }
+        })
+
+        return desk
+    }
+
+    // 洗牌
+    function shuffle(desk) {
+        // 洗牌的逻辑，从一个数组随机取值到另一个数组
+        let result = []
+
+        while (desk.length > 0) {
+            // 随机取牌
+            // 获取数组索引值
+            let i = Math.floor(Math.random() * desk.length)
+            let [card] = desk.splice(i, 1)
+            result.push(card)
+        }
+
+        return result
+    }
+
+    // 手牌
+    let hands = []
+
+    let desk = createPockerCards()
+    console.log(desk);
+    desk = shuffle(desk)
+    desk = shuffle(desk)
+    desk = shuffle(desk)
+    desk = shuffle(desk)
+    desk = shuffle(desk)
+    console.log(desk);
+
+
+    hands.push(desk.shift())
+    hands.push(desk.shift())
+    hands.push(desk.shift())
+    hands.push(desk.shift())
+    hands.push(desk.shift())
+
+    console.log(hands);
+    console.log(desk);
+
+    // 判断是否是同花顺
+    // 参数是手牌数组
+    // 返回bool值
+    function checkStraightFlush(h) {
+
+        // 排序
+        h.sort((c1, c2) => {
+            if (c1.point < c2.point) {
+                return -1
+            } else if (c1.point > c2.point) {
+                return 1
+            } else {
+                return 0
+            }
+        })
+
+        console.log(h);
+
+        // 判断同花
+
+        // 声明一个结果变量
+        let result = true
+        // 用于保存花色的临时变量
+        let face
+        // 用于保存点数的临时变量
+        let currentPoint
+
+        h.every(card => {
+            // 若face不存在花色则记录花色
+            if (!face) {
+                face = card.face
+            }
+
+
+            // 不是同花
+            if (face !== card.face) {
+                result = false
+                return false
+            }
+
+            // 若不存在点数就记录点数
+            if (!currentPoint) {
+                currentPoint = card.point
+            }
+            // 判断是否是顺子
+            else if (card.point !== currentPoint + 1) {
+                // 不连续的数字就不是顺子
+                result = false
+                return false
+            } else {
+                // 不是第一张牌 且 点数连续的情况下 currentPoint需要自增
+                currentPoint++
+            }
+
+            return true
+        })
+
+        return result
+    }
+
+    hands = [new Card('♠', 7), new Card('♠', 8), new Card('♠', 9), new Card('♠', 10), new Card('♠', 11)]
+    hands = [new Card('♠', 10), new Card('♠', 11), new Card('♠', 12), new Card('♠', 13), new Card('♠', 14)]
+
+    let r = checkStraightFlush(hands)
+    console.log(r);
+    
+</script>
+
+<script>
+    // 堆和栈的区别，举例说明什么时候用到
+    // 栈: 是内存中先进后出 后进先出的存放数据的地方 栈中存放的是函数调用的数据
+    // 堆: 是内存中用于存放数据的区域，用于存放对象数据的具体内容
+
+
+
+    // 加密方法有哪几种，哪种最安全
+    // 加密方法可以分为对称加密和非对称加密
+    // 对称: 加密后还能够还原
+    // AES MD5 RSA
+    // RSA 相对安全
+
+
+    // 111二进制转十进制
+    // -> 7
+
+
+
+    // flex怎么实现，flex的底层是什么
+    // flex 底层就是定位
+    // flex 可以通过 z-index 同 设置了 position 的元素一块设置深度
+
+
+
+    // 基本数据类型有哪些，如何检测
+    // boolean typeof
+    // null  === null
+    // undefined  typeof    === undefined
+    // number  typeof   isNaN
+    // string  typeof
+    // bigint  typeof
+    // symbol  typeof
+    // object  typeof
+
+
+
+    // iNum1 = 0 * 15, iNum2 = 20
+    // 哪个大，用一行代码算出较大值
+
+    let iNum1 = 0 * 15
+    let iNum2 = 20
+    console.log(Math.max(iNum1, iNum2));
+
+
+
+    // css的position定位，absolute，fixed，relative，static他们各自的作用和使用场景
+    // static: 去掉定位对元素的影响
+</script>
+
+</html>
