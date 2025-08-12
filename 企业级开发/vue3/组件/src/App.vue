@@ -3,10 +3,11 @@
         <!--    <ComponentBasic></ComponentBasic>-->
         <!--    <global-component></global-component>-->
         <!--    <ComponentProps></ComponentProps>-->
-        <!--    <ComponentEvent></ComponentEvent>-->
+<!--            <ComponentEvent></ComponentEvent>-->
 <!--        <ComponentSlot></ComponentSlot>-->
 <!--        <ComponentDynamic></ComponentDynamic>-->
-        <Parent></Parent>
+<!--        <Parent></Parent>-->
+        <AttrComponent></AttrComponent>
     </div>
 </template>
 
@@ -17,6 +18,7 @@ import ComponentEvent from './components/组件事件.vue'
 import ComponentSlot from './components/插槽.vue'
 import ComponentDynamic from './components/异步组件.vue'
 import Parent from '@/components/Parent.vue'
+import AttrComponent from '@/components/Attribute属性继承.vue'
 
 export default {
     name: 'App',
@@ -26,7 +28,8 @@ export default {
         ComponentEvent,
         ComponentSlot,
         ComponentDynamic,
-        Parent
+        Parent,
+        AttrComponent
     }
 }
 </script>

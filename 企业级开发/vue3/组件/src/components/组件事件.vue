@@ -1,7 +1,10 @@
 <template>
-  <div>
-    <EventChild :msg="msg" @msgChange="onChildMsgChange"></EventChild>
-  </div>
+    <div>
+        <EventChild :msg="msg" @msgChange="onChildMsgChange"></EventChild>
+        <div>childMsg: {{childMsg}}</div>
+        <div>姓: {{familyName}} 名: {{firstName}}</div>
+        <VModelChild v-model="childMsg" v-model:xing="familyName" v-model:ming="firstName"></VModelChild>
+    </div>
 </template>
 
 <script>
@@ -23,24 +26,29 @@
 
 
 import EventChild from './EventChild.vue'
+import VModelChild from './VModelChild.vue'
 
 export default {
-  components: {
-    EventChild
-  },
-  data() {
-    return {
-      msg: 'hello message'
+    components: {
+        EventChild,
+        VModelChild
+    },
+    data() {
+        return {
+            msg: 'hello message',
+            childMsg: '',
+            familyName: '',
+            firstName: ''
+        }
+    },
+    methods: {
+        onChildMsgChange(data) {
+            console.log('接收到子组件的 msgChange 事件')
+            console.log(data)
+            // 修改父组件自身的数据
+            this.msg = data
+        }
     }
-  },
-  methods: {
-    onChildMsgChange(data) {
-      console.log('接收到子组件的 msgChange 事件')
-      console.log(data)
-      // 修改父组件自身的数据
-      this.msg = data
-    }
-  }
 }
 </script>
 
