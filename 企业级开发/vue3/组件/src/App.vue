@@ -7,7 +7,8 @@
 <!--        <ComponentSlot></ComponentSlot>-->
 <!--        <ComponentDynamic></ComponentDynamic>-->
 <!--        <Parent></Parent>-->
-        <AttrComponent></AttrComponent>
+<!--        <AttrComponent></AttrComponent>-->
+        <InjectComponent></InjectComponent>
     </div>
 </template>
 
@@ -19,6 +20,7 @@ import ComponentSlot from './components/插槽.vue'
 import ComponentDynamic from './components/异步组件.vue'
 import Parent from '@/components/Parent.vue'
 import AttrComponent from '@/components/Attribute属性继承.vue'
+import InjectComponent from '@/components/依赖注入.vue'
 
 export default {
     name: 'App',
@@ -29,7 +31,8 @@ export default {
         ComponentSlot,
         ComponentDynamic,
         Parent,
-        AttrComponent
+        AttrComponent,
+        InjectComponent,
     }
 }
 </script>
