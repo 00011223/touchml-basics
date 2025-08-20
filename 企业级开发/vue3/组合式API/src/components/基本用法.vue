@@ -1,9 +1,12 @@
+<!--
+知识点
+配置组件setup生命周期
+     选项式API中配置
+     在script标签中配置
+     普通script标签和setup script标签同时使用
+            https://cn.vuejs.org/api/sfc-script-setup.html#usage-alongside-normal-script
+-->
 <template>
-    <!--    知识点-->
-    <!--    配置组件setup生命周期-->
-    <!--         选项式API中配置-->
-    <!--         在script标签中配置-->
-    <!--         普通script标签和setup script标签同时使用-->
 
     <div>
         <h1>基本用法</h1>
