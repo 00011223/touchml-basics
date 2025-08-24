@@ -60,19 +60,33 @@ function increase() {
 
 
 <script>
-export default {
+// 只执行一次的代码可以写在 script 标签中
+function once(){
+    console.log('once')
+}
+
+// once()
+
+// script 标签可以任意方式进行导出
+let config = {
     methods: {
         increase() {
             this.count++
         }
     }
 }
+
+export let fn = config.methods
+
+export default config
 </script>
 
 <script setup>
 import {ref} from 'vue'
 
 const count = ref(0)
+
+// 在 script setup 中可以直接使用 await 关键字调用异步函数
 </script>
 
 <style>
