@@ -3,7 +3,9 @@
 <!--      <BasicComponent></BasicComponent>-->
 <!--      <RefComponent></RefComponent>-->
 <!--      <ComputedComponent></ComputedComponent>-->
-      <LifeCircleComponent></LifeCircleComponent>
+<!--      <LifeCircleComponent></LifeCircleComponent>-->
+      <WatchComponent></WatchComponent>
+<!--      <Ref></Ref>-->
   </div>
 </template>
 
@@ -12,6 +14,8 @@ import BasicComponent from '@/components/基本用法.vue'
 import RefComponent from '@/components/响应式数据.vue'
 import ComputedComponent from '@/components/计算属性.vue'
 import LifeCircleComponent from '@/components/生命周期.vue'
+import WatchComponent from '@/components/监听器.vue'
+import Ref from '@/components/Ref.vue'
 
 export default {
   name: 'App',
@@ -19,7 +23,9 @@ export default {
       BasicComponent,
       RefComponent,
       ComputedComponent,
-      LifeCircleComponent
+      LifeCircleComponent,
+      WatchComponent,
+      Ref
   }
 }
 </script>
