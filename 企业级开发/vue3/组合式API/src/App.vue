@@ -4,8 +4,8 @@
 <!--      <RefComponent></RefComponent>-->
 <!--      <ComputedComponent></ComputedComponent>-->
 <!--      <LifeCircleComponent></LifeCircleComponent>-->
-      <WatchComponent></WatchComponent>
-<!--      <Ref></Ref>-->
+<!--      <WatchComponent></WatchComponent>-->
+      <Ref></Ref>
   </div>
 </template>
 
