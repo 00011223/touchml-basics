@@ -1,13 +1,14 @@
 <template>
-  <div>
-<!--      <BasicComponent></BasicComponent>-->
-<!--      <RefComponent></RefComponent>-->
-<!--      <ComputedComponent></ComputedComponent>-->
-<!--      <LifeCircleComponent></LifeCircleComponent>-->
-<!--      <WatchComponent></WatchComponent>-->
-<!--      <Ref></Ref>-->
-      <PropsAndEvents></PropsAndEvents>
-  </div>
+    <div>
+        <!--      <BasicComponent></BasicComponent>-->
+        <!--      <RefComponent></RefComponent>-->
+        <!--      <ComputedComponent></ComputedComponent>-->
+        <!--      <LifeCircleComponent></LifeCircleComponent>-->
+        <!--      <WatchComponent></WatchComponent>-->
+        <!--      <Ref></Ref>-->
+        <!--      <PropsAndEvents></PropsAndEvents>-->
+        <InjectComponent></InjectComponent>
+    </div>
 </template>
 
 <script>
@@ -18,18 +19,20 @@ import LifeCircleComponent from '@/components/生命周期.vue'
 import WatchComponent from '@/components/监听器.vue'
 import Ref from '@/components/Ref.vue'
 import PropsAndEvents from '@/components/组件props和事件.vue'
+import InjectComponent from '@/components/依赖注入.vue'
 
 export default {
-  name: 'App',
-  components: {
-      BasicComponent,
-      RefComponent,
-      ComputedComponent,
-      LifeCircleComponent,
-      WatchComponent,
-      Ref,
-      PropsAndEvents
-  }
+    name: 'App',
+    components: {
+        BasicComponent,
+        RefComponent,
+        ComputedComponent,
+        LifeCircleComponent,
+        WatchComponent,
+        Ref,
+        PropsAndEvents,
+        InjectComponent
+    }
 }
 </script>
 
