@@ -7,7 +7,8 @@
         <!--      <WatchComponent></WatchComponent>-->
         <!--      <Ref></Ref>-->
         <!--      <PropsAndEvents></PropsAndEvents>-->
-        <InjectComponent></InjectComponent>
+<!--        <InjectComponent></InjectComponent>-->
+        <NextTick></NextTick>
     </div>
 </template>
 
@@ -20,6 +21,7 @@ import WatchComponent from '@/components/监听器.vue'
 import Ref from '@/components/Ref.vue'
 import PropsAndEvents from '@/components/组件props和事件.vue'
 import InjectComponent from '@/components/依赖注入.vue'
+import NextTick from '@/components/NextTick.vue'
 
 export default {
     name: 'App',
@@ -31,7 +33,8 @@ export default {
         WatchComponent,
         Ref,
         PropsAndEvents,
-        InjectComponent
+        InjectComponent,
+        NextTick
     }
 }
 </script>
