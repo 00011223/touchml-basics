@@ -9,7 +9,8 @@ import App from './App.vue'
 // import router from '@/router/命名路由.js'
 // import router from '@/router/命名视图.js'
 // import router from '@/router/重定向和别名.js'
-import router from '@/router/路由组件参数.js'
+// import router from '@/router/路由组件参数.js'
+import router from '@/router/历史模式.js'
 
 createApp(App)
     // 安装vue插件
