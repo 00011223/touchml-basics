@@ -12,7 +12,8 @@ import App from './App.vue'
 // import router from '@/router/路由组件参数.js'
 // import router from '@/router/历史模式.js'
 // import router from '@/router/导航守卫.js'
-import router from '@/router/组合式API.js'
+// import router from '@/router/组合式API.js'
+import router from '@/router/动态路由.js'
 
 createApp(App)
     // 安装vue插件
