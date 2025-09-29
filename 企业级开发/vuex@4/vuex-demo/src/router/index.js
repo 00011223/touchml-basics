@@ -9,7 +9,8 @@ const router = createRouter({
             // component: () => import('@/views/Getters.vue')
             // component: () => import('@/views/mapState和mapActions.vue')
             // component: () => import('@/views/表单处理.vue')
-            component: () => import('@/views/Module.vue')
+            // component: () => import('@/views/Module.vue')
+            component: () => import('@/views/组合式API.vue')
         }
     ]
 })
