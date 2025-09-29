@@ -5,7 +5,8 @@ import router from '@/router'
 // import store from '@/store/基础用法.js'
 // import store from '@/store/getters.js'
 // import store from '@/store/mapState和mapActions.js'
-import store from '@/store/表单处理.js'
+// import store from '@/store/表单处理.js'
+import store from '@/store/module.js'
 
 createApp(App)
     // 安装插件
