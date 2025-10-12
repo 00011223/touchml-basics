@@ -21,10 +21,6 @@ const formData = reactive({
     desc: '传奇一生\n从出生到入土'
 })
 
-// todo
-// 重置不成功
-// 提交的数据没有
-// date-picker 国际化 引入 day.js
 
 function submit(values) {
     // console.log(formData)
@@ -54,7 +50,7 @@ function reset() {
             <a-form ref="myForm" @finish="submit" :label-col="{span: 4}" :model="formData">
                 <!-- a-form-item: 表单项
                     label 文本提示
-                    value 数据模型model中的字段名
+                    name 数据模型model中的字段名
                  -->
                 <a-form-item label="姓名" name="name">
                     <a-input type="text" v-model:value="formData.name"></a-input>
