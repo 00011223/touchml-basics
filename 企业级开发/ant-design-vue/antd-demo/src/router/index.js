@@ -11,7 +11,8 @@ const router = createRouter({
             // component: () => import('@/views/表单验证.vue')
             // component: () => import('@/views/分页表格.vue')
             // component: () => import('@/views/其余部分组件/导航组件.vue')
-            component: () => import('@/views/其余部分组件/其他.vue')
+            // component: () => import('@/views/其余部分组件/其他.vue')
+            component: () => import('@/views/其余部分组件/数据显示组件.vue')
         }
     ]
 })

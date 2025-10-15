@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="js/vue.global.js"></script>
+    <style>
+        /* 不带动画名的样式名 */
+        .v-enter-from {
+            opacity: 0;
+        }
+        
+        .v-enter-to {
+            opacity: 1;
+        }
+        
+        .v-leave-from {
+            opacity: 1;
+        }
+        
+        .v-leave-to {
+            opacity: 0;
+        }
+        
+        .v-enter-active,
+        .v-leave-active {
+            transition: all 2s linear;
+        }
+        
+        /* 带动画名称的样式名
+            以对应名称开头即可
+         */
+
+        .fade-enter-from {
+            opacity: 0;
+        }
+
+        .fade-enter-to {
+            opacity: 1;
+        }
+
+        .fade-leave-from {
+            opacity: 1;
+        }
+
+        .fade-leave-to {
+            opacity: 0;
+        }
+
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: all 2s linear;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div>
+        <h2>原理图</h2>
+        <img style="width: 100%" src="img/transition-classes.f0f7b3c9.png" title="原理图">
+        <h3>基本用法</h3>
+        <transition>
+            <div v-if="show">hello world</div>
+<!--            <div v-else>hello me</div>-->
+        </transition>
+        <h3>带动画名称</h3>
+        <transition name="fade">
+            <div v-if="show">hello world</div>
+<!--            <div v-else>hello me</div>-->
+        </transition>
+        <h3>animation 动画</h3>
+        <transition name="fade">
+            <div v-if="show">hello world</div>
+            <!--            <div v-else>hello me</div>-->
+        </transition>
+        <div>
+            <button @click="toggle">toggle</button>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    // 知识点 https://cn.vuejs.org/guide/built-ins/transition.html#transition
+    // 基础用法
+    //      *-enter-from
+    //      *-enter-to
+    //      *-leave-from
+    //      *-leave-to
+    //      *-enter-active
+    //      *-leave-active
+    //      过渡 transition
+    //      动画 animation
+    // 结合 animate.css 使用
+    // 元素间切换·
+    // 过渡模式 mode: in-out out-in
+    // 组件间过渡
+    // 出现时过渡 appear
+    // 事件 https://cn.vuejs.org/guide/built-ins/transition.html#javascript-hooks
+    
+    
+    Vue.createApp({
+        data() {
+            return {
+                show: true
+            }
+        },
+        methods: {
+            toggle() {
+                this.show = !this.show
+            }
+        }
+    }).mount('#app')
+</script>
+</html>
