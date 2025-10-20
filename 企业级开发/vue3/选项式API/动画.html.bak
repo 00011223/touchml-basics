@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="js/vue.global.js"></script>
+    <link rel="stylesheet" href="css/animate.min.css">
+    <style>
+        /* 不带动画名的样式名 */
+        .v-enter-from {
+            opacity: 0;
+        }
+        
+        .v-enter-to {
+            opacity: 1;
+        }
+        
+        .v-leave-from {
+            opacity: 1;
+        }
+        
+        .v-leave-to {
+            opacity: 0;
+        }
+        
+        .v-enter-active,
+        .v-leave-active {
+            transition: all 2s linear;
+        }
+        
+        /* 带动画名称的样式名
+            以对应名称开头即可
+         */
+        
+        .fade-enter-from {
+            opacity: 0;
+        }
+        
+        .fade-enter-to {
+            opacity: 1;
+        }
+        
+        .fade-leave-from {
+            opacity: 1;
+        }
+        
+        .fade-leave-to {
+            opacity: 0;
+        }
+        
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: all 2s linear;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div>
+        <h2>原理图</h2>
+        <img style="width: 100%" src="img/transition-classes.f0f7b3c9.png" title="原理图">
+        <h3>基本用法</h3>
+        <transition>
+            <div v-if="show">hello world</div>
+        </transition>
+        <h3>带动画名称</h3>
+        <transition name="fade">
+            <div v-if="show">hello world</div>
+        </transition>
+        <h3>animation 动画</h3>
+        <transition name="fade">
+            <div v-if="show">hello world</div>
+        </transition>
+        
+        <h3>集成animate.css动画框架</h3>
+        <transition
+                enter-active-class="animate__animated animate__tada"
+                leave-active-class="animate__animated animate__bounceOutRight">
+            <div v-if="show">hello world</div>
+        </transition>
+        <h3>元素间切换</h3>
+        <transition>
+            <div v-if="show">hello world</div>
+            <div v-else>ok me</div>
+        </transition>
+        <h3>过渡模式</h3>
+        <transition mode="in-out">
+            <div v-if="show">hello world</div>
+            <div v-else>ok me</div>
+        </transition>
+        <h3>组件间过渡</h3>
+        <transition>
+            <component :is="c"></component>
+        </transition>
+        <h3>初始过渡</h3>
+        <transition appear>
+            <div v-if="show">hello world</div>
+        </transition>
+        <button style="position: fixed; right: 0; top: 0;" @click="toggle">toggle</button>
+    </div>
+</div>
+
+</body>
+<script>
+    // 知识点 https://cn.vuejs.org/guide/built-ins/transition.html#transition
+    // 基础用法
+    //      *-enter-from
+    //      *-enter-to
+    //      *-leave-from
+    //      *-leave-to
+    //      *-enter-active
+    //      *-leave-active
+    //      过渡 transition
+    //      动画 animation
+    // 结合 animate.css 使用
+    // 元素间切换
+    // 过渡模式 mode: in-out out-in
+    // 组件间过渡
+    // 出现时过渡 appear
+    // 事件 https://cn.vuejs.org/guide/built-ins/transition.html#javascript-hooks
+    
+    const X = {
+        name: 'x',
+        render() {
+            return Vue.h('div', null, 'this is X')
+        }
+    }
+    
+    const Y = {
+        name: 'y',
+        render() {
+            return Vue.h('div', null, 'this is Y')
+        }
+    }
+    
+    const srX = Vue.shallowRef(X)
+    const srY = Vue.shallowRef(Y)
+    
+    Vue.createApp({
+        data() {
+            return {
+                show: true,
+                c: srX
+            }
+        },
+        methods: {
+            toggle() {
+                this.show = !this.show
+                this.c = this.c.name === 'x' ? srY : srX
+            }
+        }
+    }).mount('#app')
+</script>
+</html>

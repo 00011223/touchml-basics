@@ -8,100 +8,155 @@
     <script src="js/vue.global.js"></script>
     <link rel="stylesheet" href="css/animate.min.css">
     <style>
-        /* 不带动画名的样式名 */
-        .v-enter-from {
-            opacity: 0;
+        :root {
+            font-size: 64px;
         }
         
-        .v-enter-to {
-            opacity: 1;
-        }
-        
+        /* 离开时起始状态 */
         .v-leave-from {
             opacity: 1;
+            transform: translateX(0);
         }
         
+        /* 离开时结束状态 */
         .v-leave-to {
             opacity: 0;
+            transform: translateX(100%);
         }
         
-        .v-enter-active,
+        /* 激活动画的类名 */
         .v-leave-active {
-            transition: all 2s linear;
+            /*transition: all 2s linear;*/
+            
+            /* 在 active 类中 可以播放过渡动画也可以播放animation动画 */
+            animation: enter 2s linear reverse;
         }
         
-        /* 带动画名称的样式名
-            以对应名称开头即可
-         */
-        
-        .fade-enter-from {
+        /* 进入时起始状态 */
+        .v-enter-from {
             opacity: 0;
+            transform: translateY(-200px);
         }
         
-        .fade-enter-to {
+        /* 进入时结束状态 */
+        .v-enter-to {
             opacity: 1;
+            transform: translateY(0);
         }
+        
+        /* 激活动画的类名 */
+        .v-enter-active {
+            /*transition: all 2s linear;*/
+            animation: enter 2s linear forwards;
+        }
+        
+        @keyframes enter {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
         
         .fade-leave-from {
             opacity: 1;
+            transform: translateX(0);
         }
         
         .fade-leave-to {
             opacity: 0;
+            transform: translateX(100%);
         }
         
-        .fade-enter-active,
         .fade-leave-active {
             transition: all 2s linear;
         }
+        
+        .fade-enter-from {
+            opacity: 0;
+            transform: translateY(-200px);
+        }
+        
+        .fade-enter-to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .fade-enter-active {
+            transition: all 2s linear;
+        }
     </style>
+
 </head>
 <body>
 <div id="app">
     <div>
-        <h2>原理图</h2>
-        <img style="width: 100%" src="img/transition-classes.f0f7b3c9.png" title="原理图">
+        <h3>原理图</h3>
+        <img style="width: 100%" src="./img/transition-classes.f0f7b3c9.png" title="原理图">
         <h3>基本用法</h3>
+        <!-- transition 是 vue.js 内置的过渡组件，用于播放动画 -->
         <transition>
+            <!-- 通过条件渲染来触发动画 -->
             <div v-if="show">hello world</div>
         </transition>
-        <h3>带动画名称</h3>
-        <transition name="fade">
-            <div v-if="show">hello world</div>
-        </transition>
-        <h3>animation 动画</h3>
+        
+        <h3>给动画命名</h3>
+        <!-- transition 组件没有 name 属性时，类名以 v- 开头
+            否则用name属性名开头例如: fade-enter-from
+        -->
         <transition name="fade">
             <div v-if="show">hello world</div>
         </transition>
         
-        <h3>集成animate.css动画框架</h3>
+        
+        <h3>结合 animate.css 使用</h3>
         <transition
-                enter-active-class="animate__animated animate__tada"
-                leave-active-class="animate__animated animate__bounceOutRight">
+                name="custom-animate"
+                enter-active-class="animate__animated animate__fadeInDown animate__slower"
+                leave-active-class="animate__animated animate__fadeOutRight animate__slower"
+        >
             <div v-if="show">hello world</div>
         </transition>
+        
         <h3>元素间切换</h3>
-        <transition>
-            <div v-if="show">hello world</div>
-            <div v-else>ok me</div>
-        </transition>
+        <div style="position: relative; overflow: hidden; height: 72.8px">
+            <transition>
+                <!-- 使用条件渲染可以达到来回切换元素的目的 -->
+                <div style="width: 100%; position: absolute; top: 0; left: 0;" v-if="show">hello world</div>
+                <div style="width: 100%; position: absolute; top: 0; left: 0;" v-else>hello me</div>
+            </transition>
+        </div>
+        
         <h3>过渡模式</h3>
-        <transition mode="in-out">
-            <div v-if="show">hello world</div>
-            <div v-else>ok me</div>
-        </transition>
+        <div style="position: relative; overflow: hidden; height: 72.8px">
+            <!-- mode 代表先播放进入或离开动画 再播放离开或进入动画 -->
+            <transition mode="in-out">
+                <!-- 使用条件渲染可以达到来回切换元素的目的 -->
+                <div style="width: 100%; position: absolute; top: 0; left: 0;" v-if="show">hello world</div>
+                <div style="width: 100%; position: absolute; top: 0; left: 0;" v-else>hello me</div>
+            </transition>
+        </div>
+        
         <h3>组件间过渡</h3>
         <transition>
+            <!-- 使用动态组件来切换组件 -->
             <component :is="c"></component>
         </transition>
-        <h3>初始过渡</h3>
+    
+        <h3>出现时过渡</h3>
+        <!-- 添加 appear 属性，元素再第一次渲染到页面时就会播放进入动画 -->
         <transition appear>
             <div v-if="show">hello world</div>
         </transition>
-        <button style="position: fixed; right: 0; top: 0;" @click="toggle">toggle</button>
+        
+        <button style="position: fixed; bottom: 0; right: 0" @click="toggle">开关</button>
     </div>
 </div>
-
 </body>
 <script>
     // 知识点 https://cn.vuejs.org/guide/built-ins/transition.html#transition
@@ -112,6 +167,7 @@
     //      *-leave-to
     //      *-enter-active
     //      *-leave-active
+    //      给动画命名
     //      过渡 transition
     //      动画 animation
     // 结合 animate.css 使用
@@ -121,34 +177,43 @@
     // 出现时过渡 appear
     // 事件 https://cn.vuejs.org/guide/built-ins/transition.html#javascript-hooks
     
-    const X = {
-        name: 'x',
+    const A = {
+        name: 'a',
         render() {
-            return Vue.h('div', null, 'this is X')
+            return Vue.h('div', null, 'this is A')
         }
     }
     
-    const Y = {
-        name: 'y',
+    const B = {
+        name: 'b',
         render() {
-            return Vue.h('div', null, 'this is Y')
+            return Vue.h('div', null, 'this is B')
         }
     }
     
-    const srX = Vue.shallowRef(X)
-    const srY = Vue.shallowRef(Y)
+    const srA = Vue.shallowRef(A)
+    const srB = Vue.shallowRef(B)
+    const asyncC = Vue.defineAsyncComponent(() => {
+        return Promise.resolve({
+            name: 'c',
+            render() {
+                return Vue.h('div', null, 'this is C')
+            }
+        })
+    })
     
     Vue.createApp({
         data() {
             return {
                 show: true,
-                c: srX
+                c: srA
             }
         },
         methods: {
             toggle() {
                 this.show = !this.show
-                this.c = this.c.name === 'x' ? srY : srX
+                this.c = this.c.name === 'a' ? srB :
+                        this.c.name === 'b' ? asyncC : srA
             }
         }
     }).mount('#app')
