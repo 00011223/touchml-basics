@@ -16,6 +16,8 @@ import App from './App.vue'
 // import router from '@/router/动态路由.js'
 import router from '@/router/页面切换动画.js'
 
+import 'animate.css/animate.css'
+
 createApp(App)
     // 安装vue插件
     .use(router)

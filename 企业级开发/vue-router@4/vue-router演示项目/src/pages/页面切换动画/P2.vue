@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div style="position: absolute; top: 0; left: 0; width: 100%;">
+    <div>
         <h1>P2</h1>
     </div>
 </template>
