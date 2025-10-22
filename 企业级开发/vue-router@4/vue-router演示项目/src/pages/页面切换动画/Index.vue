@@ -1,5 +1,7 @@
 <script setup>
-
+// 知识点
+// router-view 成为作用域插槽
+// 利用 transition 组件进行组件间的切换
 </script>
 
 <template>
