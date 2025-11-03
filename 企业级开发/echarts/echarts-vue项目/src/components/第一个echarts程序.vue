@@ -46,7 +46,7 @@ onMounted(() => {
 <template>
     <div>
         <!-- 2. 添加根节点 -->
-        <div ref="chartRoot" id="charts" style="height: 500px;"></div>
+        <div ref="chartRoot" style="height: 500px;"></div>
     </div>
 </template>
 
