@@ -11,7 +11,7 @@ import * as echarts from 'echarts'
 export default defineComponent({
     data() {
         return {
-            echartsInstance: null,
+            // echartsInstance: null,
             option: {
                 // 图例
                 legend: {
