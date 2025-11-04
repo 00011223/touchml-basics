@@ -1,7 +1,7 @@
 <script setup>
 // 1. 引入echarts
 import * as echarts from 'echarts'
-import {onMounted, reactive, ref} from 'vue'
+import {onMounted, ref} from 'vue'
 
 const chartRoot = ref(null)
 // echartsInstance 实例对象不能是响应式的
@@ -9,7 +9,7 @@ const chartRoot = ref(null)
 // echarts 实例对象使用非响应式变量来存储
 let echartsInstance = null
 // 4. 声明 option 配置参数
-const option = reactive({
+const option = {
     legend: {},
     xAxis: {
         type: 'category',
@@ -54,7 +54,7 @@ const option = reactive({
             }
         }
     ]
-})
+}
 
 // 挂载完成后初始化 echarts
 onMounted(() => {

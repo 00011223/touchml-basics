@@ -13,6 +13,12 @@ export default defineComponent({
         return {
             // echartsInstance: null,
             option: {
+                // 工具箱
+                toolbox: {
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
                 // 图例
                 legend: {
                     data: ['重百', '永辉']
@@ -53,6 +59,9 @@ export default defineComponent({
                 series: [
                     // 每个数组成员是一个系列的数据
                     {
+                        // 堆叠
+                        // 具有相同stack名称的系列参数将堆叠在一起显示
+                        stack: 'total',
                         // 系列名
                         name: '重百',
                         // 值轴的数据
@@ -79,6 +88,7 @@ export default defineComponent({
                         }
                     },
                     {
+                        stack: 'total',
                         name: '永辉',
                         data: [90, 150, 120, 100, 60, 48, 110],
                         type: 'bar',
