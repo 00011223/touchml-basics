@@ -7,7 +7,7 @@ git config --global user.name "xxxx"
 git config --global user.email "xxxxx@qq.com"
 ```
 
-## 创建仓库
+## *创建仓库
 
 - 本地创建
 
@@ -24,7 +24,7 @@ git init
 git clone url
 ```
 
-## 添加
+## *添加
 
 ```shell script
 git add path # 路径可以是文件也可以是文件夹
@@ -53,19 +53,19 @@ git reset path
 
 > 该命令path参数可以是文件夹，也可以是文件，但该命令主要是用于重置当前版本状态
 
-## 提交
+## *提交
 
 ```shell script
 git commit -m msg
 ```
 
-## 推
+## *推
 
 ```shell script
 git push
 ```
 
-## 拉
+## *拉
 
 ```shell script
 git pull origin <branchname>
