@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "webpack --config build/plugins插件.js"
+    "start": "webpack --config build/模式.js --mode=development"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
