@@ -37,12 +37,11 @@ module.exports = {
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
             title: 'hello vue',
-            // 插件需要的 html 模板路径
             template: path.join(__dirname, '../public/index.html')
         })
     ],
     resolve: {
-        extensions: ['.vue']
+        extensions: ['.js', '.vue']
     },
     // 配置dev-server
     devServer: {
