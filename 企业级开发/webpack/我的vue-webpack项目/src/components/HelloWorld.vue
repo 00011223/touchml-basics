@@ -15,5 +15,7 @@ const count = ref(0)
 </template>
 
 <style scoped>
-
+div {
+    border: 3px solid #000;
+}
 </style>
