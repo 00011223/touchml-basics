@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "webpack --config build/webpack-dev-server使用.js --mode=development",
+    "start": "webpack --config build/node.js进程传递参数给浏览器进程.js --mode=development",
     "dev": "webpack-dev-server --config build/webpack-dev-server使用.js --mode=development"
   },
   "devDependencies": {
