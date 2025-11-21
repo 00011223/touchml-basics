@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <label>密码: <input class="pwd" type="text"></label>
+    <button onclick="getPk()">获取公钥</button>
+    <button onclick="sendMessage()">发送密文</button>
+</body>
+<script src="./js/rsa.html.js"></script>
+<script>
+    let pwdEl = document.querySelector('.pwd')
+
+    let pk
+
+    function getPk() {
+        fetch(`/getPk`, {
+            method: 'GET',
+        })
+            .then(r => r.json())
+            .then(data => {
+                console.log(data)
+                // 保存公钥
+                pk = data.pk
+            })
+    }
+
+    function sendMessage() {
+        const key = new NodeRSA({ b: 512 })
+        // 导入公钥
+        key.importKey(pk, 'pkcs1-public')
+        // 加密
+        let r = key.encrypt(pwdEl.value)
+        // 发送数据给服务器
+        fetch('/decrypt', {
+            method: 'post',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ r })
+        }).then(r => r.json()).then(data => {
+            console.log(data);
+        })
+    }
+</script>
+
+</html>
