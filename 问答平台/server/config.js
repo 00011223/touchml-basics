@@ -1,7 +1,7 @@
 module.exports = {
     db: {
         /** 数据库名 */
-        name: 'qa-db',
+        name: 'qa-demo',
         /** 账号 */
         account: 'admin',
         /** 密码 */
