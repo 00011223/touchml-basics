@@ -6,6 +6,8 @@ import store from './store'
 import AntD from 'ant-design-vue'
 // 引入样式
 import 'ant-design-vue/dist/antd.css'
+// 引入 node-rsa
+import '@/assets/node-rsa'
 
 createApp(App)
     .use(store)

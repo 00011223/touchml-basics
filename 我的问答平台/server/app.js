@@ -1,8 +1,22 @@
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
 const express = require('express')
 const mongoose = require('mongoose')
 const dbConfig = require('./dbconfig.js')
 const ru = require('./utils/responseUtil.js')
+const getUserInfo = require('./middlewares/getUserInfo.js')
 const app = express()
+
+app.use(cookieParser())
+app.use(session({
+    secret: 'my session key',
+}))
+app.use(express.json())
+
+
+// 添加自定义中间件
+app.use(getUserInfo())
+
 
 // 注册路由器
 const userRouter = require('./routers/userRouter.js')

@@ -1,7 +1,8 @@
 <script setup>
 import {useRouter} from 'vue-router'
 import {reactive} from 'vue'
-import {getPk} from '@/api/user'
+import {getPk, signUp as su} from '@/api/user'
+import {message} from 'ant-design-vue'
 
 const router = useRouter()
 
@@ -63,12 +64,28 @@ const rules = {
 }
 
 // 注册
-async function signUp() {
+async function signUp({account, pwd, nickname}) {
     // 获取公钥
     const data = await getPk()
     console.log(data)
+    let {pk} = data
     // 加密密码
+    const key = new NodeRSA({b: 512})
+    key.importKey(pk, 'pkcs1-public')
+    // 加密并返回buffer对象
+    let r = key.encrypt(pwd)
     // 发起注册请求
+    const result = await su({
+        account,
+        pwd: JSON.stringify(r),
+        nickname,
+        pk
+    })
+    console.log(result)
+    // 跳转登录页
+    router.push('/signIn').then(() => {
+        message.success('注册成功')
+    })
 }
 </script>
 
@@ -84,16 +101,16 @@ async function signUp() {
             <template #extra><a href="/signIn">已有账号?</a></template>
             <a-form @finish="signUp" :rules="rules" :model="model" :label-col="{span: 24}">
                 <a-form-item label="账号" name="account">
-                    <a-input :maxlength="10" v-model:value="model.account"></a-input>
+                    <a-input :maxlength="10" v-model:value.trim="model.account"></a-input>
                 </a-form-item>
                 <a-form-item label="密码" name="pwd">
-                    <a-input type="password" :maxlength="20" v-model:value="model.pwd"></a-input>
+                    <a-input type="password" :maxlength="20" v-model:value.trim="model.pwd"></a-input>
                 </a-form-item>
                 <a-form-item label="再次输入密码" name="twice">
-                    <a-input type="password" :maxlength="20" v-model:value="model.twice"></a-input>
+                    <a-input type="password" :maxlength="20" v-model:value.trim="model.twice"></a-input>
                 </a-form-item>
                 <a-form-item label="昵称" name="nickname">
-                    <a-input :maxlength="10" v-model:value="model.nickname"></a-input>
+                    <a-input :maxlength="10" v-model:value.trim="model.nickname"></a-input>
                 </a-form-item>
                 <a-form-item>
                     <a-button type="primary" block html-type="submit">注册</a-button>
