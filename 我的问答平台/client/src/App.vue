@@ -1,12 +1,30 @@
 <template>
-  <router-view/>
+    <router-view v-slot="{Component}">
+        <transition
+            enter-active-class="animate__animated animate__fadeInUp"
+            leave-active-class="animate__animated animate__fadeOutRight"
+        >
+            <component :is="Component"></component>
+        </transition>
+    </router-view>
 </template>
 
 <style lang="scss">
+body {
+    overflow: hidden;
+}
+
 .page-header {
     width: 100%;
     border: 1px solid rgb(235, 237, 240);
     background-color: #fff !important;
+}
+
+.animated-container {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 /* ===== Scrollbar CSS ===== */

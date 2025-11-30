@@ -12,7 +12,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <a-layout class="container">
+    <a-layout class="container animated-container">
         <a-layout-header style="color: #fff;">问答平台</a-layout-header>
         <a-layout>
             <a-layout-sider style="color: #fff">侧边栏</a-layout-sider>

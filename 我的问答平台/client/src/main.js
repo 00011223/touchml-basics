@@ -8,6 +8,8 @@ import AntD from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 // 引入 node-rsa
 import '@/assets/node-rsa'
+// 引入 animate.css
+import 'animate.css/animate.css'
 
 createApp(App)
     .use(store)

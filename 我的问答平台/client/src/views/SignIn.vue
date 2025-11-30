@@ -42,26 +42,24 @@ const rules = {
 }
 
 async function signIn({account, pwd, remember}) {
-    console.log(remember)
-
-    // // 获取公钥
-    // let {pk} = await getPkByAccount(account)
-    // // 加密密码
-    // let key = new NodeRSA({b: 512})
-    // key.importKey(pk, 'pkcs1-public')
-    // pwd = key.encrypt(pwd)
-    // // 发送请求
-    // await si({
-    //     account, pwd: JSON.stringify(pwd), remember
-    // })
-    // router.push('/').then(() => {
-    //     message.success('登录成功')
-    // })
+    // 获取公钥
+    let {pk} = await getPkByAccount(account)
+    // 加密密码
+    let key = new NodeRSA({b: 512})
+    key.importKey(pk, 'pkcs1-public')
+    pwd = key.encrypt(pwd)
+    // 发送请求
+    await si({
+        account, pwd: JSON.stringify(pwd), remember
+    })
+    router.push('/').then(() => {
+        message.success('登录成功')
+    })
 }
 </script>
 
 <template>
-    <div class="bg">
+    <div class="bg animated-container">
         <a-page-header
             class="page-header"
             title="登录"

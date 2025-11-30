@@ -90,7 +90,7 @@ async function signUp({account, pwd, nickname}) {
 </script>
 
 <template>
-    <div class="bg">
+    <div class="bg animated-container">
         <a-page-header
             class="page-header"
             title="注册"
