@@ -5,6 +5,11 @@ export function signIn({account, pwd, remember}) {
     return request.post('/user/signIn', {account, pwd, remember})
 }
 
+// 登出
+export function signOut() {
+    return request.post('/user/signOut')
+}
+
 // 注册
 export function signUp({account, pwd, nickname, pk}) {
     return request.post('/user/signUp', {account, pwd, nickname, pk})

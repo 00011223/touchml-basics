@@ -8,6 +8,8 @@ module.exports = () => {
         const tokenId = req.cookies.token
         // 用户未登录或登录失效就直接跳过
         if (tokenId === undefined) {
+            // 由于登录超时 清空缓存
+            req.session.userInfo = undefined
             next()
             return
         }

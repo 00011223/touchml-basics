@@ -108,4 +108,19 @@ router.post('/getUserInfo', ah(async (req, res) => {
     res.json(success(req.session.userInfo))
 }))
 
+// 登出
+router.post('/signOut', ah(async (req, res) => {
+    // 验证登录状态
+    assert.ok(req.session.userInfo !== undefined, '未登录')
+    // 撕票
+    // 删除数据库中的token
+    const tokenId = req.cookies.token
+    await Token.deleteOne({_id: tokenId})
+    // 删除cookie中的token
+    res.cookie('token', '', {maxAge: 0})
+    // 删除缓存
+    req.session.userInfo = undefined
+    res.json(success())
+}))
+
 module.exports = router

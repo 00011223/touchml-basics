@@ -1,19 +1,54 @@
 <script setup>
+import {SettingOutlined, LogoutOutlined} from '@ant-design/icons-vue'
+import {computed} from 'vue'
+import {signOut} from '@/api/user'
+import {useRouter} from 'vue-router'
+import {message} from 'ant-design-vue'
+import {useStore} from 'vuex'
 
-import {onMounted} from 'vue'
-import {getUserInfo} from '@/api/user'
+const router = useRouter()
+const store = useStore()
 
-onMounted(async () => {
-    // 查询用户信息
-    const userInfo = await getUserInfo()
-    console.log(userInfo)
-})
+const userInfo = computed(() => store.state.user.userInfo.nickname)
 
+// 菜单项点击事件
+async function onMenuItemClick({item, key, keyPath}) {
+    if (key === 'signOut') {
+        // 登出
+        await signOut()
+        // 跳转到登录页
+        router.push('/signIn').then(() => {
+            message.success('登出成功')
+        })
+    }
+}
 </script>
 
 <template>
     <a-layout class="container animated-container">
-        <a-layout-header style="color: #fff;">问答平台</a-layout-header>
+        <a-layout-header style="color: #fff;">
+            <div class="header">
+                <span>问答平台</span>
+                <a-dropdown :trigger="['click']">
+                    <a-button>
+                        <template #icon>
+                            <SettingOutlined/>
+                        </template>
+                        Hi! {{ userInfo }}
+                    </a-button>
+                    <template #overlay>
+                        <a-menu @click="onMenuItemClick">
+                            <a-menu-item key="signOut">
+                                <template #icon>
+                                    <LogoutOutlined/>
+                                </template>
+                                登出
+                            </a-menu-item>
+                        </a-menu>
+                    </template>
+                </a-dropdown>
+            </div>
+        </a-layout-header>
         <a-layout>
             <a-layout-sider style="color: #fff">侧边栏</a-layout-sider>
             <a-layout>
@@ -33,6 +68,12 @@ onMounted(async () => {
     .content {
         background-color: #fff;
         overflow: auto;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 }
 </style>
