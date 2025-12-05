@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div>
+    <div class="animated-container">
         <h1>pq</h1>
     </div>
 </template>

@@ -1,5 +1,5 @@
 <script setup>
-import {SettingOutlined, LogoutOutlined} from '@ant-design/icons-vue'
+import {SettingOutlined, LogoutOutlined, MenuUnfoldOutlined, MenuFoldOutlined} from '@ant-design/icons-vue'
 import {computed, reactive, ref} from 'vue'
 import {signOut} from '@/api/user'
 import {useRoute, useRouter} from 'vue-router'
@@ -9,6 +9,7 @@ import homeRoutes from '@/router/homeRoutes'
 
 const router = useRouter()
 const route = useRoute()
+console.log(route)
 const store = useStore()
 
 const userInfo = computed(() => store.state.user.userInfo.nickname)
@@ -24,10 +25,14 @@ const selectedKeys = reactive([sk[sk.length - 1]])
 // 已打开的子菜单key列表
 const openKeys = reactive([])
 // 根据路径长度 添加打开的子菜单
-if(sk.length > 2) openKeys.push(sk[sk.length -2])
+if (sk.length > 2) openKeys.push(sk[sk.length - 2])
 
 // 菜单是否折叠
 const collapsed = ref(false)
+
+function toggleCollapsed(){
+    collapsed.value = !collapsed.value
+}
 
 // 设置菜单项点击事件
 async function onSettingClick({item, key, keyPath}) {
@@ -75,13 +80,12 @@ function onMenuItemClick({item, key, keyPath}) {
             </div>
         </a-layout-header>
         <a-layout>
-            <a-layout-sider style="color: #fff">
+            <a-layout-sider style="color: #fff" v-model:collapsed="collapsed" collapsible :trigger="null">
                 <a-menu
                     v-model:selectedKeys="selectedKeys"
                     v-model:openKeys="openKeys"
                     mode="inline"
                     theme="dark"
-                    :inline-collapsed="collapsed"
                     @click="onMenuItemClick"
                 >
                     <template v-for="(route, idx) in homeRoutes" :key="idx">
@@ -112,7 +116,27 @@ function onMenuItemClick({item, key, keyPath}) {
             </a-layout-sider>
             <a-layout>
                 <a-layout-content class="content">
-                    <router-view></router-view>
+                    <!-- 标题行 -->
+                    <a-card size="small">
+                        <div class="title-row">
+                            <a-button @click="toggleCollapsed">
+                                <MenuUnfoldOutlined v-if="collapsed"/>
+                                <MenuFoldOutlined v-else/>
+                            </a-button>
+                            <h1 class="title">{{ route.meta.title }}</h1>
+                        </div>
+                    </a-card>
+                    <!-- 内容显示 -->
+                    <div style="position: relative;">
+                        <router-view v-slot="{Component}">
+                            <transition
+                                enter-active-class="animate__animated animate__fadeInUp animate__faster"
+                                leave-active-class="animate__animated animate__fadeOutRight animate__faster"
+                            >
+                                <component :is="Component"></component>
+                            </transition>
+                        </router-view>
+                    </div>
                 </a-layout-content>
                 <a-layout-footer>脚注</a-layout-footer>
             </a-layout>
@@ -125,8 +149,10 @@ function onMenuItemClick({item, key, keyPath}) {
     height: 100vh;
 
     .content {
+        position: relative;
         background-color: #fff;
-        overflow: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 
     .header {
@@ -134,5 +160,17 @@ function onMenuItemClick({item, key, keyPath}) {
         justify-content: space-between;
         align-items: center;
     }
+}
+
+.title-row {
+    display: flex;
+    align-items: center;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bolder;
+    margin: 0;
+    margin-left: 16px;
 }
 </style>
