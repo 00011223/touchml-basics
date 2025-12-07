@@ -20,8 +20,10 @@ app.use(getUserInfo())
 
 // 注册路由器
 const userRouter = require('./routers/userRouter.js')
+const questionTemplateRouter = require('./routers/questionTemplateRouter.js')
 
 app.use('/user', userRouter)
+app.use('/qtr', questionTemplateRouter)
 
 // 服务器的统一异常处理器
 // 异常处理器总是在所有接口的最后面

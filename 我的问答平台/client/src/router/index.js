@@ -7,7 +7,14 @@ const routes = [
     {
         path: '/',
         component: Home,
-        children: homeRoutes
+        children: [
+            ...homeRoutes,
+            {
+                path: 'question/:id',
+                meta: {title: '编辑问题'},
+                component: () => import('@/views/Home/Question')
+            }
+        ]
     },
     {
         path: '/signIn',

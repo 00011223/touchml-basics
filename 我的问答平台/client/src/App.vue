@@ -1,12 +1,18 @@
+<script setup>
+import zhCN from 'ant-design-vue/lib/locale/zh_CN'
+</script>
+
 <template>
-    <router-view v-slot="{Component}">
-        <transition
-            enter-active-class="animate__animated animate__fadeInUp animate__faster"
-            leave-active-class="animate__animated animate__fadeOutRight animate__faster"
-        >
-            <component :is="Component"></component>
-        </transition>
-    </router-view>
+    <a-config-provider :locale="zhCN">
+        <router-view v-slot="{Component}">
+            <transition
+                enter-active-class="animate__animated animate__fadeInUp animate__faster"
+                leave-active-class="animate__animated animate__fadeOutRight animate__faster"
+            >
+                <component :is="Component"></component>
+            </transition>
+        </router-view>
+    </a-config-provider>
 </template>
 
 <style lang="scss">

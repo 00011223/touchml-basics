@@ -9,7 +9,6 @@ import homeRoutes from '@/router/homeRoutes'
 
 const router = useRouter()
 const route = useRoute()
-console.log(route)
 const store = useStore()
 
 const userInfo = computed(() => store.state.user.userInfo.nickname)
@@ -30,7 +29,7 @@ if (sk.length > 2) openKeys.push(sk[sk.length - 2])
 // 菜单是否折叠
 const collapsed = ref(false)
 
-function toggleCollapsed(){
+function toggleCollapsed() {
     collapsed.value = !collapsed.value
 }
 
@@ -127,7 +126,7 @@ function onMenuItemClick({item, key, keyPath}) {
                         </div>
                     </a-card>
                     <!-- 内容显示 -->
-                    <div style="position: relative;">
+                    <div class="inner-content">
                         <router-view v-slot="{Component}">
                             <transition
                                 enter-active-class="animate__animated animate__fadeInUp animate__faster"
@@ -138,7 +137,9 @@ function onMenuItemClick({item, key, keyPath}) {
                         </router-view>
                     </div>
                 </a-layout-content>
-                <a-layout-footer>脚注</a-layout-footer>
+                <a-layout-footer class="footer">
+                    &copy; 2022 shampoo6@163.com 技术支持
+                </a-layout-footer>
             </a-layout>
         </a-layout>
     </a-layout>
@@ -149,10 +150,16 @@ function onMenuItemClick({item, key, keyPath}) {
     height: 100vh;
 
     .content {
-        position: relative;
-        background-color: #fff;
-        overflow-y: auto;
-        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+        background-color: #f0f2f5;
+
+        .inner-content {
+            flex-grow: 1;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
     }
 
     .header {
@@ -170,7 +177,11 @@ function onMenuItemClick({item, key, keyPath}) {
 .title {
     font-size: 24px;
     font-weight: bolder;
-    margin: 0;
-    margin-left: 16px;
+    margin: 0 0 0 16px;
+}
+
+.footer {
+    background-color: #f8f9fa;
+    text-align: right;
 }
 </style>
