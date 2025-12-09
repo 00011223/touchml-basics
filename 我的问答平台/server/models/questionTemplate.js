@@ -1,4 +1,4 @@
-const {model, Schema} = require('mongoose');
+const {model, Schema} = require('mongoose')
 
 // 题目和答案都没有key，使用索引充当key
 let question = {
@@ -16,9 +16,9 @@ const schema = new Schema({
     questions: {type: Array, index: true, default: []}, // 问题集
     // 问卷名 + 出题人id    规定同一个人不能创建两个同名的问卷
     nameAndAccountId: {type: String, index: true, unique: true},
-    createdAt: {type: Date, index: true, default: new Date()},
-    updatedAt: {type: Date, index: true, default: new Date()}
-});
+}, {
+    timestamps: true
+})
 
 // 问卷模板表
-module.exports = model('question-template', schema);
+module.exports = model('question-template', schema)

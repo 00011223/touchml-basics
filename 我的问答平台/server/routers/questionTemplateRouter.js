@@ -26,7 +26,7 @@ router.post('/add', ah(async (req, res) => {
 router.post('/page', ah(async (req, res) => {
     let {name, page, pageSize} = req.body
     let regex = eval(`/^[\\s\\S]*${name}[\\s\\S]*$/`)
-    let query = {name: regex}
+    let query = {name: regex, accountId: req.session.userInfo.id}
     let docs = await QuestionTemplate.find(query, '-__v', {
         sort: {
             updatedAt: -1 // 大于零 升序；小于零 降序
@@ -61,8 +61,7 @@ router.post('/update', ah(async (req, res) => {
     let {_id, name} = req.body
     await QuestionTemplate.updateOne({_id}, {
         name,
-        updatedAt: new Date()
-    })
+    }, {timestamps: true})
     res.json(success())
 }))
 
@@ -70,9 +69,8 @@ router.post('/update', ah(async (req, res) => {
 router.post('/saveQuestions', ah(async (req, res) => {
     let {qtId, questions} = req.body
     await QuestionTemplate.updateOne({_id: qtId}, {
-        questions,
-        updatedAt: new Date()
-    })
+        questions
+    }, {timestamps: true})
     res.json(success())
 }))
 

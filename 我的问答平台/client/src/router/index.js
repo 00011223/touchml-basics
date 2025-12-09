@@ -23,6 +23,10 @@ const routes = [
     {
         path: '/signUp',
         component: () => import('@/views/SignUp')
+    },
+    {
+        path: '/qtAnswer/:id',
+        component: () => import('@/views/qtAnswer')
     }
 ]
 

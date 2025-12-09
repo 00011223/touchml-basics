@@ -11,7 +11,7 @@ const router = useRouter()
 const route = useRoute()
 const store = useStore()
 
-const userInfo = computed(() => store.state.user.userInfo.nickname)
+const userInfo = computed(() => store.state.user.userInfo?.nickname)
 
 let sk = route.path.split('/')
 //  /qa/publishQuestion
@@ -38,6 +38,8 @@ async function onSettingClick({item, key, keyPath}) {
     if (key === 'signOut') {
         // 登出
         await signOut()
+        // 清空 store 里的数据
+        await store.dispatch('user/resetUserInfo')
         // 跳转到登录页
         router.push('/signIn').then(() => {
             message.success('登出成功')

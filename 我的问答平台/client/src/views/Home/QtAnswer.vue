@@ -1,5 +1,9 @@
 <script setup>
 import {reactive, ref} from 'vue'
+import {getMyQtAnswer} from '@/api/qtAnswer'
+import {useRouter} from 'vue-router'
+
+const router = useRouter()
 
 const tableData = ref([
     {
@@ -60,12 +64,24 @@ const pagination = reactive({
         return `总共 ${total} 条` // 返回的内容将显示到分页上
     }
 })
+
+async function query() {
+    let data = await getMyQtAnswer({name: model.name, page: pagination.current, pageSize: pagination.pageSize})
+    tableData.value = data.data
+    pagination.total = data.total
+}
+
+async function view(qtaId) {
+    await router.push(`/qtAnswer/${qtaId}`)
+}
+
+query()
 </script>
 
 <template>
     <div class="animated-container">
         <a-card size="small">
-            <a-form layout="inline" :model="model">
+            <a-form @finish="query" layout="inline" :model="model">
                 <a-form-item label="问卷名" name="name">
                     <a-input v-model:value.trim="model.name"></a-input>
                 </a-form-item>
@@ -80,7 +96,7 @@ const pagination = reactive({
                 </template>
                 <template v-else-if="column.key === 'op'">
                     <a-space>
-                        <a-button type="primary">查看</a-button>
+                        <a-button type="primary" @click="view(record._id)">查看</a-button>
                     </a-space>
                 </template>
             </template>

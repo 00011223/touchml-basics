@@ -14,7 +14,7 @@ export default {
         // 用于修改用户信息
         // payload 是一个包含用户信息的对象
         mUserInfo(state, payload) {
-            state.userInfo = {...payload}
+            state.userInfo = payload ? {...payload} : null
         }
     },
     actions: {
@@ -33,6 +33,10 @@ export default {
                 }
                 return userInfo
             }
+        },
+        // 重置用户信息
+        async resetUserInfo({commit}) {
+            commit('mUserInfo', null)
         }
     }
 }

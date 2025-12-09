@@ -21,9 +21,13 @@ app.use(getUserInfo())
 // 注册路由器
 const userRouter = require('./routers/userRouter.js')
 const questionTemplateRouter = require('./routers/questionTemplateRouter.js')
+const publishRouter = require('./routers/publishRouter.js')
+const qtaRouter = require('./routers/qtAnswerRouter.js')
 
 app.use('/user', userRouter)
 app.use('/qtr', questionTemplateRouter)
+app.use('/publish', publishRouter)
+app.use('/qta', qtaRouter)
 
 // 服务器的统一异常处理器
 // 异常处理器总是在所有接口的最后面

@@ -21,7 +21,7 @@ module.exports = () => {
         // 通常登录信息可以缓存到 redis 数据库
         // 此处将内容缓存到session中
         req.session.userInfo = {
-            id: account._id,
+            id: account._id.toString(),
             nickname: account.nickname
         }
         next()

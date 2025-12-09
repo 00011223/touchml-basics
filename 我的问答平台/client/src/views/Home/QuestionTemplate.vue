@@ -1,8 +1,9 @@
 <script setup>
-import {nextTick, reactive, ref} from 'vue'
+import {reactive, ref} from 'vue'
 import {add as ad, page as pag, removeAll as ra, getById, update} from '@/api/questionTemplate'
 import {message} from 'ant-design-vue'
 import {useRouter} from 'vue-router'
+import moment from 'moment'
 
 const router = useRouter()
 
@@ -21,6 +22,16 @@ const columns = [
         title: '问卷名',
         dataIndex: 'name',
         key: 'name'
+    },
+    {
+        title: '创建时间',
+        dataIndex: 'createdAt',
+        key: 'createdAt'
+    },
+    {
+        title: '更新时间',
+        dataIndex: 'updatedAt',
+        key: 'updatedAt'
     },
     {
         title: '操作',
@@ -173,6 +184,12 @@ page()
                             <a-button type="primary" danger>删除</a-button>
                         </a-popconfirm>
                     </a-space>
+                </template>
+                <template v-else-if="column.key === 'createdAt'">
+                    {{ moment(record.createdAt).format('YYYY/MM/DD HH:mm:ss') }}
+                </template>
+                <template v-else-if="column.key === 'updatedAt'">
+                    {{ moment(record.updatedAt).format('YYYY/MM/DD HH:mm:ss') }}
                 </template>
             </template>
         </a-table>

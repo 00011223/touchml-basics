@@ -12,8 +12,8 @@ const schema = new Schema({
     pk: {type: String, index: true},
     // 私钥
     sk: {type: String, index: true},
-    createdAt: {type: Date, index: true, default: new Date()},
-    updatedAt: {type: Date, index: true, default: new Date()}
+}, {
+    timestamps: true
 })
 
 // 导出数据模型
